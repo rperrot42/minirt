@@ -58,23 +58,23 @@ ifeq ($(OS), Linux)
 else
 	@$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(LIBFT)
 endif
-	@echo "$(GREEN)$(NAME)created $(CHECK)$(RESET_COLOR)"
+	@echo "$(GREEN)$(NAME) created $(CHECK)$(RESET_COLOR)"
 
 clean:
 	@rm -rf $(DIR_OBJS)
 	@echo "$(RED)$(DIR_OBJS) removed$(CROSS)$(RESET_COLOR)"
-	$(MAKE) -C $(LIBFT_DIRECTORY) clean
-	$(MAKE) -C $(DIR_MLX) clean
+	@$(MAKE) -C $(LIBFT_DIRECTORY) clean
+	@$(MAKE) -C $(DIR_MLX) clean
 
 $(LIBFT): FORCE
-	$(MAKE) -C $(LIBFT_DIRECTORY)
+	@$(MAKE) -C $(LIBFT_DIRECTORY)
 
 fclean: clean
 	@rm -f $(NAME)
 	@echo "$(RED)$(NAME) removed$(CROSS)$(RESET_COLOR)"
 
 mlx: FORCE
-	$(MAKE) -C $(DIR_MLX)
+	@$(MAKE) -C $(DIR_MLX)
 
 FORCE:
 
