@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+*.o
+minishell
+*/*.o
+philo/.objs
+a.out
+.vscode
+.obj
+miniRt
+libft/libft.a
+libft/.obj
