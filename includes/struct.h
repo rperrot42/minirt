@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/15 18:22:35 by rperrot          ###   ########.fr       */
+/*   Updated: 2024/10/15 20:33:32 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_point
 	float y;
 	float z;
 }	t_point;
-
 
 typedef struct s_color
 {
