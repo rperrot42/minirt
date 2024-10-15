@@ -6,7 +6,7 @@
 /*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/15 20:24:24 by rperrot          ###   ########.fr       */
+/*   Updated: 2024/10/16 01:13:41 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 #include  "mini_rt.h"
 #include "parsing.h"
 
-int main(int argc, char **argv)
+int main()
 {
-	errno = 0;
-	if (argc == 2)
-	{
-		check_file(argv[1]);
-		return 1;
-	}
-	else
-		ft_dprintf(STDOUT_FILENO, E_NB_ARGS);
-	return 0;
+	int *oui;
+	int test;
+
+	oui = malloc(sizeof(char *) * 2);
+	oui[0] = 1;
+	oui[1] = 0;
+	test = 2;
+	ft_realoc((void **)&oui, &test);
+	printf("%d\n", oui[0]);
+	printf("%d\n", oui[1]);
+	printf("%d\n", oui[2]);
+	free(oui);
+	return (0);
 }

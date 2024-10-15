@@ -127,4 +127,5 @@ int				ft_strcmp(char *s1, char *s2);
 t_bool			char_is_number(char *str);
 float			ft_atof(char **str);
 int				ft_atoi(char **str);
+t_bool			ft_realoc(void **ptr, void *new_object);
 #endif
