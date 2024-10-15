@@ -14,7 +14,7 @@ FLAGS = -Wall -Werror -Wextra
 
 INCLUDE = $(INCLUDE_DIR)/mini_rt.h
 
-SRC = test/main.c
+SRC = check_file/check_file.c
 
 SRC_PATH = src/
 

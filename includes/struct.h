@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/15 19:45:32 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:33:32 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ typedef struct s_scene
 	t_camera 	*cameras;
 	t_cylinder	*cylinders;
 	t_plane		*planes;
-};
+}	t_scene;
 
 #endif
