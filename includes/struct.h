@@ -73,6 +73,6 @@ typedef struct s_scene
 	t_camera 	*cameras;
 	t_cylinder	*cylinders;
 	t_plane		*planes;
-};
+}	t_scene;
 
 #endif
