@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:14:16 by rperrot           #+#    #+#             */
-/*   Updated: 2024/06/23 15:14:16 by rperrot          ###   ########.fr       */
+/*   Created: 2024/10/15 18:35:47 by rperrot           #+#    #+#             */
+/*   Updated: 2024/10/15 18:35:47 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_rt.h"
+#ifndef MINIRT_PARSING_H
+#define MINIRT_PARSING_H
 
-int main(void)
-{
-	printf("je suis gros\n");
-}
+#endif //MINIRT_PARSING_H
