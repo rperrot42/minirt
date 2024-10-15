@@ -13,4 +13,5 @@
 # define MINI_RT_H
 # include "libft.h"
 # include <stdio.h>
+# include "struct.h"
 #endif //MINIRT_INCLUDES_H

@@ -52,6 +52,7 @@ else
 	@$(CC)  $(IFLAGS) $(FLAGS) -Imlx -c $< -o $@
 endif
 	@echo "$(CYAN)$@ created $(CHECK)$(RESET_COLOR)"
+
 $(NAME): $(OBJ) $(LIBFT) mlx
 ifeq ($(OS), Linux)
 	@$(CC) $(OBJ)  -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
