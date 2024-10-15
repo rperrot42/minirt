@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-static t_bool	find_signe(const char **str);
+static t_bool	find_signe(char **str);
 
 static float	error_atof(void);
 
 static void		divide_value(int decimal, float *value);
 
-float	ft_atof(const char **str)
+float	ft_atof(char **str)
 {
 	float	value;
 	t_bool	neg;
@@ -59,7 +59,7 @@ static void	divide_value(int decimal, float *value)
 	}
 }
 
-static t_bool	find_signe(const char **str)
+static t_bool	find_signe(char **str)
 {
 	t_bool	neg;
 

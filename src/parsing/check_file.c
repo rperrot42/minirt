@@ -12,19 +12,9 @@
 
 #include "include.h"
 
-static t_bool  check_filename(char *str)
-{
-    int i;
+static t_bool  check_filename(const char *str);
 
-    i = 0;
-    while (str[i])
-        i++;
-    if (str[i - 1] != 't' || str[i - 2] != 'r' || str[i - 3] != '.')
-        return (true);
-    return (false);
-}
-
-int get_file(char *file_name)
+int check_file(const char *file_name)
 {
     int fd;
 
@@ -40,4 +30,16 @@ int get_file(char *file_name)
         return (fd);
     }
     return (fd);
+}
+
+static t_bool  check_filename(const char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	if (str[i - 1] != 't' || str[i - 2] != 'r' || str[i - 3] != '.')
+		return (true);
+	return (false);
 }

@@ -51,7 +51,6 @@ typedef enum s_bool
 	true = 1
 }	t_bool;
 
-int				ft_atoi(const char *str);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
@@ -126,5 +125,6 @@ char			*ft_strcpy(char *dest, char *src);
 size_t			ft_len_tab_str(char **tab);
 int				ft_strcmp(char *s1, char *s2);
 t_bool			char_is_number(char *str);
-float			ft_atof(const char **str);
+float			ft_atof(char **str);
+int				ft_atoi(char **str);
 #endif

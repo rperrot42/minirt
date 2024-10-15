@@ -10,14 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_rt.h"
+#include  "error.h"
+#include  "mini_rt.h"
+#include "parsing.h"
 
-int main(int argc, const char **argv)
+int main(int argc, char **argv)
 {
+	errno = 0;
 	if (argc == 2)
 	{
-		printf("Usage: %f <float>\n", ft_atof(&argv[1]));
+		check_file(argv[1]);
 		return 1;
 	}
+	else
+		ft_dprintf(STDOUT_FILENO, E_NB_ARGS);
 	return 0;
 }

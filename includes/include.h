@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "errno.h"
-#include "mini_rt.h"
 #include "libft.h"
 #include "error.h"
 
