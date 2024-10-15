@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 18:35:47 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/15 18:35:47 by rperrot          ###   ########.fr       */
+/*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
+/*   Updated: 2024/10/15 20:24:24 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_PARSING_H
-#define MINIRT_PARSING_H
+#include "mini_rt.h"
 
-#endif
+int main(int argc, const char **argv)
+{
+	if (argc == 2)
+	{
+		printf("Usage: %f <float>\n", ft_atof(&argv[1]));
+		return 1;
+	}
+	return 0;
+}
