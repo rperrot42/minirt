@@ -17,5 +17,6 @@
 # define E_FILE_EXT         "Wrong file extension, not a .rt file\n"
 # define E_FILE_ACCESS      "Couldn't open the file\n"
 # define E_FILE_EMPTY       "Empty file\n"
+# define E_NB_ARGS		 	 "Wrong number of arguments\n"
 
 #endif
