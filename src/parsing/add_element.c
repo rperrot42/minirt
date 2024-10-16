@@ -15,10 +15,10 @@
 int  print_error(char *error)
 {
     dprintf(2, "%s", error);
-    return (false);
+    return (1);
 }
 
-t_bool  add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
+int add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
 {
     if (str[0] && str[1])
     {
@@ -26,12 +26,14 @@ t_bool  add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
 		{
 			if (*ambient)
 				return (print_error(E_FILE_INP));
+			*ambient = true;
 			return (add_ambient(scene, str + 1));
 		}
         if (str[0] == 'C')
 		{
 			if (*camera)
 				return (print_error(E_FILE_INP));
+			*camera = true;
 			return (add_camera(scene, str + 1));
 		}
 //        if (str[0] == 'L')
@@ -43,17 +45,17 @@ t_bool  add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
 //        if (str[0] == 'c' && str[1] == 'y')
 //            return (add_cylinder(scene, str + 2));
     }
-    return (true);
+    return (0);
 }
 
-t_bool  add_ambient(t_scene *scene, char *str)
+int  add_ambient(t_scene *scene, char *str)
 {
     while (*str && *str == ' ')
         str++;
     if (*str)
         scene->ambient.intensity = ft_atof(&str);
     else
-        return (false);
+        return (1);
     if (errno)
         return (print_error(strerror(errno)));
     if (scene->ambient.intensity < 0 || scene->ambient.intensity > 1)
@@ -63,22 +65,22 @@ t_bool  add_ambient(t_scene *scene, char *str)
     if (*str)
         scene->ambient.color = get_color(&str);
     else
-        return (false);
+        return (1);
     if (errno)
 	{
 		return (print_error(strerror(errno)));
 	}
-	return (true);
+	return (0);
 }
 
-t_bool  add_camera(t_scene *scene, char *str)
+int  add_camera(t_scene *scene, char *str)
 {
     while (*str && *str == ' ')
         str++;
     if (*str)
         scene->cameras.position = get_point(&str);
     else
-        return (true);
+        return (1);
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -92,12 +94,12 @@ t_bool  add_camera(t_scene *scene, char *str)
     if (*str)
         scene->cameras.fov = ft_atof(&str);
     else
-        return (true);
+        return (1);
     if (errno)
         return (print_error(strerror(errno)));
     if (scene->cameras.fov < 0 || scene->cameras.fov > 180)
         return (print_error(E_FILE_INP));
-    return (true);
+    return (0);
 }
 
 //t_light    *add_light(t_scene *scene, char *str)

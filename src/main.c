@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 {
 	int fd;
 
+	errno = 0;
 	if (argc != 2)
 	{
 		ft_dprintf(STDERR_FILENO, E_NB_ARGS);
