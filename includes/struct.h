@@ -29,7 +29,7 @@ typedef struct s_color
 
 typedef struct s_sphere
 {
-	t_point	center;
+	t_point	position;
 	t_color color;
 	float 	radius;
 } t_sphere;
@@ -45,13 +45,13 @@ typedef struct s_light
 {
 	t_point	position;
 	t_color color;
-	float	ratio;
+	float	intensity;
 }	t_light;
 
 typedef struct s_cylinder
 {
-	t_point	origin;
-	t_point	direction;
+	t_point	position;
+	t_point	vector;
 	float	diameter;
 	float	height;
 	t_color color;
@@ -59,7 +59,7 @@ typedef struct s_cylinder
 
 typedef struct s_plane
 {
-	t_point	point;
+	t_point	position;
 	t_point vector;
 	t_color color;
 }	t_plane;

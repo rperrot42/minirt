@@ -19,7 +19,7 @@ int add_plane(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        plane.point = get_point(&str);
+        plane.position = get_point(&str);
     else
         return (print_error(E_FILE_PARS));
     if (errno)
@@ -35,7 +35,7 @@ int add_plane(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        plane.point = get_point(&str);
+        plane.position = get_point(&str);
     else
         return (print_error(E_FILE_PARS));
     if (errno)

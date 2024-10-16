@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "libft.h"
 
 int	add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
 {
@@ -27,7 +26,8 @@ int	add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
         else if (str[0] == 'C')
 		{
 			if (*camera)
-				return (print_error(E_FILE_INP));
+				return (print_error(E_CAM_NB));
+			*camera = true;
 			return (add_camera(scene, str + 1));
 		}
        if (str[0] == 'L')

@@ -26,6 +26,7 @@
 # define E_NB_ARGS		 	"Wrong number of arguments\n"
 # define E_NOT_CAMERAS		 "No cameras\n"
 # define E_NOT_AMBIENT		 "No ambient light\n"
+# define E_NOT_LIGHTS		 "No lights\n"
 
 int  print_error(char *error);
 

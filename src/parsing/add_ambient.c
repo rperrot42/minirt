@@ -34,5 +34,5 @@ int  add_ambient(t_scene *scene, char *str)
 	{
 		return (print_error(strerror(errno)));
 	}
-	return (1);
+	return (0);
 }
