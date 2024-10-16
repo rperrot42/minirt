@@ -18,5 +18,5 @@
 #include "errno.h"
 #include "libft.h"
 #include "error.h"
-
+#include <string.h>
 #endif
