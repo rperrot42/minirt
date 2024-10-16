@@ -12,44 +12,45 @@
 
 #include "libft.h"
 
-static int	value_atoi(const char *str, int i, int signe)
+static int	value_atoi( char **str, int signe)
 {
 	long long int	value;
 
 	value = 0;
-	while (str[i] >= '0' && str[i] <= '9')
+	while (ft_isdigit(**str))
 	{
 		value *= 10;
-		value += str[i] - '0';
+		value += **str - '0';
 		if (value < 0)
 		{
-			if (signe)
-				return (0);
-			return (-1);
+			errno = EINVAL;
 		}
-		i++;
+		(*str)++;
 	}
 	if (signe)
 		value *= -1;
 	return ((int)value);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(char **str)
 {
-	int	i;
 	int	signe;
 
 	signe = 0;
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	while (**str == ' ' || (**str >= 9 && **str <= 13))
+		(*str)++;
+	if (!ft_isdigit(**str))
 	{
-		if (str[i] == '-')
-			signe++;
-		i++;
+		errno = EINVAL;
+		return (0);
 	}
-	return (value_atoi(str, i, signe));
+	if (**str == '+' || **str == '-')
+	{
+		if (**str == '-')
+			signe++;
+		(*str)++;
+	}
+	return (value_atoi(str, signe));
 }
 
 t_bool	char_is_number(char *str)

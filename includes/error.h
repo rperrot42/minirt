@@ -19,5 +19,6 @@
 # define E_FILE_EMPTY       "Empty file\n"
 # define E_FILE_PARS        "Parse error\n"
 # define E_FILE_INP         "Wrong input values\n"
+# define E_NB_ARGS		 	 "Wrong number of arguments\n"
 
 #endif

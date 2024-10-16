@@ -14,7 +14,7 @@ FLAGS = -Wall -Werror -Wextra
 
 INCLUDE = $(INCLUDE_DIR)/mini_rt.h
 
-SRC = check_file/check_file.c main.c
+SRC = parsing/check_file.c main.c parsing/get_info_line.c
 
 
 SRC_PATH = src/
@@ -37,7 +37,8 @@ OBJ = $(addprefix $(DIR_OBJS)/, $(SRC:.c=.o))
 all:$(NAME)
 
 IFLAGS = -Ilibft/includes \
-			-I$(INCLUDE_DIR)
+			-I$(INCLUDE_DIR) \
+			-I$(INCLUDE_DIR)/parsing
 
 ifeq ($(OS), Linux)
 	DIR_MLX = mlx_linux

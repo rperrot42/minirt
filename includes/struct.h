@@ -22,10 +22,9 @@ typedef struct s_point
 
 typedef struct s_color
 {
-	char	r;
-	char	g;
-	char	b;
-	char	luminosity;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }	t_color;
 
 typedef struct s_sphere
@@ -65,9 +64,15 @@ typedef struct s_plane
 	t_color color;
 }	t_plane;
 
+typedef struct s_ambient
+{
+	t_color	color;
+	float	intensity;
+}	t_ambient;
+
 typedef struct s_scene
 {
-	t_color	ambient;
+	t_ambient	ambient;
 	t_sphere	*spheres;
 	t_light		*lights;
 	t_camera 	cameras;

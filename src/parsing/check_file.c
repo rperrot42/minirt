@@ -25,7 +25,7 @@ static t_bool  check_filename(char *str)
     return (false);
 }
 
-int get_file(char *file_name)
+int check_file(const char *file_name)
 {
     int fd;
 
@@ -42,3 +42,4 @@ int get_file(char *file_name)
     }
     return (fd);
 }
+
