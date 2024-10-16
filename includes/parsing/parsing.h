@@ -25,6 +25,6 @@ t_sphere  *add_sphere(t_scene *scene, char *str);
 t_plane	*add_plane(t_scene *scene, char *str);
 t_cylinder  *add_cylinder(t_scene *scene, char *str);
  t_bool  check_filename(char *str);
-t_scene 	readline(int fd);
+int readline(int fd, t_scene *scene);
 int add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient);
 #endif

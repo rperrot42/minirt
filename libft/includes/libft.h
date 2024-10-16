@@ -128,4 +128,6 @@ t_bool			char_is_number(char *str);
 float			ft_atof(char **str);
 int				ft_atoi(char **str);
 int ft_realoc(void **ptr, short *size, int size_struct, void *new_obkect);
+t_bool	ft_had_whitespace(char *str);
+
 #endif

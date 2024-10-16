@@ -19,8 +19,10 @@
 # define E_FILE_EMPTY       "Empty file\n"
 # define E_FILE_PARS        "Parse error\n"
 # define E_FILE_INP         "Wrong input values\n"
-# define E_CAM_NB			"Wrong number of cameras\n"
-# define E_AMB_NB			"Wrong number of ambient lights\n"
+# define E_CAM_NB			"Error : Wrong number of cameras\n"
+# define E_AMB_NB			"ERROR : number of ambient lights\n"
 # define E_NB_ARGS		 	 "Wrong number of arguments\n"
+# define E_NOT_CAMERAS		 "No cameras\n"
+# define E_NOT_AMBIENT		 "No ambient light\n"
 
 #endif

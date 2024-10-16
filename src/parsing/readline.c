@@ -12,27 +12,35 @@
 
 #include "parsing.h"
 
-t_scene 	readline(int fd)
+int readline(int fd, t_scene *scene)
 {
 	char	*line;
-	t_scene	scene;
 	t_bool	camera;
 	t_bool	ambient;
 
 	line = get_next_line(fd);
 	camera = false;
 	ambient = false;
-	scene = (t_scene){0};
+	ft_memset(scene, 0, sizeof(t_scene));
 	while (line)
 	{
-		if (add_elem(&scene, line, &camera, &ambient))
+		if (add_elem(scene, line, &camera, &ambient))
 		{
 			free(line);
 			errno = EINVAL;
-			return (scene);
+			return (1);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	return (scene);
+	if (camera == false | ambient == false)
+	{
+		errno = 1;
+		if (camera == false)
+			ft_dprintf(STDERR_FILENO, "Error: %s", E_NOT_CAMERAS);
+		if (ambient == false)
+			ft_dprintf(STDERR_FILENO, "Error: %s", E_NOT_AMBIENT);
+		return (1);
+	}
+	return (0);
 }
