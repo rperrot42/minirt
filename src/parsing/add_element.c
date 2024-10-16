@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:56:27 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 20:58:25 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:12:50 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
         else if (str[0] == 'C')
 		{
 			if (*camera)
-				return (print_error(E_FILE_INP));
+				return (print_error(E_CAM_NB));
+            *camera = true;
 			return (add_camera(scene, str + 1));
 		}
        if (str[0] == 'L')

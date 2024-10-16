@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:01:37 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 18:02:32 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:26:20 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int add_light(t_scene *scene, char *str)
     else
         return (print_error(E_FILE_PARS));
     if (light.ratio < 0 || light.ratio > 1)
-        return (print_error(E_FILE_INP));
+        return (print_error(E_FILE_FOV));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')

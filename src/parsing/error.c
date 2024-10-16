@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:05:41 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 18:05:50 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:12:12 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int  print_error(char *error)
 {
-    dprintf(2, "%s", error);
-    return (0);
+    dprintf(STDERR_FILENO, "%s", error);
+    return (1);
 }

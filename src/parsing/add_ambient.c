@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:59:55 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 18:00:07 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:10:06 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int  add_ambient(t_scene *scene, char *str)
 	{
 		return (print_error(strerror(errno)));
 	}
-	return (1);
+	return (0);
 }

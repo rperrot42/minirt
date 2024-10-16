@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:31:09 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 20:59:54 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:26:06 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define E_FILE_ACCESS      "Couldn't open the file\n"
 # define E_FILE_EMPTY       "Empty file\n"
 # define E_FILE_PARS        "Parse error\n"
-# define E_FILE_INP         "Wrong input values\n"
+# define E_FILE_FOV         "Wrong FOV input values\n"
 
 # define E_CAM_NB			"Wrong number of cameras\n"
 # define E_AMB_NB			"Wrong number of ambient lights\n"
