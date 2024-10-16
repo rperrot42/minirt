@@ -74,10 +74,14 @@ typedef struct s_scene
 {
 	t_ambient	ambient;
 	t_sphere	*spheres;
+	short		nb_spheres;
 	t_light		*lights;
+	short		nb_lights;
 	t_camera 	cameras;
 	t_cylinder	*cylinders;
+	short		nb_cylinders;
 	t_plane		*planes;
+	short		nb_planes;
 }	t_scene;
 
 #endif

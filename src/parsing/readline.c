@@ -20,10 +20,12 @@ t_scene 	readline(int fd)
 	t_bool	ambient;
 
 	line = get_next_line(fd);
+	camera = false;
+	ambient = false;
 	scene = (t_scene){0};
 	while (line)
 	{
-		if (!add_elem(&scene, line, &camera, &ambient))
+		if (add_elem(&scene, line, &camera, &ambient))
 		{
 			free(line);
 			errno = EINVAL;

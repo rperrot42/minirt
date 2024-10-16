@@ -10,7 +10,7 @@ INCLUDE_DIR = includes
 
 LIBFT_DIRECTORY = ./libft/
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3
 
 INCLUDE = $(INCLUDE_DIR)/mini_rt.h
 
