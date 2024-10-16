@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/16 01:13:41 by rperrot          ###   ########.fr       */
+/*   Updated: 2024/10/16 20:46:57 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "error.h"
 #include "parsing.h"
+
 void print_scene(t_scene scene);
 
 int main(int argc, char **argv)
@@ -27,7 +28,7 @@ int main(int argc, char **argv)
 	fd = check_file(argv[1]);
 	if (fd == -1)
 		return (1);
-	t_scene oui = readline(fd);
+	t_scene oui = ft_readline(fd);
 	if (!errno)
 	 	print_scene(oui);
 	else

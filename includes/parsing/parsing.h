@@ -6,14 +6,17 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:35:47 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/16 17:40:24 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:53:47 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_PARSING_H
-#define MINIRT_PARSING_H
-#include "struct.h"
-#include "include.h"
+# define MINIRT_PARSING_H
+
+# include "struct.h"
+# include "include.h"
+# include "error.h"
+
 int check_file(char *file_name);
 t_color	get_color(char **line);
 t_point	get_point(char **line);
@@ -25,6 +28,7 @@ int add_sphere(t_scene *scene, char *str);
 int add_plane(t_scene *scene, char *str);
 int add_cylinder(t_scene *scene, char *str);
  t_bool  check_filename(char *str);
-t_scene 	readline(int fd);
+t_scene 	ft_readline(int fd);
 int add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient);
+
 #endif

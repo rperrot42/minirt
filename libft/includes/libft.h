@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibjean-b <ibjean-b@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:47:13 by rperrot           #+#    #+#             */
-/*   Updated: 2024/06/06 15:42:20 by ibjean-b         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:51:30 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,5 @@ int				ft_strcmp(char *s1, char *s2);
 t_bool			char_is_number(char *str);
 float			ft_atof(char **str);
 int				ft_atoi(char **str);
-int ft_realoc(void **ptr, short *size, int size_struct, void *new_obkect);
+int				ft_realloc(void **ptr, short *size, int size_struct, void *new_obkect);
 #endif
