@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:31:09 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/15 22:52:11 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:25:48 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@
 # define E_FILE_INP         "Wrong input values\n"
 # define E_CAM_NB			"Wrong number of cameras\n"
 # define E_AMB_NB			"Wrong number of ambient lights\n"
-# define E_NB_ARGS		 	 "Wrong number of arguments\n"
+# define E_NB_ARGS		 	"Wrong number of arguments\n"
 
 #endif
