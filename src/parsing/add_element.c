@@ -6,11 +6,12 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:56:27 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 17:38:01 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 17:43:46 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "libft.h"
 
 int  print_error(char *error)
 {
@@ -53,7 +54,7 @@ int  add_ambient(t_scene *scene, char *str)
     if (*str)
         scene->ambient.intensity = ft_atof(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     if (scene->ambient.intensity < 0 || scene->ambient.intensity > 1)
@@ -63,7 +64,7 @@ int  add_ambient(t_scene *scene, char *str)
     if (*str)
         scene->ambient.color = get_color(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
 	{
 		return (print_error(strerror(errno)));
@@ -78,7 +79,7 @@ int  add_camera(t_scene *scene, char *str)
     if (*str)
         scene->cameras.position = get_point(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -92,7 +93,7 @@ int  add_camera(t_scene *scene, char *str)
     if (*str)
         scene->cameras.fov = ft_atof(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     if (scene->cameras.fov < 0 || scene->cameras.fov > 180)
@@ -102,14 +103,14 @@ int  add_camera(t_scene *scene, char *str)
 
 int add_light(t_scene *scene, char *str)
 {
-    t_lights light;
+    t_light light;
 
     while (*str && *str == ' ')
         str++;
     if (*str)
         light.position = get_point(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -117,8 +118,8 @@ int add_light(t_scene *scene, char *str)
     if (*str)
         light.ratio = ft_atof(&str);
     else
-        return (print_error(E_FILE_PARSE));
-    if (light.ratio < 0 || light->ratio > 1)
+        return (print_error(E_FILE_PARS));
+    if (light.ratio < 0 || light.ratio > 1)
         return (print_error(E_FILE_INP));
     if (errno)
         return (print_error(strerror(errno)));
@@ -127,10 +128,10 @@ int add_light(t_scene *scene, char *str)
     if (*str)
         light.color = get_color(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
-    if (ft_realloc(&scene->lights, &scene->nb_lights, sizeof(t_lights), light))
+    if (ft_realloc(&scene->lights, &scene->nb_lights, sizeof(t_light), (void *)&light))
         return (print_error(E_MALLOC));
    return (0);
 }
@@ -144,7 +145,7 @@ int add_sphere(t_scene *scene, char *str)
     if (*str)
         sphere.center = get_point(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -152,7 +153,7 @@ int add_sphere(t_scene *scene, char *str)
     if (*str)
         sphere.radius = ft_atof(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -160,7 +161,7 @@ int add_sphere(t_scene *scene, char *str)
     if (*str)
         sphere.color = get_color(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     if (ft_realloc(&scene->spheres, &scene->nb_spheres, sizeof(t_sphere), sphere))
@@ -177,7 +178,7 @@ int add_plane(t_scene *scene, char *str)
     if (*str)
         plane.point = get_point(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -185,7 +186,7 @@ int add_plane(t_scene *scene, char *str)
     if (*str)
         plane.vector = get_vector(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -193,7 +194,7 @@ int add_plane(t_scene *scene, char *str)
     if (*str)
         plane.point = get_point(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     if (ft_realloc(&scene->planes, &scene->nb_planes, sizeof(t_plane), plane))
@@ -208,9 +209,9 @@ int add_cylinder(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        cylinder.point = get_point(&str);
+        cylinder.origin = get_point(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -218,7 +219,7 @@ int add_cylinder(t_scene *scene, char *str)
     if (*str)
         cylinder.direction = get_vector(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -226,7 +227,7 @@ int add_cylinder(t_scene *scene, char *str)
     if (*str)
         cylinder.diameter = ft_atof(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
     while (*str && *str == ' ')
@@ -234,10 +235,10 @@ int add_cylinder(t_scene *scene, char *str)
     if (*str)
         cylinder.color = get_color(&str);
     else
-        return (print_error(E_FILE_PARSE));
+        return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
-    if (ft_realloc(&scene->cylinder, &scene->nb_cylinder, sizeof(t_cylinder), cylinder))
+    if (ft_realloc(&scene->cylinders, &scene->nb_cylinders, sizeof(t_cylinder), cylinder))
         return (print_error(E_MALLOC));
     return (0);
 }
