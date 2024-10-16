@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <fcntl.h>
+#include "error.h"
 
 static t_bool  check_filename(char *str)
 {
@@ -25,19 +26,19 @@ static t_bool  check_filename(char *str)
     return (false);
 }
 
-int check_file(const char *file_name)
+int check_file(char *file_name)
 {
     int fd;
 
     if (check_filename(file_name))
     {
-        ft_dprintf(2, "%s", E_FILE_EXT);
+        ft_dprintf(STDERR_FILENO, "%s", E_FILE_EXT);
         return (-1);
     }
     fd = open(file_name, O_RDONLY);
     if (fd == -1)
     {
-        ft_dprintf(2, "%s", E_FILE_ACCESS);
+        ft_dprintf(STDERR_FILENO, "%s", E_FILE_ACCESS);
         return (fd);
     }
     return (fd);

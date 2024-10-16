@@ -7,7 +7,7 @@ philo/.objs
 a.out
 .vscode
 .obj
-miniRt
+miniRT
 libft/libft.a
 libft/.obj
 mlx/libmlx.a

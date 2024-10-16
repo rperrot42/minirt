@@ -1,6 +1,6 @@
 MAKE = make
 
-NAME = miniRt
+NAME = miniRT
 
 LIBFT = libft/libft.a
 
@@ -14,7 +14,11 @@ FLAGS = -Wall -Werror -Wextra
 
 INCLUDE = $(INCLUDE_DIR)/mini_rt.h
 
-SRC = parsing/check_file.c main.c parsing/get_info_line.c
+SRC = parsing/check_file.c \
+	parsing/get_info_line.c \
+	parsing/add_element.c \
+	parsing/readline.c \
+	main.c
 
 
 SRC_PATH = src/
