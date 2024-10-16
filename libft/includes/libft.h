@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:47:13 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/16 17:51:30 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:01:04 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,6 @@ t_bool			char_is_number(char *str);
 float			ft_atof(char **str);
 int				ft_atoi(char **str);
 int				ft_realloc(void **ptr, short *size, int size_struct, void *new_obkect);
+t_bool	ft_had_whitespace(char *str);
+
 #endif

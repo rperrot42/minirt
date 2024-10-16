@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_initstack.c                                     :+:      :+:    :+:   */
+/*   ft_had_whitespace.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 13:38:51 by rperrot           #+#    #+#             */
-/*   Updated: 2023/12/05 13:41:53 by rperrot          ###   ########.fr       */
+/*   Created: 2024/10/16 19:49:34 by rperrot           #+#    #+#             */
+/*   Updated: 2024/10/16 19:52:04 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "libft.h"
 
-t_stack	*ft_init_stack(void)
+t_bool	ft_had_whitespace(char *str)
 {
-	t_stack	*new_stack;
-
-	new_stack = malloc(sizeof(t_stack));
-	if (!new_stack)
-		return (NULL);
-	new_stack -> first = NULL;
-	return (new_stack);
+	while (*str)
+	{
+		if (((*str) < 7	|| (*str) > 13) && (*str) != 32)
+			return (false);
+		str++;
+	}
+	return (true);
 }

@@ -66,7 +66,9 @@ SRCS_FILES = 	ft_isalnum.c \
 				ft_len_tab_str.c \
 				ft_strcmp.c \
 				ft_atof.c \
-				ft_realoc.c
+				ft_realoc.c \
+				ft_initstack.c \
+				ft_had_whitespace.c \
 
 INCS_FILES =	libft.h
 
