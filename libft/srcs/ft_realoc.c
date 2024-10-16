@@ -13,26 +13,17 @@
 #include <stdio.h>
 #include "libft.h"
 
-t_bool	ft_realoc(void **ptr, void *new_object)
+int ft_realoc(void **ptr, short *size, int size_struct, void *new_object)
 {
-	size_t	size;
-	void	*ptr_value;
+	char *new_ptr;
 
-	size = 0;
-	ptr_value = *ptr;
-	while (((char *)(*ptr))[size])
-		size++;
-	*ptr = malloc(sizeof(char  *) * (size + 2));
-	printf(" %p %p\n" , *ptr, ptr_value);
-	if (!*ptr)
-	{
-		free(ptr_value);
-		return false;
-	}
-	(void)new_object;
-	ft_memmove(*ptr, ptr_value, size);
-	*(ptr + size) = (char *)new_object;
-	free(ptr_value);
-	*(ptr + size + 1) = NULL;
-	return true;
+	new_ptr = malloc(((*size) + 1) * size_struct);
+	if (!new_ptr)
+		return (1);
+	ft_memmove(new_ptr, *ptr, (*size) * size_struct);
+	free(*ptr);
+	*ptr = new_ptr;
+	ft_memmove(new_ptr + ((*size) * size_struct), new_object, size_struct);
+	(*size)++;
+	return (0);
 }
