@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:59:55 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 21:10:06 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:36:28 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int  add_ambient(t_scene *scene, char *str)
     if (errno)
         return (print_error(strerror(errno)));
     if (scene->ambient.intensity < 0 || scene->ambient.intensity > 1)
-        return (print_error(E_FILE_INP)); 
+        return (print_error(E_FILE_BRIGHT)); 
     while (*str && *str == ' ')
         str++;
     if (*str)

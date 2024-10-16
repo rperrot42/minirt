@@ -19,7 +19,7 @@ int add_cylinder(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        cylinder.origin = get_point(&str);
+        cylinder.position = get_point(&str);
     else
         return (print_error(E_FILE_PARS));
     if (errno)
@@ -27,7 +27,7 @@ int add_cylinder(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        cylinder.direction = get_vector(&str);
+        cylinder.vector = get_vector(&str);
     else
         return (print_error(E_FILE_PARS));
     if (errno)
@@ -36,6 +36,14 @@ int add_cylinder(t_scene *scene, char *str)
         str++;
     if (*str)
         cylinder.diameter = ft_atof(&str);
+    else
+        return (print_error(E_FILE_PARS));
+    if (errno)
+		return (print_error(strerror(errno)));
+	while (*str && *str == ' ')
+		str++;
+    if (*str)
+        cylinder.height = ft_atof(&str);
     else
         return (print_error(E_FILE_PARS));
     if (errno)

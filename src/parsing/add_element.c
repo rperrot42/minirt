@@ -6,12 +6,11 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:56:27 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 21:12:50 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:34:56 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "libft.h"
 
 int	add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
 {
@@ -41,6 +40,6 @@ int	add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
            return (add_cylinder(scene, str + 2));
     }
 	if (str[0] && !ft_had_whitespace(str))
-		return (print_error(E_FILE_INP));
+		return (print_error(E_FILE_PARS));
     return (0);
 }

@@ -14,6 +14,8 @@ FLAGS = -Wall -Werror -Wextra -g3
 
 INCLUDE = $(INCLUDE_DIR)/mini_rt.h
 
+SRC_ERROR = error.c
+
 SRC_PARSING =	check_file.c	\
 				get_info_line.c	\
 				add_element.c	\
@@ -24,10 +26,11 @@ SRC_PARSING =	check_file.c	\
 				add_light.c		\
 				add_plane.c		\
 				add_sphere.c	\
-				error.c			\
 
 SRC =	$(addprefix parsing/, $(SRC_PARSING))	\
+		$(addprefix error/, $(SRC_ERROR))		\
 		main.c					\
+
 
 
 SRC_PATH = src/

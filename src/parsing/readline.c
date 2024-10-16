@@ -33,7 +33,7 @@ int ft_readline(int fd, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (camera == false | ambient == false)
+	if (camera == false || ambient == false)
 	{
 		errno = 1;
 		if (camera == false)
@@ -42,5 +42,7 @@ int ft_readline(int fd, t_scene *scene)
 			ft_dprintf(STDERR_FILENO, "Error: %s", E_NOT_AMBIENT);
 		return (1);
 	}
+	if (scene->nb_lights == 0)
+		return (print_error(E_NOT_LIGHTS));
 	return (0);
 }

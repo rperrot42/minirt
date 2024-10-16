@@ -19,7 +19,7 @@ int add_sphere(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        sphere.center = get_point(&str);
+        sphere.position = get_point(&str);
     else
         return (print_error(E_FILE_PARS));
     if (errno)
