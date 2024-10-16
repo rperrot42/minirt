@@ -32,7 +32,11 @@ int main(int argc, char **argv)
 	if (!return_value)
 	 	print_scene(oui);
 	else
+	{
+		free_scene(&oui);
 		return (1);
+	}
+	free_scene(&oui);
 	return (0);
 }
 

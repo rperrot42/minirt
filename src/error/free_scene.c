@@ -10,3 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "include.h"
+#include "struct.h"
+
+void	free_scene(t_scene *scene)
+{
+	if (scene)
+	{
+		free(scene->cylinders);
+		free(scene->planes);
+		free(scene->spheres);
+		free(scene->lights);
+	}
+}
