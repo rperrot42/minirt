@@ -10,27 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "error.h"
+#include "error.h"
 #include "parsing.h"
 
-void print_scene(t_scene scene);
+void	print_scene(t_scene scene);
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int fd;
-	t_scene oui;
+	int		fd;
+	int		return_value;
+	t_scene	oui;
+
 	errno = 0;
 	if (argc != 2)
-	{
-		ft_dprintf(STDERR_FILENO, E_NB_ARGS);
-		return (1);
-	}
+		return print_error(E_NB_ARGS);
 	fd = check_file(argv[1]);
 	if (fd == -1)
 		return (1);
-	int return_value = ft_readline(fd, &oui);
+	return_value = ft_readline(fd, &oui);
 	if (!return_value)
-	 	print_scene(oui);
+		print_scene(oui);
 	else
 	{
 		free_scene(&oui);

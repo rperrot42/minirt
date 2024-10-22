@@ -14,33 +14,32 @@
 #include <fcntl.h>
 #include "error.h"
 
-static t_bool  check_filename(char *str)
+static t_bool	check_filename(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-        i++;
-    if (str[i - 1] != 't' || str[i - 2] != 'r' || str[i - 3] != '.')
-        return (true);
-    return (false);
+	i = 0;
+	while (str[i])
+		i++;
+	if (str[i - 1] != 't' || str[i - 2] != 'r' || str[i - 3] != '.')
+		return (true);
+	return (false);
 }
 
-int check_file(char *file_name)
+int	check_file(char *file_name)
 {
-    int fd;
+	int	fd;
 
-    if (check_filename(file_name))
-    {
-        ft_dprintf(STDERR_FILENO, "%s", E_FILE_EXT);
-        return (-1);
-    }
-    fd = open(file_name, O_RDONLY);
-    if (fd == -1)
-    {
-        ft_dprintf(STDERR_FILENO, "%s", E_FILE_ACCESS);
-        return (fd);
-    }
-    return (fd);
+	if (check_filename(file_name))
+	{
+		ft_dprintf(STDERR_FILENO, "%s", E_FILE_EXT);
+		return (-1);
+	}
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_dprintf(STDERR_FILENO, "%s", E_FILE_ACCESS);
+		return (fd);
+	}
+	return (fd);
 }
-

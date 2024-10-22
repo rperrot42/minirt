@@ -1,20 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 18:05:41 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 21:12:12 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/10/22 17:35:25 by rperrot           #+#    #+#             */
+/*   Updated: 2024/10/22 17:35:25 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.h"
-
-int	print_error(char *error)
-{
-	errno = 1;
-	dprintf(STDERR_FILENO, "%s", error);
-	return (1);
-}
+#include "parsing.h"
