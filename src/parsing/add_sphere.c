@@ -12,18 +12,18 @@
 
 #include "parsing.h"
 
-int add_sphere(t_scene *scene, char *str)
+int	add_sphere(t_scene *scene, char *str)
 {
-    t_sphere    sphere;
+	t_sphere	sphere;
 
-    while (*str && *str == ' ')
-        str++;
-    if (*str)
-        sphere.position = get_point(&str);
-    else
-        return (print_error(E_FILE_PARS));
-    if (errno)
-        return (print_error(strerror(errno)));
+	while (*str && *str == ' ')
+		str++;
+	if (*str)
+		sphere.position = get_point(&str);
+	else
+		return (print_error(E_FILE_PARS));
+	if (errno)
+		return (print_error(strerror(errno)));
     while (*str && *str == ' ')
         str++;
     if (*str)

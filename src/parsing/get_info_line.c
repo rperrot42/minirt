@@ -15,8 +15,8 @@
 t_color	get_color(char **line)
 {
 	t_color	color;
+	int		result;
 
-	int result;
 	result = ft_atoi(line);
 	if (errno || **line != ',' || result < 0 || result > 255)
 		return (errno = EINVAL, (t_color){0, 0, 0});
@@ -41,7 +41,7 @@ t_point	get_point(char **line)
 
 	result = ft_atof(line);
 	if (errno || **line != ',' || result < -1000000 || result > 1000000)
-		return (errno = EINVAL, (t_point ){0, 0, 0});
+		return (errno = EINVAL, (t_point){0, 0, 0});
 	point.x = result;
 	(*line)++;
 	result = ft_atof(line);
@@ -63,7 +63,7 @@ t_point	get_vector(char **line)
 
 	result = ft_atof(line);
 	if (errno || **line != ',' || result < -1 || result > 1)
-		return (errno = EINVAL, (t_point ){0, 0, 0});
+		return (errno = EINVAL, (t_point){0, 0, 0});
 	point.x = result;
 	(*line)++;
 	result = ft_atof(line);

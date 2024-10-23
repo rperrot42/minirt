@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   collison.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 18:05:41 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 21:12:12 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/10/23 14:40:45 by rperrot           #+#    #+#             */
+/*   Updated: 2024/10/23 14:45:22 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.h"
+#ifndef MINIRT_H
+# define COLLISON_H
+# include "struct.h"
+# include "include.h"
+t_point intersection_plane_line(t_line *line, t_new_plane *plane);
 
-int	print_error(char *error)
-{
-	errno = 1;
-	dprintf(STDERR_FILENO, "%s", error);
-	return (1);
-}
+#endif //MINIRT_COLLISON_H

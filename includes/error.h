@@ -13,6 +13,7 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+# include "struct.h"
 # define E_MALLOC           "Error malloc\n"
 
 # define E_FILE_EXT         "Wrong file extension, not a .rt file\n"
@@ -29,6 +30,7 @@
 # define E_NOT_AMBIENT		 "No ambient light\n"
 # define E_NOT_LIGHTS		 "No lights\n"
 
-int  print_error(char *error);
+int		print_error(char *error);
+void	free_scene(t_scene *scene);
 
 #endif

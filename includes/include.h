@@ -13,10 +13,10 @@
 #ifndef INCLUDE_H
 # define INCLUDE_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include "errno.h"
-#include "libft.h"
-#include "error.h"
-#include <string.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include "errno.h"
+# include "libft.h"
+# include "error.h"
+# include <string.h>
 #endif
