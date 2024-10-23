@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   include.h                                          :+:      :+:    :+:   */
+/*   collison.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 19:52:55 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/15 20:59:04 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/10/23 14:40:45 by rperrot           #+#    #+#             */
+/*   Updated: 2024/10/23 14:45:22 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDE_H
-# define INCLUDE_H
+#ifndef MINIRT_H
+# define COLLISON_H
+# include "struct.h"
+# include "include.h"
+t_point intersection_plane_line(t_line *line, t_new_plane *plane);
 
-# include <stdlib.h>
-# include <stdio.h>
-# include "errno.h"
-# include "libft.h"
-# include "error.h"
-# include <string.h>
-#endif
+#endif //MINIRT_COLLISON_H

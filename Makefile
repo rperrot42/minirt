@@ -29,8 +29,11 @@ SRC_PARSING =	check_file.c	\
 				add_plane.c		\
 				add_sphere.c	\
 
+SRC_COLLISION = plane.c
+
 SRC =	$(addprefix parsing/, $(SRC_PARSING))	\
 		$(addprefix error/, $(SRC_ERROR))		\
+		$(addprefix collision/, $(SRC_COLLISION))		\
 		main.c					\
 
 SRC_PATH = src/
@@ -54,7 +57,8 @@ all:$(NAME)
 
 IFLAGS = -Ilibft/includes \
 			-I$(INCLUDE_DIR) \
-			-I$(INCLUDE_DIR)/parsing
+			-I$(INCLUDE_DIR)/parsing \
+			-I$(INCLUDE_DIR)/collision \
 
 ifeq ($(OS), Linux)
 	DIR_MLX = mlx_linux

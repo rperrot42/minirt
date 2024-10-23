@@ -15,9 +15,9 @@
 
 typedef struct s_point
 {
-	float x;
-	float y;
-	float z;
+	float	x;
+	float	y;
+	float	z;
 }	t_point;
 
 typedef struct s_color
@@ -30,9 +30,14 @@ typedef struct s_color
 typedef struct s_sphere
 {
 	t_point	position;
-	t_color color;
-	float 	radius;
-} t_sphere;
+	t_color	color;
+	float	radius;
+}	t_sphere;
+
+typedef struct s_line{
+	t_point	position;
+	t_point	vector;
+}	t_line;
 
 typedef struct s_camera
 {
@@ -44,7 +49,7 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_point	position;
-	t_color color;
+	t_color	color;
 	float	intensity;
 }	t_light;
 
@@ -54,14 +59,14 @@ typedef struct s_cylinder
 	t_point	vector;
 	float	diameter;
 	float	height;
-	t_color color;
+	t_color	color;
 }	t_cylinder;
 
 typedef struct s_plane
 {
 	t_point	position;
-	t_point vector;
-	t_color color;
+	t_point	vector;
+	t_color	color;
 }	t_plane;
 
 typedef struct s_ambient
@@ -77,11 +82,25 @@ typedef struct s_scene
 	short		nb_spheres;
 	t_light		*lights;
 	short		nb_lights;
-	t_camera 	cameras;
+	t_camera	cameras;
 	t_cylinder	*cylinders;
 	short		nb_cylinders;
 	t_plane		*planes;
 	short		nb_planes;
 }	t_scene;
+
+typedef struct s_new_plane
+{
+	float	d;
+	t_point	vector;
+	t_color	color;
+}	t_new_plane;
+
+typedef enum s_obj
+{
+	SPHERE,
+	PLANE,
+	CYLINDER
+}	t_obj;
 
 #endif
