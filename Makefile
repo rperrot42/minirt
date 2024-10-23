@@ -14,8 +14,8 @@ FLAGS = -Wall -Werror -Wextra -g3
 
 INCLUDE = $(INCLUDE_DIR)/mini_rt.h
 
-SRC_ERROR = error.c \
-			free_scene.c \
+SRC_ERROR = 	error.c			\
+				free_scene.c	\
 
 
 SRC_PARSING =	check_file.c	\
@@ -31,10 +31,16 @@ SRC_PARSING =	check_file.c	\
 
 SRC_COLLISION = plane.c
 
-SRC =	$(addprefix parsing/, $(SRC_PARSING))	\
-		$(addprefix error/, $(SRC_ERROR))		\
-		$(addprefix collision/, $(SRC_COLLISION))		\
-		main.c					\
+SRC_ANGLE = 	get_angle_plane.c	\
+
+SRC_INIT =		init_mlx.c		\
+
+SRC =	$(addprefix parsing/, $(SRC_PARSING))		\
+		$(addprefix error/, $(SRC_ERROR))			\
+		$(addprefix collision/, $(SRC_COLLISION))	\
+		$(addprefix angle/, $(SRC_ANGLE))			\
+		$(addprefix init/, $(SRC_INIT))				\
+		main.c										\
 
 SRC_PATH = src/
 
@@ -55,10 +61,11 @@ OBJ = $(addprefix $(DIR_OBJS)/, $(SRC:.c=.o))
 
 all:$(NAME)
 
-IFLAGS = -Ilibft/includes \
-			-I$(INCLUDE_DIR) \
-			-I$(INCLUDE_DIR)/parsing \
-			-I$(INCLUDE_DIR)/collision \
+IFLAGS =	-Ilibft/includes			\
+			-I$(INCLUDE_DIR)			\
+			-I$(INCLUDE_DIR)/parsing	\
+			-I$(INCLUDE_DIR)/collision	\
+			-I$(INCLUDE_DIR)/angle		\
 
 ifeq ($(OS), Linux)
 	DIR_MLX = mlx_linux

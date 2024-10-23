@@ -6,13 +6,14 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/16 21:00:06 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/23 22:06:52 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 #include "parsing.h"
 #include "collison.h"
+#include "mlx.h"
 
 //void	print_scene(t_scene scene);
 
@@ -40,22 +41,47 @@
 //	return (0);
 //}
 
-int main(){
-	t_new_plane plane;
-	plane.vector.x  = 4;
-	plane.vector.y= -1;
-	plane.vector.z = 3;
-	plane.d = 1;
-	t_line line;
-	line.vector.x = 4;
-	line.vector.y = -1;
-	line.vector.z = 3;
-	line.position.x = -5;
-	line.position.y = -1;
-	line.position.z = 0;
-	t_point point =  intersection_plane_line(&line, &plane);
-	printf("%f %f %f\n", point.x, point.y, point.z);
+// int main(){
+// 	t_new_plane plane;
+// 	plane.vector.x  = 4;
+// 	plane.vector.y= -1;
+// 	plane.vector.z = 3;
+// 	plane.d = 1;
+// 	t_line line;
+// 	line.vector.x = 4;
+// 	line.vector.y = -1;
+// 	line.vector.z = 3;
+// 	line.position.x = -5;
+// 	line.position.y = -1;
+// 	line.position.z = 0;
+// 	t_point point =  intersection_plane_line(&line, &plane);
+// 	printf("%f %f %f\n", point.x, point.y, point.z);
+// }
+
+
+int	main(void)
+{
+	t_scene	scene;
+	int		fd;
+
+	if (argc != 2)
+		return (print_error(E_NB_ARGS));
+	fd = check_file(argv[1]);
+	if (fd == -1)
+		return (1);
+	if (ft_readline(fd, &scene) || init_mlx(&scene))
+	{
+		free_scene(&scene);
+		return (2);
+	}
+	for (int x = 0; x < W_WITDH; i++)
+	{
+		scene.img.addr = 
+	}
+	free_scene(&scene);
+	return (0);
 }
+
 //
 //void print_scene(t_scene scene)
 //{

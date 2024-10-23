@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/15 23:09:32 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/23 21:20:38 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,18 @@ typedef struct s_scene
 	short		nb_cylinders;
 	t_plane		*planes;
 	short		nb_planes;
+	void		*mlx;
+	void		*window;
+	t_data		img;
 }	t_scene;
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct s_new_plane
 {

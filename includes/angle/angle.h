@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_rt.h                                          :+:      :+:    :+:   */
+/*   angle.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:15:10 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/23 21:02:33 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/10/23 21:09:09 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/10/23 21:10:00 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#ifndef ANGLE_H
+# define ANGLE_H
 
-# define W_WIDTH  500
-# define W_HEIGHT 500
+float   get_angle_plan(t_point p, t_point q, t_new_plane *plan);
 
-# include "libft.h"
-# include <stdio.h>
-# include "struct.h"
-
-#endif //MINIRT_INCLUDES_H
+#endif

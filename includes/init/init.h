@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_rt.h                                          :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:15:10 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/23 21:02:33 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/10/23 21:28:08 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/10/23 21:28:29 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#ifndef INIT_H
+# define INIT_H
 
-# define W_WIDTH  500
-# define W_HEIGHT 500
+int init_window(t_scene *scene);
 
-# include "libft.h"
-# include <stdio.h>
-# include "struct.h"
-
-#endif //MINIRT_INCLUDES_H
+#endif
