@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:35:25 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/22 17:35:25 by rperrot          ###   ########.fr       */
+/*   Updated: 2024/10/25 18:41:48 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collison.h"
 #include <math.h>
 
-t_point intersection_plane_line(t_line *line, t_new_plane *plane)
+t_point intersection_plane_line(t_line *line, t_plane *plane)
 {
 	float t;
 	t_point point;
