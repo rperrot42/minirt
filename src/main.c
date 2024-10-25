@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "error.h"
 #include "parsing.h"
 #include "collison.h"
@@ -103,28 +104,35 @@ int	main(int argc, char **argv)
 	t_new_plane	plan;
 	t_line line;
 	t_point p;
+	float xp;
+	float yp = -(scene.cameras.fov * M_PI / 360);
 
-	float a = (scene.cameras.fov / 180) / W_WIDTH;
+	float a = M_PI * scene.cameras.fov / 180 / (W_HEIGHT - 1);
 	plan.d = scene.planes->position.x * scene.planes->vector.x + scene.planes->position.y \
 	* scene.planes->vector.y +  scene.planes->position.z * scene.planes->vector.z;
 	plan.vector = scene.planes->vector;
 	int c = create_trgb(0, scene.planes->color.r, scene.planes->color.g, scene.planes->color.b);
-	line = (t_line){0};
-	line.vector.x = -scene.cameras.fov / 360;
-	line.vector.y = -scene.cameras.fov / 360;
+	line.vector.z = 1;
 	for (int y = 0; y < W_WIDTH; y++)
 	{
+		xp = -scene.cameras.fov * M_PI / 360;
+
 		line.vector.x = -scene.cameras.fov / 360;
 		for (int x = 0; x < W_HEIGHT; x++)
 		{
-			line.vector = scene.cameras.vector;
+			line.vector.y =sinf(xp);
+			line.vector.x = cosf(xp) * sinf(yp);
+			line.vector.z =   cosf(yp) * cosf(xp);
+			printf("line.vector.x = %f %f %f %f\n", line.vector.x, 		line.vector.y, line.vector.z, line.vector.x * line.vector.x + line.vector.y * line.vector.y + line.vector.z * line.vector.z);
 			p = intersection_plane_line(&line, &plan);
 			if (p.z != -1)
 			{
 				my_mlx_pixel_put(&scene.img, x, y, c);
 			}
 			line.vector.x += a;
+			xp += a;
 		}
+		yp += a;
 		line.vector.y += a;
 	}
 	mlx_put_image_to_window(scene.mlx, scene.window, scene.img.img, 0, 0);
