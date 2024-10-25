@@ -66,6 +66,7 @@ IFLAGS =	-Ilibft/includes			\
 			-I$(INCLUDE_DIR)/parsing	\
 			-I$(INCLUDE_DIR)/collision	\
 			-I$(INCLUDE_DIR)/angle		\
+			-I$(INCLUDE_DIR)/init		\
 
 ifeq ($(OS), Linux)
 	DIR_MLX = mlx_linux

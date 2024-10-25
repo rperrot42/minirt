@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:01:40 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 18:03:36 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:01:56 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int add_plane(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        plane.position = get_point(&str);
+        plane.color = get_color(&str);
     else
         return (print_error(E_FILE_PARS));
     if (errno)

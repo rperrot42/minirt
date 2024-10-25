@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:31:09 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 21:36:09 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:19:53 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include "struct.h"
 # define E_MALLOC           "Error malloc\n"
+
+# define E_MLX_INIT         "Error mlx_init()\n"
+# define E_MLX_WINDOW       "Error mlx_new_window()\n"
+# define E_MLX_IMG          "Error mlx_new_image()\n"
 
 # define E_FILE_EXT         "Wrong file extension, not a .rt file\n"
 # define E_FILE_ACCESS      "Couldn't open the file\n"
