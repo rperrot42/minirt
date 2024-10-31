@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/31 11:19:02 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:24:18 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,8 @@ int	main(int argc, char **argv)
 
 	t_plane	plan;
 	t_line line;
-	t_point p;
+
 	float fov = scene.cameras.fov * M_PI / 360;
-	plan.d = scene.planes->position.x * scene.planes->vector.x + scene.planes->position.y \
-	* scene.planes->vector.y +  scene.planes->position.z * scene.planes->vector.z;
-	plan.vector = scene.planes->vector;
 	int c = create_trgb(0, scene.planes->color.r, scene.planes->color.g, scene.planes->color.b);
 	line.vector.z = 1;
 	for (int y = 0; y < LENGTH; y++)
