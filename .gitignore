@@ -12,3 +12,6 @@ libft/libft.a
 libft/.obj
 mlx/libmlx.a
 mlx_linux/test/mlx-test
+libmlx.a
+libmlx_Linux.a
+obj

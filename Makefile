@@ -38,12 +38,16 @@ SRC_INIT =		init_mlx.c		\
 
 SRC_COLOR =		color.c			\
 
+SRC_MLX =		pixel_put.c		\
+				hooking.c		\
+
 SRC =	$(addprefix parsing/, $(SRC_PARSING))		\
 		$(addprefix error/, $(SRC_ERROR))			\
 		$(addprefix collision/, $(SRC_COLLISION))	\
 		$(addprefix angle/, $(SRC_ANGLE))			\
 		$(addprefix init/, $(SRC_INIT))				\
 		$(addprefix color/, $(SRC_COLOR))			\
+		$(addprefix mlx_functions/, $(SRC_MLX))		\
 		main.c										\
 
 SRC_PATH = src/
