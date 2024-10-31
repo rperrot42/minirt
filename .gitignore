@@ -11,3 +11,4 @@ miniRT
 libft/libft.a
 libft/.obj
 mlx/libmlx.a
+mlx_linux/test/mlx-test

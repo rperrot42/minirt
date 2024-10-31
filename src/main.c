@@ -6,10 +6,11 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/31 10:46:08 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:19:02 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "error.h"
 #include "parsing.h"
 #include "collison.h"
@@ -88,34 +89,36 @@ int	main(int argc, char **argv)
 		return (2);
 	}
 	print_scene(scene);
-	t_line	line;
-	t_point	p;
 
-	line = (t_line){0};
-	line.vector.x = -scene.cameras.fov / 360;
-	line.vector.y = -scene.cameras.fov / 360;
+	t_plane	plan;
+	t_line line;
+	t_point p;
+	float fov = scene.cameras.fov * M_PI / 360;
+	plan.d = scene.planes->position.x * scene.planes->vector.x + scene.planes->position.y \
+	* scene.planes->vector.y +  scene.planes->position.z * scene.planes->vector.z;
+	plan.vector = scene.planes->vector;
+	int c = create_trgb(0, scene.planes->color.r, scene.planes->color.g, scene.planes->color.b);
 	line.vector.z = 1;
 	for (int y = 0; y < LENGTH; y++)
 	{
-		line.vector.x = -scene.cameras.fov / 360;
+		line.vector.y =tanf(((2.0 * y) -  LENGTH) /( LENGTH -2 ) * fov);
 		for (int x = 0; x < LENGTH; x++)
 		{
-			p = intersection_plane_line(&line, scene.planes);
+
+			line.vector.x =  tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);
+			printf("line.vector.x = %f %f %f %f\n", line.vector.x, line.vector.y, line.vector.z, line.vector.x * line.vector.x + line.vector.y * line.vector.y + line.vector.z * line.vector.z);
+			p = intersection_plane_line(&line, &plan);
 			if (p.z != -1)
-			{
 				my_mlx_pixel_put(&scene.img, x, y, c);
-			}
-			line.vector.x += a;
 		}
-		line.vector.y += a;
 	}
-	mlx_put_image_to_window(scene.mlx, scene.window, scene.img.img, 0, 0);
-	mlx_hook(scene.window, 2, 1L<<0, close_win, &scene);
-	mlx_loop(scene.mlx);
+	//mlx_put_image_to_window(scene.mlx, scene.window, scene.img.img, 0, 0);
+	//mlx_hook(scene.window, 2, 1L<<0, close_win, &scene);
+	//mlx_loop(scene.mlx);
 	free_scene(&scene);
+	printf("%f\n", fov);
 	return (0);
 }
-
 
 void print_scene(t_scene scene)
 {
