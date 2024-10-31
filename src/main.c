@@ -104,10 +104,7 @@ int	main(int argc, char **argv)
 	t_new_plane	plan;
 	t_line line;
 	t_point p;
-	float xp;
-	float yp = -(scene.cameras.fov * M_PI / 360);
-
-	float a = M_PI * scene.cameras.fov / 180 / (W_HEIGHT - 1);
+	float fov = scene.cameras.fov * M_PI / 360;
 	plan.d = scene.planes->position.x * scene.planes->vector.x + scene.planes->position.y \
 	* scene.planes->vector.y +  scene.planes->position.z * scene.planes->vector.z;
 	plan.vector = scene.planes->vector;
@@ -115,33 +112,24 @@ int	main(int argc, char **argv)
 	line.vector.z = 1;
 	for (int y = 0; y < W_WIDTH; y++)
 	{
-		xp = -scene.cameras.fov * M_PI / 360;
-
-		line.vector.x = -scene.cameras.fov / 360;
+		line.vector.y =tanf(((2.0 * y) -  W_HEIGHT) /( W_HEIGHT -2 ) * fov);
 		for (int x = 0; x < W_HEIGHT; x++)
 		{
-			line.vector.y =sinf(xp);
-			line.vector.x = cosf(xp) * sinf(yp);
-			line.vector.z =   cosf(yp) * cosf(xp);
-			printf("line.vector.x = %f %f %f %f\n", line.vector.x, 		line.vector.y, line.vector.z, line.vector.x * line.vector.x + line.vector.y * line.vector.y + line.vector.z * line.vector.z);
+
+			line.vector.x =  tanf(((2.0 * x) -  W_HEIGHT) / (W_HEIGHT - 2) * fov);
+			printf("line.vector.x = %f %f %f %f\n", line.vector.x, line.vector.y, line.vector.z, line.vector.x * line.vector.x + line.vector.y * line.vector.y + line.vector.z * line.vector.z);
 			p = intersection_plane_line(&line, &plan);
 			if (p.z != -1)
-			{
 				my_mlx_pixel_put(&scene.img, x, y, c);
-			}
-			line.vector.x += a;
-			xp += a;
 		}
-		yp += a;
-		line.vector.y += a;
 	}
-	mlx_put_image_to_window(scene.mlx, scene.window, scene.img.img, 0, 0);
-	mlx_hook(scene.window, 2, 1L<<0, close_win, &scene);
-	mlx_loop(scene.mlx);
+	//mlx_put_image_to_window(scene.mlx, scene.window, scene.img.img, 0, 0);
+	//mlx_hook(scene.window, 2, 1L<<0, close_win, &scene);
+	//mlx_loop(scene.mlx);
 	free_scene(&scene);
+	printf("%f\n", fov);
 	return (0);
 }
-
 
 void print_scene(t_scene scene)
 {
