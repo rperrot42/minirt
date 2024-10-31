@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/24 13:59:53 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/25 18:41:23 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_cylinder
 
 typedef struct s_plane
 {
-	t_point	position;
+	float	d;
 	t_point	vector;
 	t_color	color;
 }	t_plane;
@@ -99,13 +99,6 @@ typedef struct s_scene
 	void		*window;
 	t_data		img;
 }	t_scene;
-
-typedef struct s_new_plane
-{
-	float	d;
-	t_point	vector;
-	t_color	color;
-}	t_new_plane;
 
 typedef enum s_obj
 {

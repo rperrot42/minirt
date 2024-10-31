@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/25 16:40:25 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:02:56 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,24 +101,22 @@ int	main(int argc, char **argv)
 		return (2);
 	}
 	print_scene(scene);
-	t_new_plane	plan;
+	t_plane	plan;
 	t_line line;
 	t_point p;
 	float fov = scene.cameras.fov * M_PI / 360;
-	plan.d = scene.planes->position.x * scene.planes->vector.x + scene.planes->position.y \
-	* scene.planes->vector.y +  scene.planes->position.z * scene.planes->vector.z;
 	plan.vector = scene.planes->vector;
 	int c = create_trgb(0, scene.planes->color.r, scene.planes->color.g, scene.planes->color.b);
+	line = (t_line){0};
 	line.vector.z = 1;
-	for (int y = 0; y < W_WIDTH; y++)
+	for (int y = 0; y < LENGTH; y++)
 	{
-		line.vector.y =tanf(((2.0 * y) -  W_HEIGHT) /( W_HEIGHT -2 ) * fov);
-		for (int x = 0; x < W_HEIGHT; x++)
+		line.vector.y =tanf(((2.0 * y) -  LENGTH) /( LENGTH -2 ) * fov);
+		for (int x = 0; x < LENGTH; x++)
 		{
-
-			line.vector.x =  tanf(((2.0 * x) -  W_HEIGHT) / (W_HEIGHT - 2) * fov);
+			line.vector.x =  tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);
 			printf("line.vector.x = %f %f %f %f\n", line.vector.x, line.vector.y, line.vector.z, line.vector.x * line.vector.x + line.vector.y * line.vector.y + line.vector.z * line.vector.z);
-			p = intersection_plane_line(&line, &plan);
+			p = intersection_plane_line(&line, scene.planes);
 			if (p.z != -1)
 				my_mlx_pixel_put(&scene.img, x, y, c);
 		}
@@ -164,7 +162,7 @@ void print_scene(t_scene scene)
 	for (int i = 0; i < scene.nb_planes; i++)
 	{
 		printf("planes [%d]:\n", i + 1);
-		printf(" -Position: %f %f %f\n", scene.planes[i].position.x,scene.planes[i].position.y,scene.planes[i].position.z);
+		printf(" -d value: %f\n", scene.planes[i].d);
 		printf(" -vector: %f %f %f\n",scene.planes[i].vector.x,scene.planes[i].vector.y,scene.planes[i].vector.z);
 		printf(" -Color: %d %d %d\n",scene.planes[i].color.r,scene.planes[i].color.g,scene.planes[i].color.b);
 	}

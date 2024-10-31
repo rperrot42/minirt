@@ -13,11 +13,10 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
 
-# define W_WIDTH  10
-# define W_HEIGHT 10
 
 # include "libft.h"
 # include <stdio.h>
 # include "struct.h"
 
+#define LENGTH 10
 #endif //MINIRT_INCLUDES_H

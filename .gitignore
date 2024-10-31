@@ -11,3 +11,6 @@ miniRT
 libft/libft.a
 libft/.obj
 mlx/libmlx.a
+libmlx.a
+libmlx_Linux.a
+obj
