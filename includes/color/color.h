@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_rt.h                                          :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:15:10 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/25 19:26:40 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/10/25 20:18:04 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/10/25 20:19:24 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#ifndef COLOR_H
+# define COLOR_H
 
-# define LENGTH  1000
+int	create_trgb(int t, int r, int g, int b);
+int	get_r(int trgb);
+int	get_g(int trgb);
+int	get_b(int trgb);
 
-# include "libft.h"
-# include <stdio.h>
-# include "struct.h"
-
-#endif //MINIRT_INCLUDES_H
+#endif

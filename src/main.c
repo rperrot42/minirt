@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/25 19:02:56 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/10/31 10:46:08 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "init.h"
 #include "mini_rt.h"
 #include "mlx.h"
+#include "color.h"
 
 void	print_scene(t_scene scene);
 
@@ -60,19 +61,6 @@ void	print_scene(t_scene scene);
 // 	printf("%f %f %f\n", point.x, point.y, point.z);
 // }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
 int	close_win(int keycode, t_scene *scene)
 {
 	if (keycode == 65307)
@@ -103,16 +91,14 @@ int	main(int argc, char **argv)
 	t_line	line;
 	t_point	p;
 
-	float a = (scene.cameras.fov / 180) / W_WIDTH;
-	int c = create_trgb(0, scene.planes->color.r, scene.planes->color.g, scene.planes->color.b);
 	line = (t_line){0};
 	line.vector.x = -scene.cameras.fov / 360;
 	line.vector.y = -scene.cameras.fov / 360;
 	line.vector.z = 1;
-	for (int y = 0; y < W_WIDTH; y++)
+	for (int y = 0; y < LENGTH; y++)
 	{
 		line.vector.x = -scene.cameras.fov / 360;
-		for (int x = 0; x < W_HEIGHT; x++)
+		for (int x = 0; x < LENGTH; x++)
 		{
 			p = intersection_plane_line(&line, scene.planes);
 			if (p.z != -1)

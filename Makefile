@@ -11,6 +11,7 @@ INCLUDE_DIR = includes
 LIBFT_DIRECTORY = ./libft/
 
 FLAGS = -Wall -Werror -Wextra -g3
+DFLAGS = -MD -MP
 
 INCLUDE = $(INCLUDE_DIR)/mini_rt.h
 
@@ -35,11 +36,14 @@ SRC_ANGLE = 	get_angle_plane.c	\
 
 SRC_INIT =		init_mlx.c		\
 
+SRC_COLOR =		color.c			\
+
 SRC =	$(addprefix parsing/, $(SRC_PARSING))		\
 		$(addprefix error/, $(SRC_ERROR))			\
 		$(addprefix collision/, $(SRC_COLLISION))	\
 		$(addprefix angle/, $(SRC_ANGLE))			\
 		$(addprefix init/, $(SRC_INIT))				\
+		$(addprefix color/, $(SRC_COLOR))			\
 		main.c										\
 
 SRC_PATH = src/
@@ -58,6 +62,7 @@ OS := $(shell uname)
 SYSTEM_EXPLOIT = uname
 
 OBJ = $(addprefix $(DIR_OBJS)/, $(SRC:.c=.o))
+DEP = $(OBJ:.o=.d)
 
 all:$(NAME)
 
@@ -67,6 +72,7 @@ IFLAGS =	-Ilibft/includes			\
 			-I$(INCLUDE_DIR)/collision	\
 			-I$(INCLUDE_DIR)/angle		\
 			-I$(INCLUDE_DIR)/init		\
+			-I$(INCLUDE_DIR)/color		\
 
 ifeq ($(OS), Linux)
 	DIR_MLX = mlx_linux
@@ -74,38 +80,38 @@ else
 	DIR_MLX = mlx
 endif
 
-$(DIR_OBJS)/%.o: $(SRC_PATH)%.c Makefile $(INClUDE)
-	@mkdir -p  $(dir $@)
+-include $(DEP)
+
+$(DIR_OBJS)/%.o: $(SRC_PATH)%.c Makefile
+	mkdir -p  $(dir $@)
 ifeq ($(OS), Linux)
-	@$(CC)  $(IFLAGS) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC)  $(IFLAGS) $(FLAGS) $(DFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 else
-	@$(CC)  $(IFLAGS) $(FLAGS) -Imlx -c $< -o $@
+	$(CC)  $(IFLAGS) $(FLAGS) $(DFLAGS) -Imlx -c $< -o $@
 endif
 	@echo "$(CYAN)$@ created $(CHECK)$(RESET_COLOR)"
 
 $(NAME): $(OBJ) $(LIBFT) mlx
 ifeq ($(OS), Linux)
-	@$(CC) $(OBJ)  -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
+	$(CC) $(OBJ)  -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
 else
-	@$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(LIBFT)
+	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(LIBFT)
 endif
-	@echo "$(GREEN)$(NAME) created $(CHECK)$(RESET_COLOR)"
+	echo "$(GREEN)$(NAME) created $(CHECK)$(RESET_COLOR)"
 
 clean:
-	@rm -rf $(DIR_OBJS)
-	@echo "$(RED)$(DIR_OBJS) removed$(CROSS)$(RESET_COLOR)"
-	@$(MAKE) -C $(LIBFT_DIRECTORY) clean
-	@$(MAKE) -C $(DIR_MLX) clean
+	rm -rf $(DIR_OBJS)
+	$(MAKE) -C $(LIBFT_DIRECTORY) clean
+	$(MAKE) -C $(DIR_MLX) clean
 
 $(LIBFT): FORCE
-	@$(MAKE) -C $(LIBFT_DIRECTORY)
+	$(MAKE) -C $(LIBFT_DIRECTORY)
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(RED)$(NAME) removed$(CROSS)$(RESET_COLOR)"
+	rm -f $(NAME)
 
 mlx: FORCE
-	@$(MAKE) -C $(DIR_MLX)
+	$(MAKE) -C $(DIR_MLX)
 
 FORCE:
 

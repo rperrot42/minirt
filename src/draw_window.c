@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_rt.h                                          :+:      :+:    :+:   */
+/*   draw_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 15:15:10 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/25 19:26:40 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/10/31 10:43:34 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/10/31 11:13:27 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#include "struct.h"
+#include "mini_rt.h"
 
-# define LENGTH  1000
+void    draw_window(t_scene *scene)
+{
+    int x;
+    int y;
 
-# include "libft.h"
-# include <stdio.h>
-# include "struct.h"
+    y = 0;
+    while (y < LENGTH)
+    {
+        x = 0;
+        while (x < LENGTH)
+        {
+            draw_pixel(x, y, scene);
+            x++;
+        }
+        y++;
+    }
+}
 
-#endif //MINIRT_INCLUDES_H
+void    draw_pixel(int x, int y, t_scene *scene)
+{
+    
+}
