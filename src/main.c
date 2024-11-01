@@ -10,102 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "error.h"
 #include "parsing.h"
-#include "collison.h"
-#include "init.h"
 #include "mini_rt.h"
-#include "mlx.h"
-#include "color.h"
 #include "draw.h"
 
 void	print_scene(t_scene scene);
 
-//int	main(int argc, char **argv)
-//{
-//	int		fd;
-//	int		return_value;
-//	t_scene	oui;
-//
-//	errno = 0;
-//	if (argc != 2)
-//		return print_error(E_NB_ARGS);
-//	fd = check_file(argv[1]);
-//	if (fd == -1)
-//		return (1);
-//	return_value = ft_readline(fd, &oui);
-//	if (!return_value)
-//		print_scene(oui);
-//	else
-//	{
-//		free_scene(&oui);
-//		return (1);
-//	}
-//	free_scene(&oui);
-//	return (0);
-//}
-
-// int main(){
-// 	t_new_plane plane;
-// 	plane.vector.x  = 4;
-// 	plane.vector.y= -1;
-// 	plane.vector.z = 3;
-// 	plane.d = 1;
-// 	t_line line;
-// 	line.vector.x = 4;
-// 	line.vector.y = -1;
-// 	line.vector.z = 3;
-// 	line.position.x = -5;
-// 	line.position.y = -1;
-// 	line.position.z = 0;
-// 	t_point point =  intersection_plane_line(&line, &plane);
-// 	printf("%f %f %f\n", point.x, point.y, point.z);
-// }
-
 int	main(int argc, char **argv)
 {
-	t_scene	scene;
 	int		fd;
+	int		return_value;
+	t_scene	scene;
 
+	errno = 0;
 	if (argc != 2)
-		return (print_error(E_NB_ARGS));
+		return print_error(E_NB_ARGS);
 	fd = check_file(argv[1]);
 	if (fd == -1)
 		return (1);
-	if (ft_readline(fd, &scene) || init_window(&scene))
+	return_value = ft_readline(fd, &scene);
+	if (!return_value)
+		draw_window(&scene);
+	else
 	{
 		free_scene(&scene);
-		return (2);
+		return (1);
 	}
-	print_scene(scene);
-
-	float fov = scene.cameras.fov * M_PI / 360;
-	t_line line;
-	t_point p;
-	int c = create_trgb(0, scene.planes->color.r, scene.planes->color.g, scene.planes->color.b);
-	line = (t_line){0};
-	line.vector.z = 1;
-	for (int y = 0; y < LENGTH; y++)
-	{
-		line.vector.y =tanf(((2.0 * y) -  LENGTH) /( LENGTH -2 ) * fov);
-		for (int x = 0; x < LENGTH; x++)
-		{
-
-			line.vector.x =  tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);
-			printf("line.vector.x = %f %f %f %f\n", line.vector.x, line.vector.y, line.vector.z, line.vector.x * line.vector.x + line.vector.y * line.vector.y + line.vector.z * line.vector.z);
-			p = intersection_plane_line(&line, scene.planes);
-			if (p.z != -1)
-				my_mlx_pixel_put(&scene.img, x, y, c);
-		}
-	}
-	mlx_put_image_to_window(scene.mlx, scene.window, scene.img.img, 0, 0);
-	mlx_hook(scene.window, 2, 1L<<0, close_win, &scene);
-	mlx_loop(scene.mlx);
 	free_scene(&scene);
-	printf("%f\n", fov);
 	return (0);
 }
+
 
 void print_scene(t_scene scene)
 {

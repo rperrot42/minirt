@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.h                                             :+:      :+:    :+:   */
+/*   pixel_put.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 11:43:44 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/31 11:44:23 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/10/31 14:50:36 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAW_H
-# define DRAW_H
+#include "angle.h"
 
-# include "struct.h"
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void    draw_window(t_scene *scene);
-
-#endif
+float	scalar_product(t_point a, t_point b)
+{
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
+}

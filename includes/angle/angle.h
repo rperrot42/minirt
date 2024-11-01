@@ -12,7 +12,8 @@
 
 #ifndef ANGLE_H
 # define ANGLE_H
+# include "struct.h"
 
-float   get_angle_plan(t_point p, t_point q, t_new_plane *plan);
-
+float   get_angle_plan(t_point p, t_point q, t_plane *plan);
+float	scalar_product(t_point a, t_point b);
 #endif

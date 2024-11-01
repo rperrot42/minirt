@@ -33,6 +33,7 @@ SRC_PARSING =	check_file.c	\
 SRC_COLLISION = plane.c
 
 SRC_ANGLE = 	get_angle_plane.c	\
+				scalar_product.c
 
 SRC_INIT =		init_mlx.c		\
 
