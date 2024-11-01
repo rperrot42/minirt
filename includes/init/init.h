@@ -14,5 +14,5 @@
 # define INIT_H
 
 int init_window(t_scene *scene);
-
+void	hooking(t_scene *scene);
 #endif

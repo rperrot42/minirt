@@ -13,7 +13,10 @@
 #include "struct.h"
 #include "collison.h"
 #include "mini_rt.h"
+#include "angle.h"
 #include "math.h"
+#include "color.h"
+#include "mlx.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -23,7 +26,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void    *get_closest_plan(t_line *line, t_scene *scene, t_point *p)
+t_plane    *get_closest_plan(t_line *line, t_scene *scene, t_point *p)
 {
     t_plane *obj;
     t_point temp;
@@ -57,16 +60,23 @@ t_line	get_line_2point(t_point *a, t_point *b)
 	return (line);
 }
 
-void    draw_pixel(t_scene *scene, t_line *line)
+t_color    draw_pixel(t_scene *scene, t_line *line)
 {
     t_point p;
     t_plane *plan;
+	t_line	lineLight;
+	p = (t_point){0, 0, -1};
 
-    p = intersection_plane_line(line, scene->planes);
     plan = get_closest_plan(line, scene, &p);
+	if (p.z == -1)
+		return (scene->ambient.color);
+	lineLight = get_line_2point(&p, &scene->lights[0].position);
+	if (scalar_product(lineLight.vector, plan->vector) < 0)
+		return (scene->ambient.color);
+	return (get_multiple_color(scene->ambient.color, plan->color));
 }
 
-void    draw_window(t_scene *scene)
+int draw_window(t_scene *scene)
 {
     int     x;
     int     y;
@@ -83,9 +93,11 @@ void    draw_window(t_scene *scene)
         while (x < LENGTH)
         {
             line.vector.x = tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);
-            draw_pixel(scene, &line);
+			my_mlx_pixel_put(&scene->img, x, y, color_to_int(draw_pixel(scene, &line)));
             x++;
         }
         y++;
     }
+	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
+	return (0);
 }

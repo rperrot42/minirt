@@ -13,6 +13,7 @@
 #include "error.h"
 #include "parsing.h"
 #include "mini_rt.h"
+#include "init.h"
 #include "draw.h"
 
 void	print_scene(t_scene scene);
@@ -30,8 +31,10 @@ int	main(int argc, char **argv)
 	if (fd == -1)
 		return (1);
 	return_value = ft_readline(fd, &scene);
+	if (init_window(&scene))
+		return (1);
 	if (!return_value)
-		draw_window(&scene);
+		hooking(&scene);
 	else
 	{
 		free_scene(&scene);
@@ -40,6 +43,7 @@ int	main(int argc, char **argv)
 	free_scene(&scene);
 	return (0);
 }
+
 
 
 void print_scene(t_scene scene)
