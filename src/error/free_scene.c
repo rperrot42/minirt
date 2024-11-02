@@ -6,15 +6,16 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 21:28:18 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/24 14:34:17 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:12:03 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "include.h"
 #include "struct.h"
 #include "mlx.h"
 
-void	free_scene(t_scene *scene)
+int	free_scene(t_scene *scene)
 {
 	if (scene->cylinders)
 		free(scene->cylinders);
@@ -33,4 +34,5 @@ void	free_scene(t_scene *scene)
 		mlx_destroy_display(scene->mlx);
 		free(scene->mlx);
 	}
+	exit(0);
 }

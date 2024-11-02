@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:31:09 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/31 12:56:21 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:12:53 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # define E_NOT_LIGHTS		 "No lights\n"
 
 int		print_error(char *error);
-void	free_scene(t_scene *scene);
-int	    close_win(int keycode, t_scene *scene);
+int     free_scene(t_scene *scene);
 
 #endif
