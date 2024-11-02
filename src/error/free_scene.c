@@ -13,6 +13,7 @@
 #include "include.h"
 #include "struct.h"
 #include "mlx.h"
+#include "init.h"
 
 void	free_scene(t_scene *scene)
 {

@@ -8,6 +8,8 @@ DIR_OBJS = .obj
 
 INCLUDE_DIR = includes
 
+OS := $(shell uname)
+
 LIBFT_DIRECTORY = ./libft/
 
 FLAGS = -Wall -Werror -Wextra -g3
@@ -37,6 +39,10 @@ SRC_ANGLE = 	get_angle_plane.c	\
 
 SRC_INIT =		init_mlx.c		\
 
+ifeq ($(OS), Darwin)
+	SRC_INIT += mlx_destroy_display.c
+endif
+
 SRC_COLOR =		color.c			\
 
 SRC_MLX =		pixel_put.c		\
@@ -63,8 +69,6 @@ RESET_COLOR = $(shell tput sgr0)
 CYAN = $(shell tput setaf 6)
 
 OS := $(shell uname)
-
-SYSTEM_EXPLOIT = uname
 
 OBJ = $(addprefix $(DIR_OBJS)/, $(SRC:.c=.o))
 DEP = $(OBJ:.o=.d)
@@ -102,7 +106,7 @@ ifeq ($(OS), Linux)
 else
 	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(LIBFT)
 endif
-	echo "$(GREEN)$(NAME) created $(CHECK)$(RESET_COLOR)"
+	@echo "$(GREEN)$(NAME) created $(CHECK)$(RESET_COLOR)"
 
 clean:
 	rm -rf $(DIR_OBJS)
@@ -123,4 +127,3 @@ FORCE:
 re: fclean all
 
 .PHONY: all re clean fclean re FORCE
-

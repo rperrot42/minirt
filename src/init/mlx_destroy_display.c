@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 21:28:08 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/24 14:06:35 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/11/02 11:16:40 by rperrot           #+#    #+#             */
+/*   Updated: 2024/11/02 11:16:40 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
-
-int init_window(t_scene *scene);
-void	hooking(t_scene *scene);
-
-#  ifdef __APPLE__
-	int mlx_destroy_display(void *ptr);
-# endif
-#endif
+int mlx_destroy_display(void *ptr){
+	(void)ptr;
+	return (0);
+}
