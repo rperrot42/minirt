@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "struct.h"
-#include "error.h"
 #include "mlx.h"
+#include "include.h"
 #include "draw.h"
 
 int	key_press(int keycode, t_scene *scene)
 {
-	if (keycode == 65307)
+	printf("keycode: %d\n", keycode);
+	if (keycode == KEY_ESC)
 		free_scene(scene);
 	return (0);
 }

@@ -107,4 +107,13 @@ typedef enum s_obj
 	CYLINDER
 }	t_obj;
 
+typedef struct s_translation
+{
+	float	translation_z;
+	float	translation_x;
+	float	translation_y;
+	float	rotation_x;
+	float	rotation_y;
+}	t_translation;
+
 #endif
