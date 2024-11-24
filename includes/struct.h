@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/25 18:41:23 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/24 20:45:59 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_plane
 {
 	float	d;
 	t_point	vector;
+	t_point	p;
 	t_color	color;
 }	t_plane;
 
@@ -106,14 +107,5 @@ typedef enum s_obj
 	PLANE,
 	CYLINDER
 }	t_obj;
-
-typedef struct s_translation
-{
-	float	translation_z;
-	float	translation_x;
-	float	translation_y;
-	float	rotation_x;
-	float	rotation_y;
-}	t_translation;
 
 #endif

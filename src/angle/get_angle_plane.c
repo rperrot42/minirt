@@ -6,18 +6,19 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:44:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/25 20:21:20 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:25:10 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct.h"
 #include <math.h>
 
-float   get_angle_plan(t_point p, t_point q, t_plane *plan)
+float get_angle_plan(t_line l, t_plane *plan, float dot_product)
 {
-    return (acos((q.x - p.x) * plan->vector.x + (q.y - p.y) * plan->vector.y + (q.z - p.z) * plan->vector.z / \
-    sqrt((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y) + (q.z - p.z) * (q.z - p.z)) * \
-    sqrt(plan->vector.x * plan->vector.x + plan->vector.y * plan->vector.y + plan->vector.z * plan->vector.z)));
+    float   norm_pq = sqrt(l.vector.x * l.vector.x + l.vector.y * l.vector.y + l.vector.z * l.vector.z);
+    float   norm_plan = sqrt(plan->vector.x * plan->vector.x + plan->vector.y * plan->vector.y + plan->vector.z * plan->vector.z);
+
+    return (acos(dot_product / (norm_pq * norm_plan)));
 }
 
 // angle = arcos( PQ⋅plan / ∥PQ∥⋅∥plan∥ )

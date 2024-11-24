@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:01:40 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/25 18:40:58 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/24 20:47:35 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 int add_plane(t_scene *scene, char *str)
 {
     t_plane plane;
-    t_point pos;
 
     while (*str && *str == ' ')
         str++;
     if (*str)
-        pos = get_point(&str);
+        plane.p = get_point(&str);
     else
         return (print_error(E_FILE_PARS));
     if (errno)
@@ -41,7 +40,7 @@ int add_plane(t_scene *scene, char *str)
         return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
-    plane.d = pos.x * plane.vector.x + pos.y * plane.vector.y + pos.z * plane.vector.z;
+    plane.d = plane.p.x * plane.vector.x + plane.p.y * plane.vector.y + plane.p.z * plane.vector.z;
     if (ft_realloc((void **)&scene->planes, &scene->nb_planes, sizeof(t_plane), (void *)&plane))
         return (print_error(E_MALLOC));
     return (0);
