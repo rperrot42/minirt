@@ -40,7 +40,7 @@ int add_plane(t_scene *scene, char *str)
         return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
-    plane.d = plane.p.x * plane.vector.x + plane.p.y * plane.vector.y + plane.p.z * plane.vector.z;
+    plane.d = -(plane.p.x * plane.vector.x + plane.p.y * plane.vector.y + plane.p.z * plane.vector.z);
     if (ft_realloc((void **)&scene->planes, &scene->nb_planes, sizeof(t_plane), (void *)&plane))
         return (print_error(E_MALLOC));
     return (0);

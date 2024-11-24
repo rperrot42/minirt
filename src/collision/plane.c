@@ -25,6 +25,5 @@ t_point intersection_plane_line(t_line *line, t_plane *plane)
 	point.x = line->position.x + line->vector.x * t;
 	point.y = line->position.y + line->vector.y * t;
 	point.z = line->position.z + line->vector.z * t;
-
 	return point;
 }

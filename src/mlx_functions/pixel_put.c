@@ -30,20 +30,20 @@ t_plane    *get_closest_plan(t_line *line, t_scene *scene, t_point *p)
 {
     t_plane *obj;
     t_point p_temp;
-	int 	avancement;
     int     i;
 
     i = -1;
-    obj = scene->planes;
+    obj = NULL;
+	//printf("line->vector.z : %f %f %f\n", line->vector.z, line->vector.x, line->vector.y);
+
 	if (line->vector.z == 0)
 		line->vector.z = 1e-4;
-	avancement = (line->vector.z > 0) - (line->vector.z < 0);
-    while (++i < scene->nb_planes)
+	while (++i < scene->nb_planes)
     {
         p_temp = intersection_plane_line(line, &scene->planes[i]);
-        if (p_temp.z * avancement < p->z)
+		if (p_temp.z < p->z && p_temp.z > 0)
         {
-            obj = &scene->planes[i];
+			obj = &scene->planes[i];
             *p = p_temp;
         }
     }
@@ -65,11 +65,10 @@ t_color    draw_pixel(t_scene *scene, t_line *line)
     t_point p;
     t_plane *plan;
 	t_line	lineLight;
-	p = (t_point){0, 0, -1};
-
+	p = (t_point){0, 0, 10000000};
     plan = get_closest_plan(line, scene, &p);
-	if (p.z == -1)
-		return (scene->ambient.color);
+	if (plan == NULL || p.z == -1)
+		return ((t_color){0, 0, 0});
 	lineLight = get_line_2point(&p, &scene->lights[0].position);
     float   scalar_light_obj = scalar_product(lineLight.vector, plan->vector);
     float   scalar_cam_obj = scalar_product(scene->cameras.vector, plan->vector);
