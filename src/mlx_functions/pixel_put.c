@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/31 14:50:36 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:33:11 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 t_plane    *get_closest_plan(t_line *line, t_scene *scene, t_point *p)
 {
     t_plane *obj;
-    t_point temp;
+    t_point p_temp;
 	int 	avancement;
     int     i;
 
@@ -37,14 +37,14 @@ t_plane    *get_closest_plan(t_line *line, t_scene *scene, t_point *p)
     obj = scene->planes;
 	if (line->vector.z == 0)
 		line->vector.z = 1e-4;
-	avancement = (line->vector.z > 0) - (line ->vector.z < 0);
+	avancement = (line->vector.z > 0) - (line->vector.z < 0);
     while (++i < scene->nb_planes)
     {
-        temp = intersection_plane_line(line, &scene->planes[i]);
-        if (temp.z * avancement < p->z)
+        p_temp = intersection_plane_line(line, &scene->planes[i]);
+        if (p_temp.z * avancement < p->z)
         {
             obj = &scene->planes[i];
-            *p = temp;
+            *p = p_temp;
         }
     }
     return (obj);
@@ -71,9 +71,17 @@ t_color    draw_pixel(t_scene *scene, t_line *line)
 	if (p.z == -1)
 		return (scene->ambient.color);
 	lineLight = get_line_2point(&p, &scene->lights[0].position);
-	if (scalar_product(lineLight.vector, plan->vector) < 0)
-		return (scene->ambient.color);
-	return (get_multiple_color(scene->ambient.color, plan->color));
+    float   scalar_light_obj = scalar_product(lineLight.vector, plan->vector);
+    float   scalar_cam_obj = scalar_product(scene->cameras.vector, plan->vector);
+	if ((scalar_light_obj < 0 && scalar_cam_obj > 0) || (scalar_light_obj > 0 && scalar_cam_obj < 0))
+    {
+        t_color c;
+        c.r = 0;
+        c.g = 0;
+        c.b = 0;
+		return (c);
+    }
+	return (get_multiple_color(plan->color, scene, fabs(scalar_light_obj)));
 }
 
 int draw_window(t_scene *scene)
