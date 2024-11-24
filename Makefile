@@ -13,6 +13,7 @@ OS := $(shell uname)
 LIBFT_DIRECTORY = ./libft/
 
 FLAGS = -Wall -Werror -Wextra -g3
+
 DFLAGS = -MD -MP
 
 INCLUDE = $(INCLUDE_DIR)/mini_rt.h
@@ -39,6 +40,8 @@ SRC_ANGLE = 	get_angle_plane.c	\
 
 SRC_INIT =		init_mlx.c		\
 
+SRC_OBJECT =	move.c
+
 ifeq ($(OS), Darwin)
 	SRC_INIT += mlx_destroy_display.c
 endif
@@ -55,6 +58,7 @@ SRC =	$(addprefix parsing/, $(SRC_PARSING))		\
 		$(addprefix init/, $(SRC_INIT))				\
 		$(addprefix color/, $(SRC_COLOR))			\
 		$(addprefix mlx_functions/, $(SRC_MLX))		\
+		$(addprefix object/, $(SRC_OBJECT))			\
 		main.c										\
 
 SRC_PATH = src/

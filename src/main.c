@@ -14,9 +14,8 @@
 #include "parsing.h"
 #include "mini_rt.h"
 #include "init.h"
-#include "draw.h"
 
-void	print_scene(t_scene scene);
+void	print_scene(t_scene s);
 
 int	main(int argc, char **argv)
 {
@@ -25,6 +24,7 @@ int	main(int argc, char **argv)
 	t_scene	scene;
 
 	errno = 0;
+	scene = (t_scene){0};
 	if (argc != 2)
 		return print_error(E_NB_ARGS);
 	fd = check_file(argv[1]);
@@ -46,50 +46,50 @@ int	main(int argc, char **argv)
 
 
 
-void print_scene(t_scene scene)
+void print_scene(t_scene s)
 {
 
 	printf("-------- Ambient light: ------\n");
-	printf(" -Intensity: %f\n", scene.ambient.intensity);
-	printf(" -Color: %d %d %d\n", scene.ambient.color.r, scene.ambient.color.g, scene.ambient.color.b);
+	printf(" -Intensity: %f\n", s.ambient.intensity);
+	printf(" -Color: %d %d %d\n", s.ambient.color.r, s.ambient.color.g, s.ambient.color.b);
 	printf(" -------- Camera: --------\n");
-	printf(" -Position: %f %f %f\n", scene.cameras.position.x, scene.cameras.position.y, scene.cameras.position.z);
-	printf(" -Orientation: %f %f %f\n", scene.cameras.vector.x, scene.cameras.vector.y, scene.cameras.vector.z);
-	printf(" -Fov: %f\n", scene.cameras.fov);
+	printf(" -Position: %f %f %f\n", s.cameras.position.x, s.cameras.position.y, s.cameras.position.z);
+	printf(" -Orientation: %f %f %f\n", s.cameras.vector.x, s.cameras.vector.y, s.cameras.vector.z);
+	printf(" -Fov: %f\n", s.cameras.fov);
 	printf (" \n------- lights -----------\n\n");
-	for (int i = 0; i < scene.nb_lights; i++)
+	for (int i = 0; i < s.nb_lights; i++)
 	{
 		printf("Light [%d]:\n", i + 1);
-		printf(" -Position: %f %f %f\n", scene.lights[i].position.x, scene.lights[i].position.y, scene.lights[i].position.z);
-		printf(" -Intensity: %f\n", scene.lights[i].intensity);
-		printf(" -Color: %d %d %d\n", scene.lights[i].color.r, scene.lights[i].color.g, scene.lights[i].color.b);
+		printf(" -Position: %f %f %f\n", s.lights[i].position.x, s.lights[i].position.y, s.lights[i].position.z);
+		printf(" -Intensity: %f\n", s.lights[i].intensity);
+		printf(" -Color: %d %d %d\n", s.lights[i].color.r, s.lights[i].color.g, s.lights[i].color.b);
 	}
 	printf (" \n------- cylindre -----------\n\n");
-	for (int i = 0; i < scene.nb_cylinders; i++)
+	for (int i = 0; i < s.nb_cylinders; i++)
 	{
 		printf("cylindre [%d]:\n", i + 1);
-		printf(" -Position: %f %f %f\n", scene.cylinders[i].position.x,scene.cylinders[i].position.y, scene.cylinders[i].position.z);
-		printf(" -diametre: %f\n", scene.cylinders[i].diameter);
-		printf(" -Color: %d %d %d\n",scene.cylinders[i].color.r,scene.cylinders[i].color.g,scene.cylinders[i].color.b);
-		printf(" -Direction: %f %f %f\n", scene.cylinders[i].vector.x,scene.cylinders[i].vector.y,scene.cylinders[i].vector.z);
-		printf(" -Height: %f\n", scene.cylinders[i].height);
+		printf(" -Position: %f %f %f\n", s.cylinders[i].position.x,s.cylinders[i].position.y, s.cylinders[i].position.z);
+		printf(" -diametre: %f\n", s.cylinders[i].diameter);
+		printf(" -Color: %d %d %d\n",s.cylinders[i].color.r,s.cylinders[i].color.g,s.cylinders[i].color.b);
+		printf(" -Direction: %f %f %f\n", s.cylinders[i].vector.x,s.cylinders[i].vector.y,s.cylinders[i].vector.z);
+		printf(" -Height: %f\n", s.cylinders[i].height);
 	}
 	printf (" \n------- planes -----------\n\n");
 
-	for (int i = 0; i < scene.nb_planes; i++)
+	for (int i = 0; i < s.nb_planes; i++)
 	{
 		printf("planes [%d]:\n", i + 1);
-		printf(" -d value: %f\n", scene.planes[i].d);
-		printf(" -vector: %f %f %f\n",scene.planes[i].vector.x,scene.planes[i].vector.y,scene.planes[i].vector.z);
-		printf(" -Color: %d %d %d\n",scene.planes[i].color.r,scene.planes[i].color.g,scene.planes[i].color.b);
+		printf(" -d value: %f\n", s.planes[i].d);
+		printf(" -vector: %f %f %f\n",s.planes[i].vector.x,s.planes[i].vector.y,s.planes[i].vector.z);
+		printf(" -Color: %d %d %d\n",s.planes[i].color.r,s.planes[i].color.g,s.planes[i].color.b);
 	}
 	printf (" \n------- spheres -----------\n\n");
-	for (int i = 0; i < scene.nb_spheres; i++)
+	for (int i = 0; i < s.nb_spheres; i++)
 	{
 		printf("Spheres [%d]:\n", i + 1);
-		printf(" -position: %f %f %f\n", scene.spheres[i].position.x,scene.spheres[i].position.y,scene.spheres[i].position.z);
-		printf(" -radius: %f\n",scene.spheres[i].radius);
-		printf(" -Color: %d %d %d\n",scene.spheres[i].color.r,scene.spheres[i].color.g,scene.spheres[i].color.b);
+		printf(" -position: %f %f %f\n", s.spheres[i].position.x,s.spheres[i].position.y,s.spheres[i].position.z);
+		printf(" -radius: %f\n",s.spheres[i].radius);
+		printf(" -Color: %d %d %d\n",s.spheres[i].color.r,s.spheres[i].color.g,s.spheres[i].color.b);
 	}
-	printf("oui.nb_planes = %d\n", scene.nb_planes);
+	printf("oui.nb_planes = %d\n", s.nb_planes);
 }

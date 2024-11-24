@@ -13,6 +13,8 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+#include "libft.h"
+
 typedef struct s_point
 {
 	float	x;
@@ -83,21 +85,29 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct s_move_mouse
+{
+	int		last_position_x;
+	int		last_position_y;
+	t_bool	left_click;
+}	t_move_mouse;
+
 typedef struct s_scene
 {
-	t_ambient	ambient;
-	t_sphere	*spheres;
-	short		nb_spheres;
-	t_light		*lights;
-	short		nb_lights;
-	t_camera	cameras;
-	t_cylinder	*cylinders;
-	short		nb_cylinders;
-	t_plane		*planes;
-	short		nb_planes;
-	void		*mlx;
-	void		*window;
-	t_data		img;
+	t_ambient		ambient;
+	t_sphere		*spheres;
+	short			nb_spheres;
+	t_light			*lights;
+	short			nb_lights;
+	t_camera		cameras;
+	t_cylinder		*cylinders;
+	short			nb_cylinders;
+	t_plane			*planes;
+	short			nb_planes;
+	void			*mlx;
+	void			*window;
+	t_data			img;
+	t_move_mouse	move_mouse;
 }	t_scene;
 
 typedef enum s_obj
@@ -107,13 +117,12 @@ typedef enum s_obj
 	CYLINDER
 }	t_obj;
 
-typedef struct s_translation
+typedef enum e_move
 {
-	float	translation_z;
-	float	translation_x;
-	float	translation_y;
-	float	rotation_x;
-	float	rotation_y;
-}	t_translation;
+	LEFT,
+	RIGHT,
+	FORWARD,
+	BACK
+}	t_move;
 
 #endif

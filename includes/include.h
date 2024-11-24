@@ -18,6 +18,7 @@
 # include "errno.h"
 # include "libft.h"
 # include "error.h"
+# include <math.h>
 # include <string.h>
 #endif
 
@@ -84,3 +85,4 @@
 #  define RIGHT_CLICK 3
 #  define KEY_ESC 65307
 # endif
+# define LEFT_CLICK 1
