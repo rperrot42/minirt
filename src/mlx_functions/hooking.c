@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:29:15 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/24 23:05:02 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:43:29 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int button_release(int keycode, int x, int y, t_scene *scene)
 
 int	key_press(int keycode, t_scene *scene)
 {
+	// printf("keycode : %d\n", keycode);
 	if (keycode == KEY_ESC)
 		free_scene(scene);
 	else if (keycode == KEY_W)
@@ -77,7 +78,7 @@ void	hooking(t_scene *scene)
 	mlx_hook(scene->window, 4, 1L << 2, button_press, scene);
 	mlx_hook(scene->window, 5, 1L << 3, button_release, scene);
 	mlx_hook(scene->window, 6, 1L << 6, motion_notify, scene);
-	//mlx_loop_hook(scene->mlx, draw_window, scene);
+	// mlx_loop_hook(scene->mlx, draw_window, scene);
 	mlx_loop(scene->mlx);
 }
 

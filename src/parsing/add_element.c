@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:56:27 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 21:34:56 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:14:39 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient)
            return (add_plane(scene, str + 2));
        if (str[0] == 'c' && str[1] == 'y')
            return (add_cylinder(scene, str + 2));
+        if (str[0] == '#')
+            return (0);
     }
 	if (str[0] && !ft_had_whitespace(str))
 		return (print_error(E_FILE_PARS));
