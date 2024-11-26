@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:29:15 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/24 23:05:02 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:43:29 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int button_release(int keycode, int x, int y, t_scene *scene)
 
 int	key_press(int keycode, t_scene *scene)
 {
+	// printf("keycode : %d\n", keycode);
 	if (keycode == KEY_ESC)
 		free_scene(scene);
 	else if (keycode == KEY_W)

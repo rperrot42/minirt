@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/24 23:59:36 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:26:24 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-t_plane    *get_closest_plan(t_line *line, t_scene *scene, t_point *p)
-{
-    t_plane *obj;
-    t_point p_temp;
-    int     i;
-
-    i = -1;
-    obj = scene->planes;
-	if (line->vector.z == 0)
-		line->vector.z = 1e-4;
-    while (++i < scene->nb_planes)
-    {
-        p_temp = intersection_plane_line(line, &scene->planes[i]);
-        if (p_temp.z < p->z && p_temp.z > 0)
-        {
-            obj = &scene->planes[i];
-            *p = p_temp;
-        }
-    }
-    return (obj);
-}
-t_line	get_line_2point(t_point *a, t_point *b)
-{
-	t_line line;
-
-	line.vector.x = b->x - a->x;
-	line.vector.y = b->y - a->y;
-	line.vector.z = b->z - a->z;
-	line.position = *a;
-	return (line);
-}
-
 t_color    draw_pixel(t_scene *scene, t_line *line)
 {
     t_point p;
@@ -66,25 +34,27 @@ t_color    draw_pixel(t_scene *scene, t_line *line)
 	p = (t_point){0, 0, INFINITY};
 
     plan = get_closest_plan(line, scene, &p);
-	if (p.z == -1)
+	if (p.z == -INFINITY)
     {
-        t_color c;
-        c.r = 0;
-        c.g = 0;
-        c.b = 0;
+        t_color c = {0};
 		return (c);
     }
 	lineLight = get_line_2point(&scene->lights[0].position, &p);
-    float   scalar_light_obj = scalar_product(lineLight.vector, plan->vector);
-    float   scalar_cam_obj = scalar_product(scene->cameras.vector, plan->vector);
-	if ((scalar_light_obj < 0 && scalar_cam_obj > 0) || (scalar_light_obj > 0 && scalar_cam_obj < 0))
+    int i = -1;
+    while (++i < scene->nb_planes)
     {
-        t_color c;
-        c.r = 0;
-        c.g = 0;
-        c.b = 0;
-		return (c);
+        if (plan != scene->planes + i && scalar_product(lineLight.vector, scene->planes[i].vector) != 0)
+        {
+            t_point q = intersection_plane_line(&lineLight, scene->planes + i);
+            if (q.z != -INFINITY && point_between(lineLight.position, p, q))
+                return (get_ambiant_color(plan->color, scene));
+        }
     }
+    float   scalar_light_obj = scalar_product(lineLight.vector, plan->vector);
+    float   scalar_cam_obj = scalar_product(line->vector, plan->vector);
+
+	if ((scalar_light_obj < 0 && scalar_cam_obj > 0) || (scalar_light_obj > 0 && scalar_cam_obj < 0))
+		return (get_ambiant_color(plan->color, scene));
 	return (get_multiple_color(plan->color, scene, fabs(scalar_light_obj)));
 }
 
