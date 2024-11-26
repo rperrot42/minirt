@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/26 18:28:17 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:20:11 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ t_color    draw_pixel(t_scene *scene, t_line *line)
 
     plan = get_closest_plan(line, scene, &p);
     sphere = get_closest_sphere(line, scene, &q);
-    if (q.z != INFINITY)
-    {
-        // printf("sphere : %f / %f / %f\n", q.x, q.y, q.z);
-        // printf("plan : %f / %f / %f\n", p.x, p.y, p.z);
-    }
 	if (p.z == -INFINITY)
     {
         t_color c = {0};

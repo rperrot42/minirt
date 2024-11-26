@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:29:15 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/25 23:43:29 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:23:02 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	key_press(int keycode, t_scene *scene)
 	else if (keycode == KEY_D)
 		translation(RIGHT, scene);
 	else if (keycode == KEY_SP)
-		move_plane(scene, 0, 0, 1);
+		move_plane(scene, 0, 1, 0);
 	else if (keycode == KEY_SHIFT)
-		move_plane(scene, 0,0, -1);
+		move_plane(scene, 0,-1, 0);
 	return (0);
 }
 
@@ -78,7 +78,7 @@ void	hooking(t_scene *scene)
 	mlx_hook(scene->window, 4, 1L << 2, button_press, scene);
 	mlx_hook(scene->window, 5, 1L << 3, button_release, scene);
 	mlx_hook(scene->window, 6, 1L << 6, motion_notify, scene);
-	// mlx_loop_hook(scene->mlx, draw_window, scene);
+	mlx_loop_hook(scene->mlx, draw_window, scene);
 	mlx_loop(scene->mlx);
 }
 
@@ -90,7 +90,7 @@ static void translation(t_move move, t_scene *scene)
 	if (move == LEFT || move == BACK)
 		positive = -1;
 	if (move == LEFT || move == RIGHT)
-		move_plane(scene, positive * cosf(scene->cameras.vector.x), positive * sinf(scene->cameras.vector.x), 0);
+		move_plane(scene, positive * cosf(scene->cameras.vector.x), 0, -1 * positive * sinf(scene->cameras.vector.x));
 	else
-		move_plane(scene, positive * sinf(scene->cameras.vector.x), positive * cosf(scene->cameras.vector.x), 0);
+		move_plane(scene, positive * sinf(scene->cameras.vector.x), 0, -1 * positive * cosf(scene->cameras.vector.x));
 }
