@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/26 12:26:24 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:28:17 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,27 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 t_color    draw_pixel(t_scene *scene, t_line *line)
 {
     t_point p;
+    t_point q;
     t_plane *plan;
-	t_line	lineLight;
+    t_sphere    *sphere;
 	p = (t_point){0, 0, INFINITY};
+    q = (t_point){0, 0, INFINITY};
 
     plan = get_closest_plan(line, scene, &p);
+    sphere = get_closest_sphere(line, scene, &q);
+    if (q.z != INFINITY)
+    {
+        // printf("sphere : %f / %f / %f\n", q.x, q.y, q.z);
+        // printf("plan : %f / %f / %f\n", p.x, p.y, p.z);
+    }
 	if (p.z == -INFINITY)
     {
         t_color c = {0};
 		return (c);
     }
-	lineLight = get_line_2point(&scene->lights[0].position, &p);
-    int i = -1;
-    while (++i < scene->nb_planes)
-    {
-        if (plan != scene->planes + i && scalar_product(lineLight.vector, scene->planes[i].vector) != 0)
-        {
-            t_point q = intersection_plane_line(&lineLight, scene->planes + i);
-            if (q.z != -INFINITY && point_between(lineLight.position, p, q))
-                return (get_ambiant_color(plan->color, scene));
-        }
-    }
-    float   scalar_light_obj = scalar_product(lineLight.vector, plan->vector);
-    float   scalar_cam_obj = scalar_product(line->vector, plan->vector);
-
-	if ((scalar_light_obj < 0 && scalar_cam_obj > 0) || (scalar_light_obj > 0 && scalar_cam_obj < 0))
-		return (get_ambiant_color(plan->color, scene));
-	return (get_multiple_color(plan->color, scene, fabs(scalar_light_obj)));
+    if (p.z < q.z)
+        return (get_color_plan(scene, plan, &p, line));
+    return (sphere->color);
 }
 
 int draw_window(t_scene *scene)

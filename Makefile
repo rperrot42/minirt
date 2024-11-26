@@ -33,7 +33,8 @@ SRC_PARSING =	check_file.c	\
 				add_plane.c		\
 				add_sphere.c	\
 
-SRC_COLLISION = plane.c
+SRC_COLLISION = plane.c			\
+				sphere.c		\
 
 SRC_ANGLE = 	create_line.c	\
 				scalar_product.c

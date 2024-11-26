@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/24 20:55:41 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:11:34 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_scene
 	t_move_mouse	move_mouse;
 }	t_scene;
 
-typedef enum s_obj
+typedef enum e_obj
 {
 	SPHERE,
 	PLANE,
