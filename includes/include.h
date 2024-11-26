@@ -53,6 +53,7 @@
 #  define KEY_SHIFT 257
 #  define RIGHT_CLICK 2
 #  define KEY_ESC 53
+#  define KEY_TAB 48
 # else
 #  define KEY_A 97
 #  define KEY_B 98
@@ -84,5 +85,6 @@
 #  define KEY_SHIFT 65505
 #  define RIGHT_CLICK 3
 #  define KEY_ESC 65307
+#  define KEY_TAB 65289
 # endif
 # define LEFT_CLICK 1

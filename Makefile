@@ -90,41 +90,43 @@ IFLAGS =	-Ilibft/includes			\
 ifeq ($(OS), Linux)
 	DIR_MLX = mlx_linux
 else
-	DIR_MLX = mlx
+	DIR_MLX = mlx_macos
 endif
 
 -include $(DEP)
 
 $(DIR_OBJS)/%.o: $(SRC_PATH)%.c Makefile
-	mkdir -p  $(dir $@)
+	@mkdir -p  $(dir $@)
 ifeq ($(OS), Linux)
-	$(CC)  $(IFLAGS) $(FLAGS) $(DFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	@$(CC)  $(IFLAGS) $(FLAGS) $(DFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 else
-	$(CC)  $(IFLAGS) $(FLAGS) $(DFLAGS) -Imlx -c $< -o $@
+	@$(CC)  $(IFLAGS) $(FLAGS) $(DFLAGS) -Imlx_macos -c $< -o $@
 endif
 	@echo "$(CYAN)$@ created $(CHECK)$(RESET_COLOR)"
 
 $(NAME): $(OBJ) $(LIBFT) mlx
 ifeq ($(OS), Linux)
-	$(CC) $(OBJ)  -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
+	@$(CC) $(OBJ)  -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
 else
-	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(LIBFT)
+	@$(CC) $(OBJ) -Lmlx_macos -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(LIBFT)
 endif
-	@echo "$(GREEN)$(NAME) created $(CHECK)$(RESET_COLOR)"
+	@echo "$(GREEN)$(NAME) created $(CHECK)$(RESET_COLOR) "
 
 clean:
-	rm -rf $(DIR_OBJS)
-	$(MAKE) -C $(LIBFT_DIRECTORY) clean
-	$(MAKE) -C $(DIR_MLX) clean
+	@rm -rf $(DIR_OBJS)
+	@$(MAKE) -C $(LIBFT_DIRECTORY) clean
+	@$(MAKE) -C $(DIR_MLX) clean
+	@echo "$(RED)$(DIR_OBJS) removed $(CROSS)$(RESET_COLOR) "
 
 $(LIBFT): FORCE
-	$(MAKE) -C $(LIBFT_DIRECTORY)
+	@$(MAKE) -C $(LIBFT_DIRECTORY)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(RED)$(NAME) removed $(CROSS)$(RESET_COLOR) "
 
 mlx: FORCE
-	$(MAKE) -C $(DIR_MLX)
+	@$(MAKE) -C $(DIR_MLX)
 
 FORCE:
 

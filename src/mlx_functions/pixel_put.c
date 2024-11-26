@@ -101,7 +101,7 @@ int draw_window(t_scene *scene)
     while (y < LENGTH)
     {
         x = 0;
-        line.vector.y = tanf(((2.0 * y) -  LENGTH) / (LENGTH - 2) * fov);
+        line.vector.y = -tanf(((2.0 * y) -  LENGTH) / (LENGTH - 2) * fov);
         while (x < LENGTH)
         {
             line.vector.x = tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);

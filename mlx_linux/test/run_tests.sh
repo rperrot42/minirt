@@ -45,14 +45,14 @@ sigint_handler(){
 	exit 1
 }
 
-# look at test/main.c and run ./mlx-test to understand what this function does
+# look at test/main.c and run ./mlx_macos-test to understand what this function does
 test_default_main(){
 	${MAKE} -f Makefile.gen all
-	./mlx-test &
+	./mlx_mac-test &
 	PID="$!"
 	log_info "./mlx-test running in background, pid:" $PID
 	
-	i=25		# waiting 25s mlx-test to be ready for inputs.
+	i=25		# waiting 25s mlx_macos-test to be ready for inputs.
 	while [ $i -gt 0 ]; do
 		if ! ps -p $PID > /dev/null ; then
 			wait $PID 

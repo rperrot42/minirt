@@ -1,4 +1,4 @@
-// mlx xpm
+// mlx_macos xpm
 // by ol
 
 #include <OpenGL/gl3.h>

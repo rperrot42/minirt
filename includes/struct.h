@@ -126,4 +126,11 @@ typedef enum e_move
 	BACK
 }	t_move;
 
+typedef enum e_coordinate
+{
+	X,
+	Y,
+	Z
+}	t_coordinate;
+
 #endif
