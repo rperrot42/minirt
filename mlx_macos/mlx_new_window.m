@@ -111,7 +111,7 @@ int get_mouse_button(NSEventType eventtype)
 
   flag = [theEvent modifierFlags];
   //  printf("Key flag changed: %x => %x\n", keyflag, flag);
-  //  printf("**mlx flag low part : %d  - %x\n", flag&0xFFFF, flag&0xFFFF);
+  //  printf("**mlx_macos flag low part : %d  - %x\n", flag&0xFFFF, flag&0xFFFF);
 
   if (!(val = (keyflag|flag)&(~(keyflag&flag))))
     return ;   // no change - can happen when loosing focus on special key pressed, then re-pressed later
@@ -636,7 +636,7 @@ int get_mouse_button(NSEventType eventtype)
 @end
 
 
-// mlx API
+// mlx_macos API
  
 
 void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)

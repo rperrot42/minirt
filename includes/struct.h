@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/26 19:17:17 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:43:33 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ typedef struct s_line{
 	t_point	position;
 	t_point	vector;
 }	t_line;
+
+typedef struct s_line_color{
+	t_point	position;
+	t_point	vector;
+	t_color	color;
+	float	scalar_light_obj;
+	float	norm;
+}	t_line_color;
 
 typedef struct s_camera
 {
@@ -125,5 +133,12 @@ typedef enum e_move
 	FORWARD,
 	BACK
 }	t_move;
+
+typedef enum e_coordinate
+{
+	X,
+	Y,
+	Z
+}	t_coordinate;
 
 #endif

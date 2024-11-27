@@ -94,22 +94,22 @@ all: $(NAME)
 
 $(NAME): $(DIR_OBJS) $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
-	@echo "$(GREEN)libft/$(NAME) created$(CHECK)$(RESET_COLOR)"
+	@echo "$(GREEN)libft/$(NAME) created $(CHECK)$(RESET_COLOR)"
 
 $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c $(INCS)
 	@$(CC) $(FLAGS) -I $(DIR_INCS) -c $< -o $@
-	@echo "$(CYAN)libft/$@ created$(RESET_COLOR)"
+	@echo "$(CYAN)libft/$@ created $(RESET_COLOR)"
 
 clean:
 	@rm -rf $(DIR_OBJS)
-	@echo "$(RED)libft/$(DIR_OBJS) removed$(CROSS)$(RESET_COLOR)"
+	@echo "$(RED)libft/$(DIR_OBJS) removed $(CROSS)$(RESET_COLOR)"
 
 $(DIR_OBJS):
 	@mkdir -p $(DIR_OBJS)
 
 fclean:clean
 	@rm -f $(NAME)
-	@echo "$(RED)$(NAME) removed$(CROSS)$(RESET_COLOR)"
+	@echo "$(RED)$(NAME) removed $(CROSS)$(RESET_COLOR)"
 
 re: fclean all
 

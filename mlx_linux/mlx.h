@@ -1,5 +1,5 @@
 /*
-** mlx.h for MinilibX in 
+** mlx_macos.h for MinilibX in
 ** 
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>

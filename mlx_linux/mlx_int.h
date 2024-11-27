@@ -1,5 +1,5 @@
 /*
-** mlx_int.h for mlx in 
+** mlx_int.h for mlx_macos in
 ** 
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>

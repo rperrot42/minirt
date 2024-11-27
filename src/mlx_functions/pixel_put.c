@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/26 19:20:11 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:16:47 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,19 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 t_color    draw_pixel(t_scene *scene, t_line *line)
 {
-    t_point p;
-    t_point q;
-    t_plane *plan;
-    t_sphere    *sphere;
-	p = (t_point){0, 0, INFINITY};
-    q = (t_point){0, 0, INFINITY};
-
-    plan = get_closest_plan(line, scene, &p);
-    sphere = get_closest_sphere(line, scene, &q);
-	if (p.z == -INFINITY)
+    t_line_color    l = (t_line_color){0};
+    void    *obj;
+    
+    l.position.z = INFINITY;
+    if (line->vector.z == 0)
+		line->vector.z = 1e-4;
+    obj = get_closest_obj(line, scene, &l);
+	if (l.position.z == -INFINITY)
     {
         t_color c = {0};
 		return (c);
     }
-    if (p.z < q.z)
-        return (get_color_plan(scene, plan, &p, line));
-    return (sphere->color);
+    return (get_color_obj(scene, obj, &l, line));
 }
 
 int draw_window(t_scene *scene)
@@ -60,7 +56,7 @@ int draw_window(t_scene *scene)
     while (y < LENGTH)
     {
         x = 0;
-        line.vector.y = tanf(((2.0 * y) -  LENGTH) / (LENGTH - 2) * fov);
+        line.vector.y = -tanf(((2.0 * y) -  LENGTH) / (LENGTH - 2) * fov);
         while (x < LENGTH)
         {
             line.vector.x = tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);
