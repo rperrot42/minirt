@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:58:10 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/27 17:44:39 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/27 23:10:52 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,21 @@
 void	*get_closest_obj(t_line *line, t_scene *scene, t_line_color *l)
 {
 	void	*obj;
+	void	*temp;
 	
-	obj = get_closest_plan(line, scene, l);
-	return (obj);
+	if (scene->nb_planes > 0)
+	{
+
+		temp = get_closest_plan(line, scene, l);
+		obj = temp;
+	}
+	if (scene->nb_spheres > 0)
+	{
+		temp = get_closest_sphere(line, scene, l);
+	}
+	if (l->type == PLANE)
+		return (obj);
+	return (temp);
 }
 
 t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line)
@@ -33,20 +45,34 @@ t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line)
 int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *line)
 {
 	t_line	lineLight = get_line_2point(&scene->lights[0].position, &l->position);
+	int i;
 
-	int i = -1;
+	i = -1;
 	while (++i < scene->nb_planes)
     {
         if (obj != scene->planes + i && scalar_product(lineLight.vector, scene->planes[i].vector) != 0)
         {
             t_point p = intersection_plane_line(&lineLight, scene->planes + i);
-            if (p.z != -INFINITY && point_between(lineLight.position, l->position, p))
+            if (p.z != INFINITY && point_between(lineLight.position, l->position, p))
+                return (1);
+        }
+    }
+	i = -1;
+	while (++i < scene->nb_spheres)
+    {
+        if (obj != scene->spheres + i)
+        {
+            t_point p = intersection_sphere_line(&lineLight, scene->spheres + i);
+            if (p.z != INFINITY && point_between(lineLight.position, l->position, p))
                 return (1);
         }
     }
 	l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
-    float	scalar_cam_obj = scalar_product(line->vector, l->vector);
-	if ((l->scalar_light_obj < 0 && scalar_cam_obj > 0) || (l->scalar_light_obj > 0 && scalar_cam_obj < 0))
-		return (1);
+	if (l->position.z != INFINITY && l->type == PLANE) //si le pixel rendu appartient a un plan, et que la camera est de lautre cote du plan par rapport a la lumiere
+	{
+		float	scalar_cam_obj = scalar_product(line->vector, l->vector);
+		if ((l->scalar_light_obj < 0 && scalar_cam_obj > 0) || (l->scalar_light_obj > 0 && scalar_cam_obj < 0))
+			return (1);
+	}
 	return (0);
 }

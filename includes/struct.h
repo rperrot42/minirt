@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/27 17:43:33 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:04:15 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ typedef struct s_color
 	unsigned char	b;
 }	t_color;
 
+typedef enum e_obj
+{
+	SPHERE,
+	PLANE,
+	CYLINDER
+}	t_obj;
+
 typedef struct s_sphere
 {
 	t_point	position;
@@ -47,6 +54,7 @@ typedef struct s_line_color{
 	t_color	color;
 	float	scalar_light_obj;
 	float	norm;
+	t_obj	type;
 }	t_line_color;
 
 typedef struct s_camera
@@ -118,13 +126,6 @@ typedef struct s_scene
 	t_data			img;
 	t_move_mouse	move_mouse;
 }	t_scene;
-
-typedef enum e_obj
-{
-	SPHERE,
-	PLANE,
-	CYLINDER
-}	t_obj;
 
 typedef enum e_move
 {

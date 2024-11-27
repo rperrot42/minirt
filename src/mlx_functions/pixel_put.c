@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/27 17:16:47 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/27 23:17:38 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_color    draw_pixel(t_scene *scene, t_line *line)
     if (line->vector.z == 0)
 		line->vector.z = 1e-4;
     obj = get_closest_obj(line, scene, &l);
-	if (l.position.z == -INFINITY)
+	if (l.position.z == INFINITY)
     {
         t_color c = {0};
 		return (c);

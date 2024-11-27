@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:53:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/26 19:12:28 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/27 23:26:36 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ t_point	intersection_sphere_line(t_line *line, t_sphere *sphere)
 		// printf("Discriminant: %f\n", b4ac);
 		p1.x = 0;
 		p1.y = 0;
-		p1.z = -INFINITY;
-		
+		p1.z = INFINITY;
 		return (p1);
 	}
 	t1 = -((2 * ((line->position.x - sphere->position.x) * line->vector.x + (line->position.y - sphere->position.y) * line->vector.y + (line->position.z - sphere->position.z) * line->vector.z)) + sqrt(b4ac)) / (2 * line->vector.x * line->vector.x + line->vector.y * line->vector.y + line->vector.z * line->vector.z);
@@ -50,7 +49,7 @@ t_point	intersection_sphere_line(t_line *line, t_sphere *sphere)
 	return (p1);
 }
 
-t_sphere    *get_closest_sphere(t_line *line, t_scene *scene, t_point *p)
+t_sphere    *get_closest_sphere(t_line *line, t_scene *scene, t_line_color *l)
 {
     t_sphere *obj;
     t_point p_temp;
@@ -64,32 +63,18 @@ t_sphere    *get_closest_sphere(t_line *line, t_scene *scene, t_point *p)
     {
         p_temp = intersection_sphere_line(line, scene->spheres + i);
 		//printf("sphere : %f / %f / %f\n", p_temp.x, p_temp.y, p_temp.z);
-        if (p_temp.z < p->z && p_temp.z > 0)
+        if (p_temp.z < l->position.z && p_temp.z > 0)
         {
             obj = scene->spheres + i;
-            *p = p_temp;
+            l->position = p_temp;
+			l->type = SPHERE;
         }
+    }
+	if (l->position.z != INFINITY && l->type == SPHERE)
+    {
+        l->color = obj->color;
+		l->vector = get_line_2point(&obj->position, &l->position).vector;
+		l->type = SPHERE;
     }
     return (obj);
 }
-
-// t_color	get_color_sphere(t_scene *scene, t_sphere *sphere, t_point *p, t_line *line)
-// {
-// 	t_line lineLight = get_line_2point(&scene->lights[0].position, p);
-
-// 	int i = -1;
-// 	while (++i < scene->nb_planes)
-//     {
-//         if (plan != scene->planes + i && scalar_product(lineLight.vector, scene->planes[i].vector) != 0)
-//         {
-//             t_point q = intersection_plane_line(&lineLight, scene->planes + i);
-//             if (q.z != -INFINITY && point_between(lineLight.position, *p, q))
-//                 return (get_ambiant_color(plan->color, scene));
-//         }
-//     }
-//     float   scalar_light_obj = scalar_product(lineLight.vector, plan->vector);
-//     float   scalar_cam_obj = scalar_product(line->vector, plan->vector);
-// 	if ((scalar_light_obj < 0 && scalar_cam_obj > 0) || (scalar_light_obj > 0 && scalar_cam_obj < 0))
-// 		return (get_ambiant_color(plan->color, scene));
-// 	return (get_multiple_color(plan->color, scene, fabs(scalar_light_obj)));
-// }

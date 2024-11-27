@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:35:25 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/27 18:50:09 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/27 23:26:12 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_point intersection_plane_line(t_line *line, t_plane *plane)
 	t = -(plane->d + (plane->vector.x * line->position.x + plane->vector.y * line->position.y + plane->vector.z * line->position.z)) \
 	/ (plane->vector.x * line->vector.x + plane->vector.y * line->vector.y + plane->vector.z * line->vector.z);
 	if (fabs(t) < 1e-6)
-			return (t_point){0, 0, -INFINITY};
+			return (t_point){0, 0, INFINITY};
 	point.x = line->vector.x * t + line->position.x;
 	point.y = line->vector.y * t + line->position.y;
 	point.z = line->vector.z * t + line->position.z;
@@ -45,12 +45,14 @@ void    *get_closest_plan(t_line *line, t_scene *scene, t_line_color *l)
         {
             obj = scene->planes + i;
             l->position = p_temp;
+            l->type = PLANE;
         }
     }
-    if (l->position.z != -INFINITY)
+    if (l->position.z != INFINITY && l->type == PLANE)
     {
         l->vector = obj->vector;
         l->color = obj->color;
+        l->type = PLANE;
     }
     // printf("r : %d\n", l->color.r);
     // printf("g : %d\n", l->color.g);
