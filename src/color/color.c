@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:16:23 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/27 17:34:31 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:18:56 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,21 @@ t_color	get_multiple_color(t_color obj, t_scene *scene, float scalar_product)
 	t_color	color;
 	float		c;
 
-	c = (float)((float)obj.r / 255) * ((scene->lights->color.r * scene->lights->intensity) + (scene->ambient.color.r * scene->ambient.intensity));
+	c = (float)((float)obj.r / 255) * ((scene->lights->color.r * scene->lights->intensity * scalar_product) + (scene->ambient.color.r * scene->ambient.intensity));
 	if (c > obj.r)
-		color.r = obj.r * scalar_product;
+		color.r = obj.r;
 	else
-		color.r = c * scalar_product;
-	c = (float)((float)obj.g / 255) * ((scene->lights->color.g * scene->lights->intensity) + (scene->ambient.color.g * scene->ambient.intensity));
+		color.r = c;
+	c = (float)((float)obj.g / 255) * ((scene->lights->color.g * scene->lights->intensity * scalar_product) + (scene->ambient.color.g * scene->ambient.intensity));
 	if (c > obj.g)
-		color.g = obj.g * scalar_product;
+		color.g = obj.g;
 	else
-		color.g = c * scalar_product;
-	c = (float)((float)obj.b / 255) * ((scene->lights->color.b * scene->lights->intensity) + (scene->ambient.color.b * scene->ambient.intensity));
+		color.g = c;
+	c = (float)((float)obj.b / 255) * ((scene->lights->color.b * scene->lights->intensity * scalar_product) + (scene->ambient.color.b * scene->ambient.intensity));
 	if (c > obj.b)
-		color.b = obj.b * scalar_product;
+		color.b = obj.b;
 	else
-		color.b = c * scalar_product;
+		color.b = c;
 	// printf("r : %d\n", color.r);
 	// printf("g : %d\n", color.g);
 	// printf("b : %d\n", color.b);

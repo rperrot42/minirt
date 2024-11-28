@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:58:10 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/27 23:10:52 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:52:08 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,22 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
         }
     }
 	l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
-	if (l->position.z != INFINITY && l->type == PLANE) //si le pixel rendu appartient a un plan, et que la camera est de lautre cote du plan par rapport a la lumiere
+	if (l->position.z != INFINITY)
 	{
-		float	scalar_cam_obj = scalar_product(line->vector, l->vector);
-		if ((l->scalar_light_obj < 0 && scalar_cam_obj > 0) || (l->scalar_light_obj > 0 && scalar_cam_obj < 0))
-			return (1);
+		if (l->type == PLANE)
+		{
+			//l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
+			float	scalar_cam_obj = scalar_product(line->vector, l->vector);
+			if ((l->scalar_light_obj < 0 && scalar_cam_obj > 0) || (l->scalar_light_obj > 0 && scalar_cam_obj < 0))
+				return (1);
+		}
+		if (l->type == SPHERE)
+		{
+			l->scalar_light_obj = scalar_product(get_line_2point(&scene->lights[0].position, &((t_sphere *)obj)->position).vector, l->vector);
+			if (l->scalar_light_obj < 0)
+			//if (scalar_product(get_line_2point(&scene->lights[0].position, &((t_sphere *)obj)->position).vector, l->vector) < 0)
+				return (1);
+		}
 	}
 	return (0);
 }

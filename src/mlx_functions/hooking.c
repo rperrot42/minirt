@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:29:15 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/27 20:17:18 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:53:29 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void rotation_light(t_scene *scene, float rotation, t_coordinate rotate);
 static void translation(t_move move, t_scene *scene);
 
 static void rotation_plane(t_scene *scene, float rotation, t_coordinate rotate);
+
+static void rotation_sphere(t_scene *scene, float rotation, t_coordinate rotate);
 
 int button_press(int keycode, int x, int y, t_scene *scene)
 {
@@ -70,6 +72,8 @@ int	motion_notify(int x, int y, t_scene *scene)
 		rotation_plane(scene, (y - scene->move_mouse.last_position_y) * 0.01, X);
 		rotation_light(scene, (y - scene->move_mouse.last_position_y) * 0.01, X);
 		rotation_light(scene, (x - scene->move_mouse.last_position_x) * 0.01, Y);
+		rotation_sphere(scene, (y - scene->move_mouse.last_position_y) * 0.01, X);
+		rotation_sphere(scene, (x - scene->move_mouse.last_position_x) * 0.01, Y);
 		scene->move_mouse.last_position_x = x;
 		scene->move_mouse.last_position_y = y;
 
@@ -143,8 +147,28 @@ static void rotation_light(t_scene *scene, float rotation, t_coordinate rotate)
 		}
 		else if (rotate == Y)
 		{
-			scene->lights[i].position.x = cosf(rotation) * scene->lights[i].position.x + sinf(rotation) * scene->lights[i].position .z;
+			scene->lights[i].position.x = cosf(rotation) * scene->lights[i].position.x + sinf(rotation) * scene->lights[i].position.z;
 			scene->lights[i].position.z = -sinf(rotation) * scene->lights[i].position.x + cosf(rotation) * scene->lights[i].position.z;
+		}
+	}
+}
+
+static void rotation_sphere(t_scene *scene, float rotation, t_coordinate rotate)
+{
+	int		i;
+
+	i = -1;
+	while (++i < scene->nb_spheres)
+	{
+		if (rotate == X)
+		{
+			scene->spheres[i].position.y = cosf(rotation) * scene->spheres[i].position.y - sinf(rotation) * scene->spheres[i].position.z;
+			scene->spheres[i].position.z = sinf(rotation) * scene->spheres[i].position.y + cosf(rotation) * scene->spheres[i].position.z;
+		}
+		else if (rotate == Y)
+		{
+			scene->spheres[i].position.x = cosf(rotation) * scene->spheres[i].position.x + sinf(rotation) * scene->spheres[i].position.z;
+			scene->spheres[i].position.z = -sinf(rotation) * scene->spheres[i].position.x + cosf(rotation) * scene->spheres[i].position.z;
 		}
 	}
 }
