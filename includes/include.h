@@ -17,8 +17,10 @@
 # include <stdio.h>
 # include "errno.h"
 # include "libft.h"
+# include "fcntl.h"
 # include "error.h"
 # include <math.h>
+#
 # include <string.h>
 #endif
 

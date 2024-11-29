@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move.h                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 20:23:51 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/24 20:24:10 by rperrot          ###   ########.fr       */
+/*   Created: 2024/11/29 16:22:41 by rperrot           #+#    #+#             */
+/*   Updated: 2024/11/29 16:23:00 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+long	ft_clock();
 
-#ifndef MOVE_H
-#define MOVE_H
+#ifndef UTILS_H
+#define UTILS_H
 
-#include "struct.h"
-#include "include.h"
-void	move_plane(t_scene *scene, int x, int y, int z);
-int		all_deplacement(t_scene *scene, int deplacement);
 #endif

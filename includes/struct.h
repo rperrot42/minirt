@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/24 20:55:41 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:04:15 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ typedef struct s_color
 	unsigned char	b;
 }	t_color;
 
+typedef enum e_obj
+{
+	SPHERE,
+	PLANE,
+	CYLINDER
+}	t_obj;
+
 typedef struct s_sphere
 {
 	t_point	position;
@@ -40,6 +47,15 @@ typedef struct s_line{
 	t_point	position;
 	t_point	vector;
 }	t_line;
+
+typedef struct s_line_color{
+	t_point	position;
+	t_point	vector;
+	t_color	color;
+	float	scalar_light_obj;
+	float	norm;
+	t_obj	type;
+}	t_line_color;
 
 typedef struct s_camera
 {
@@ -93,6 +109,16 @@ typedef struct s_move_mouse
 	t_bool	left_click;
 }	t_move_mouse;
 
+typedef struct s_press_key
+{
+	t_bool	w_press;
+	t_bool	s_press;
+	t_bool	a_press;
+	t_bool	d_press;
+	t_bool	tab_press;
+	t_bool	sp_press;
+}	t_press_key;
+
 typedef struct s_scene
 {
 	t_ambient		ambient;
@@ -109,14 +135,11 @@ typedef struct s_scene
 	void			*window;
 	t_data			img;
 	t_move_mouse	move_mouse;
+	t_press_key		press_key;
+	int			    fps;
+	int				second_actual;
+	float			last_fps;
 }	t_scene;
-
-typedef enum s_obj
-{
-	SPHERE,
-	PLANE,
-	CYLINDER
-}	t_obj;
 
 typedef enum e_move
 {

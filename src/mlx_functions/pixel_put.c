@@ -6,17 +6,18 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/26 12:26:24 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:24:26 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct.h"
 #include "collison.h"
 #include "mini_rt.h"
-#include "angle.h"
 #include "math.h"
 #include "color.h"
 #include "mlx.h"
+#include "move.h"
+#include "utils.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -28,34 +29,19 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 t_color    draw_pixel(t_scene *scene, t_line *line)
 {
-    t_point p;
-    t_plane *plan;
-	t_line	lineLight;
-	p = (t_point){0, 0, INFINITY};
-
-    plan = get_closest_plan(line, scene, &p);
-	if (p.z == -INFINITY)
+    t_line_color    l = (t_line_color){0};
+    void    *obj;
+    
+    l.position.z = INFINITY;
+    if (line->vector.z == 0)
+		line->vector.z = 1e-4;
+    obj = get_closest_obj(line, scene, &l);
+	if (l.position.z == INFINITY)
     {
         t_color c = {0};
 		return (c);
     }
-	lineLight = get_line_2point(&scene->lights[0].position, &p);
-    int i = -1;
-    while (++i < scene->nb_planes)
-    {
-        if (plan != scene->planes + i && scalar_product(lineLight.vector, scene->planes[i].vector) != 0)
-        {
-            t_point q = intersection_plane_line(&lineLight, scene->planes + i);
-            if (q.z != -INFINITY && point_between(lineLight.position, p, q))
-                return (get_ambiant_color(plan->color, scene));
-        }
-    }
-    float   scalar_light_obj = scalar_product(lineLight.vector, plan->vector);
-    float   scalar_cam_obj = scalar_product(line->vector, plan->vector);
-
-	if ((scalar_light_obj < 0 && scalar_cam_obj > 0) || (scalar_light_obj > 0 && scalar_cam_obj < 0))
-		return (get_ambiant_color(plan->color, scene));
-	return (get_multiple_color(plan->color, scene, fabs(scalar_light_obj)));
+    return (get_color_obj(scene, obj, &l, line));
 }
 
 int draw_window(t_scene *scene)
@@ -64,10 +50,13 @@ int draw_window(t_scene *scene)
     int     y;
     t_line  line;
     float fov = scene->cameras.fov * M_PI / 360;
+	long actual_fps;
 
     y = 0;
+	actual_fps = ft_clock();
     line = (t_line){0};
     line.vector.z = 1;
+	all_deplacement(scene, actual_fps - scene->last_fps);
     while (y < LENGTH)
     {
         x = 0;
@@ -80,6 +69,15 @@ int draw_window(t_scene *scene)
         }
         y++;
     }
+	scene->fps++;
+	if (scene->second_actual != actual_fps / 100)
+	{
+		printf("fps : %d\n", scene->fps);
+
+		scene->second_actual = ft_clock() / 100;
+		scene->fps = 0;
+	}
 	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
+	scene->last_fps = actual_fps;
 	return (0);
 }

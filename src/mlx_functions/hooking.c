@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:29:15 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/25 23:43:29 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:33:52 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 static void rotation_light(t_scene *scene, float rotation, t_coordinate rotate);
 
-static void translation(t_move move, t_scene *scene);
-
 static void rotation_plane(t_scene *scene, float rotation, t_coordinate rotate);
+
+static void rotation_sphere(t_scene *scene, float rotation, t_coordinate rotate);
 
 int button_press(int keycode, int x, int y, t_scene *scene)
 {
@@ -44,23 +44,41 @@ int button_release(int keycode, int x, int y, t_scene *scene)
 
 int	key_press(int keycode, t_scene *scene)
 {
-	// printf("keycode : %d\n", keycode);
 	if (keycode == KEY_ESC)
 		free_scene(scene);
 	else if (keycode == KEY_W)
-		translation(FORWARD, scene);
+		scene->press_key.w_press = true;
 	else if (keycode == KEY_S)
-		translation(BACK, scene);
+		scene->press_key.s_press = true;
 	else if (keycode == KEY_A)
-		translation(LEFT, scene);
+		scene->press_key.a_press = true;
 	else if (keycode == KEY_D)
-		translation(RIGHT, scene);
+		scene->press_key.d_press = true;
 	else if (keycode == KEY_SP)
-		move_plane(scene, 0, 5, 0                                                                                                                                         );
+		scene->press_key.sp_press = true;
 	else if (keycode == KEY_TAB)
-		move_plane(scene, 0,-5, 0);
+		scene->press_key.tab_press = true;
 	return (0);
 }
+
+int key_release(int keycode, t_scene *scene)
+{
+	printf("keycode = %d\n", keycode);
+	if (keycode == KEY_W)
+		scene->press_key.w_press = false;
+	else if (keycode == KEY_S)
+		scene->press_key.s_press = false;
+	else if (keycode == KEY_A)
+		scene->press_key.a_press = false;
+	else if (keycode == KEY_D)
+		scene->press_key.d_press = false;
+	else if (keycode == KEY_SP)
+		scene->press_key.sp_press = false;
+	else if (keycode == KEY_TAB)
+		scene->press_key.tab_press = false;
+	return (0);
+}
+
 
 int	motion_notify(int x, int y, t_scene *scene)
 {
@@ -70,6 +88,8 @@ int	motion_notify(int x, int y, t_scene *scene)
 		rotation_plane(scene, (y - scene->move_mouse.last_position_y) * 0.01, X);
 		rotation_light(scene, (y - scene->move_mouse.last_position_y) * 0.01, X);
 		rotation_light(scene, (x - scene->move_mouse.last_position_x) * 0.01, Y);
+		rotation_sphere(scene, (y - scene->move_mouse.last_position_y) * 0.01, X);
+		rotation_sphere(scene, (x - scene->move_mouse.last_position_x) * 0.01, Y);
 		scene->move_mouse.last_position_x = x;
 		scene->move_mouse.last_position_y = y;
 
@@ -80,7 +100,8 @@ int	motion_notify(int x, int y, t_scene *scene)
 void	hooking(t_scene *scene)
 {
 	mlx_hook(scene->window, 17,  0L, free_scene, scene);
-	mlx_hook(scene->window, 2,  (1L << 0), key_press, scene);
+	mlx_hook(scene->window, 2,  (1L<<0), key_press, scene);
+	mlx_hook(scene->window, 3,  (1L<<1), key_release, scene);
 	mlx_hook(scene->window, 4, 1L << 2, button_press, scene);
 	mlx_hook(scene->window, 5, 1L << 3, button_release, scene);
 	mlx_hook(scene->window, 6, 1L << 6, motion_notify, scene);
@@ -88,18 +109,7 @@ void	hooking(t_scene *scene)
 	mlx_loop(scene->mlx);
 }
 
-static void translation(t_move move, t_scene *scene)
-{
-	int positive;
 
-	positive = 5;
-	if (move == LEFT || move == BACK)
-		positive = -5;
-	if (move == LEFT || move == RIGHT)
-		move_plane(scene, positive * cosf(scene->cameras.vector.x), 0, positive * sinf(scene->cameras.vector.x));
-	else
-		move_plane(scene, positive * sinf(scene->cameras.vector.x), 0, positive * cosf(scene->cameras.vector.x));
-}
 static void rotation_plane(t_scene *scene, float rotation, t_coordinate rotate)
 {
 	int		i;
@@ -142,8 +152,28 @@ static void rotation_light(t_scene *scene, float rotation, t_coordinate rotate)
 		}
 		else if (rotate == Y)
 		{
-			scene->lights[i].position.x = cosf(rotation) * scene->lights[i].position.x + sinf(rotation) * scene->lights[i].position .z;
+			scene->lights[i].position.x = cosf(rotation) * scene->lights[i].position.x + sinf(rotation) * scene->lights[i].position.z;
 			scene->lights[i].position.z = -sinf(rotation) * scene->lights[i].position.x + cosf(rotation) * scene->lights[i].position.z;
+		}
+	}
+}
+
+static void rotation_sphere(t_scene *scene, float rotation, t_coordinate rotate)
+{
+	int		i;
+
+	i = -1;
+	while (++i < scene->nb_spheres)
+	{
+		if (rotate == X)
+		{
+			scene->spheres[i].position.y = cosf(rotation) * scene->spheres[i].position.y - sinf(rotation) * scene->spheres[i].position.z;
+			scene->spheres[i].position.z = sinf(rotation) * scene->spheres[i].position.y + cosf(rotation) * scene->spheres[i].position.z;
+		}
+		else if (rotate == Y)
+		{
+			scene->spheres[i].position.x = cosf(rotation) * scene->spheres[i].position.x + sinf(rotation) * scene->spheres[i].position.z;
+			scene->spheres[i].position.z = -sinf(rotation) * scene->spheres[i].position.x + cosf(rotation) * scene->spheres[i].position.z;
 		}
 	}
 }
