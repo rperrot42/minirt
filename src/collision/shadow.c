@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:58:10 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/28 22:52:08 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:34:39 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line)
 
 int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *line)
 {
+	//-------------------------OTHER OBJECT------------------------------//
 	t_line	lineLight = get_line_2point(&scene->lights[0].position, &l->position);
 	int i;
 
@@ -67,6 +68,9 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
                 return (1);
         }
     }
+	//-------------------------OTHER OBJECT------------------------------//
+
+	//-------------------------OBJECT HIMSELF------------------------------//
 	l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
 	if (l->position.z != INFINITY)
 	{
@@ -79,11 +83,19 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
 		}
 		if (l->type == SPHERE)
 		{
-			l->scalar_light_obj = scalar_product(get_line_2point(&scene->lights[0].position, &((t_sphere *)obj)->position).vector, l->vector);
+			l->scalar_light_obj = scalar_product(get_line_2point(&((t_sphere *)obj)->position, &scene->lights[0].position).vector, l->vector);
+			// l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
+			// l->scalar_light_obj = scalar_product(get_line_2point(&l->position, &scene->lights[0].position).vector, l->vector);
+			if (l->color.g > 0)
+			{
+				printf("l.pos :%f %f %f\n", l->position.x, l->position.y, l->position.z);
+				printf("l.vec :%f %f %f\n", l->vector.x, l->vector.y, l->vector.z);
+				printf("scalar result :%f\n", l->scalar_light_obj);
+			}
 			if (l->scalar_light_obj < 0)
-			//if (scalar_product(get_line_2point(&scene->lights[0].position, &((t_sphere *)obj)->position).vector, l->vector) < 0)
 				return (1);
 		}
 	}
+	//-------------------------OBJECT HIMSELF------------------------------//
 	return (0);
 }

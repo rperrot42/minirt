@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/27 23:17:38 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:24:26 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int draw_window(t_scene *scene)
         line.vector.y = -tanf(((2.0 * y) -  LENGTH) / (LENGTH - 2) * fov);
         while (x < LENGTH)
         {
-            line.vector.x = tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);
+            line.vector.x = -tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);
 			my_mlx_pixel_put(&scene->img, x, y, color_to_int(draw_pixel(scene, &line)));
             x++;
         }

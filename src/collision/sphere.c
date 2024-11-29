@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:53:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/28 16:10:27 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:27:12 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ t_sphere    *get_closest_sphere(t_line *line, t_scene *scene, t_line_color *l)
     {
         l->color = obj->color;
 		l->vector = get_line_2point(&obj->position, &l->position).vector;
-		l->type = SPHERE;
     }
     return (obj);
 }

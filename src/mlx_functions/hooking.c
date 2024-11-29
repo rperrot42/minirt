@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:29:15 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/28 21:53:29 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:33:52 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	hooking(t_scene *scene)
 	mlx_hook(scene->window, 4, 1L << 2, button_press, scene);
 	mlx_hook(scene->window, 5, 1L << 3, button_release, scene);
 	mlx_hook(scene->window, 6, 1L << 6, motion_notify, scene);
-	mlx_loop_hook(scene->mlx, draw_window, scene);
+	// mlx_loop_hook(scene->mlx, draw_window, scene);
 	mlx_loop(scene->mlx);
 }
 
