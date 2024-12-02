@@ -72,9 +72,8 @@ int draw_window(t_scene *scene)
 	scene->fps++;
 	if (scene->second_actual != actual_fps / 100)
 	{
-		printf("fps : %d\n", scene->fps);
-
 		scene->second_actual = ft_clock() / 100;
+		printf("fps: %d\n", scene->fps);
 		scene->fps = 0;
 	}
 	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);

@@ -30,6 +30,20 @@ int button_press(int keycode, int x, int y, t_scene *scene)
 		scene->move_mouse.last_position_x = x;
 		scene->move_mouse.last_position_y = y;
 	}
+	else if (keycode == ROLL_UP)
+	{
+		if (scene->cameras.fov <= 90)
+			scene->cameras.fov += (scene->cameras.fov) * 0.03;
+		else
+			scene->cameras.fov +=  (179 - scene->cameras.fov) * 0.03;
+	}
+	else if (keycode == ROLL_DOWN)
+	{
+		if (scene->cameras.fov <= 90)
+			scene->cameras.fov -= (scene->cameras.fov) * 0.03;
+		else
+			scene->cameras.fov -= (179 - scene->cameras.fov) * 0.03;
+	}
 	return (0);
 }
 
@@ -63,7 +77,6 @@ int	key_press(int keycode, t_scene *scene)
 
 int key_release(int keycode, t_scene *scene)
 {
-	printf("keycode = %d\n", keycode);
 	if (keycode == KEY_W)
 		scene->press_key.w_press = false;
 	else if (keycode == KEY_S)

@@ -29,8 +29,7 @@ t_point	intersection_sphere_line(t_line *line, t_sphere *sphere)
 	{
 		// printf("Line position: (%f, %f, %f)\n", line->position.x, line->position.y, line->position.z);
 		// printf("Sphere position: (%f, %f, %f)\n", sphere->position.x, sphere->position.y, sphere->position.z);
-		// printf("Direction vector: (%f, %f, %f)\n", line->vector.x, line->vector.y, line->vector.z);
-		// printf("Discriminant: %f\n", b4ac);
+		// printf("Direction vls -a
 		p1.x = 0;
 		p1.y = 0;
 		p1.z = INFINITY;

@@ -27,9 +27,7 @@ void	*get_closest_obj(t_line *line, t_scene *scene, t_line_color *l)
 		obj = temp;
 	}
 	if (scene->nb_spheres > 0)
-	{
 		temp = get_closest_sphere(line, scene, l);
-	}
 	if (l->type == PLANE)
 		return (obj);
 	return (temp);

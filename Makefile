@@ -12,7 +12,7 @@ OS := $(shell uname)
 
 LIBFT_DIRECTORY = ./libft/
 
-FLAGS = -Wall -Werror -Wextra -g3
+FLAGS = -Wall -Werror -Wextra -o3
 
 DFLAGS = -MD -MP
 
