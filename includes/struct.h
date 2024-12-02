@@ -109,6 +109,16 @@ typedef struct s_move_mouse
 	t_bool	left_click;
 }	t_move_mouse;
 
+typedef struct s_press_key
+{
+	t_bool	w_press;
+	t_bool	s_press;
+	t_bool	a_press;
+	t_bool	d_press;
+	t_bool	tab_press;
+	t_bool	sp_press;
+}	t_press_key;
+
 typedef struct s_scene
 {
 	t_ambient		ambient;
@@ -125,6 +135,10 @@ typedef struct s_scene
 	void			*window;
 	t_data			img;
 	t_move_mouse	move_mouse;
+	t_press_key		press_key;
+	int			    fps;
+	int				second_actual;
+	float			last_fps;
 }	t_scene;
 
 typedef enum e_move

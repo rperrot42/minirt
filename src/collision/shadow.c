@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:58:10 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/29 14:34:39 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:30:19 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ void	*get_closest_obj(t_line *line, t_scene *scene, t_line_color *l)
 
 		temp = get_closest_plan(line, scene, l);
 		obj = temp;
-	}
-	if (scene->nb_spheres > 0)
-	{
-		temp = get_closest_sphere(line, scene, l);
 	}
 	if (l->type == PLANE)
 		return (obj);
@@ -83,17 +79,16 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
 		}
 		if (l->type == SPHERE)
 		{
-			l->scalar_light_obj = scalar_product(get_line_2point(&((t_sphere *)obj)->position, &scene->lights[0].position).vector, l->vector);
-			// l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
-			// l->scalar_light_obj = scalar_product(get_line_2point(&l->position, &scene->lights[0].position).vector, l->vector);
-			if (l->color.g > 0)
-			{
-				printf("l.pos :%f %f %f\n", l->position.x, l->position.y, l->position.z);
-				printf("l.vec :%f %f %f\n", l->vector.x, l->vector.y, l->vector.z);
-				printf("scalar result :%f\n", l->scalar_light_obj);
-			}
-			if (l->scalar_light_obj < 0)
-				return (1);
+			l->scalar_light_obj = scalar_product(get_line_2point(&l->position, &scene->lights[0].position).vector, l->vector);
+			// // l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
+			// // if (l->color.g > 0)
+			// // {
+			// // 	printf("l.pos :%f %f %f\n", l->position.x, l->position.y, l->position.z);
+			// // 	printf("l.vec :%f %f %f\n", l->vector.x, l->vector.y, l->vector.z);
+			// // 	printf("scalar result :%f\n", l->scalar_light_obj);
+			// // }
+			// if (l->scalar_light_obj < 0)
+			// 	return (1);
 		}
 	}
 	//-------------------------OBJECT HIMSELF------------------------------//

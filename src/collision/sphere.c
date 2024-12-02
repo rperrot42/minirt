@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   sphere->c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 13:53:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/29 14:27:12 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:55:19 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,36 @@
 
 t_point	intersection_sphere_line(t_line *line, t_sphere *sphere)
 {
-	t_point	p1;
-	t_point	p2;
-	float	t1;
-	float	t2;
-	float	b4ac;
+	float	A = line->vector.x * line->vector.x + line->vector.y * line->vector.y + line->vector.z * line->vector.z;
+	float	B = 2 * ((line->position.x - sphere->position.x) * line->vector.x + (line->position.y - sphere->position.y) * line->vector.y + (line->position.z - sphere->position.z * line->vector.z));
+	float	C = (line->position.x - sphere->position.x) * (line->position.x - sphere->position.x) + (line->position.y - sphere->position.y) * (line->position.y - sphere->position.y) + (line->position.z - sphere->position.z) * (line->position.z - sphere->position.z) - sphere->radius * sphere->radius;
 
-	b4ac = pow(2 * ((line->position.x - sphere->position.x) * line->vector.x + (line->position.y - sphere->position.y) * line->vector.y + (line->position.z - sphere->position.z) * line->vector.z), 2) \
-	- 4 * (line->vector.x * line->vector.x + line->vector.y * line->vector.y + line->vector.z * line->vector.z) * \
-	(pow(line->position.x - sphere->position.x, 2) + pow(line->position.y - sphere->position.y, 2) + pow(line->position.z - sphere->position.z, 2) - sphere->radius * sphere->radius);
+	float	b4ac = B * B - 4 * A * C;
 	if (b4ac < 0)
 	{
-		// printf("Line position: (%f, %f, %f)\n", line->position.x, line->position.y, line->position.z);
-		// printf("Sphere position: (%f, %f, %f)\n", sphere->position.x, sphere->position.y, sphere->position.z);
-		// printf("Direction vector: (%f, %f, %f)\n", line->vector.x, line->vector.y, line->vector.z);
-		// printf("Discriminant: %f\n", b4ac);
-		p1.x = 0;
-		p1.y = 0;
-		p1.z = INFINITY;
+		t_point p;
+		p.x = 0;
+		p.y = 0;
+		p.z = INFINITY;
+		return (p);
+	}
+	float	t1 = (-B - sqrt(b4ac)) / (2 * A);
+	float	t2 = (-B + sqrt(b4ac)) / (2 * A);
+
+	t_point	p1;
+	t_point	p2;
+	p1.z = line->position.z + t1 * line->vector.z;
+	p2.z = line->position.z + t2 * line->vector.z;
+
+	if (p1.z <= p2.z)
+	{
+		p1.x = line->position.x + t1 * line->vector.x;
+		p1.y = line->position.y + t1 * line->vector.y;
 		return (p1);
 	}
-	t1 = -((2 * ((line->position.x - sphere->position.x) * line->vector.x + (line->position.y - sphere->position.y) * line->vector.y + (line->position.z - sphere->position.z) * line->vector.z)) + sqrt(b4ac)) / (2 * line->vector.x * line->vector.x + line->vector.y * line->vector.y + line->vector.z * line->vector.z);
-	t2 = -((2 * ((line->position.x - sphere->position.x) * line->vector.x + (line->position.y - sphere->position.y) * line->vector.y + (line->position.z - sphere->position.z) * line->vector.z)) - sqrt(b4ac)) / (2 * line->vector.x * line->vector.x + line->vector.y * line->vector.y + line->vector.z * line->vector.z);
-	p1.x = line->position.x + t1 * line->vector.x;
-	p1.y = line->position.y + t1 * line->vector.y;
-	p1.z = line->position.z + t1 * line->vector.z;
 	p2.x = line->position.x + t2 * line->vector.x;
 	p2.y = line->position.y + t2 * line->vector.y;
-	p2.z = line->position.z + t2 * line->vector.z;
-	if (point_between(line->position, p1, p2))
-		return (p2);
-	return (p1);
+	return (p2);
 }
 
 t_sphere    *get_closest_sphere(t_line *line, t_scene *scene, t_line_color *l)

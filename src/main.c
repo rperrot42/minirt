@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/27 18:44:41 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:59:36 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "parsing.h"
 #include "mini_rt.h"
 #include "init.h"
+#include "utils.h"
 
 void	print_scene(t_scene s);
 
@@ -33,7 +34,6 @@ int	main(int argc, char **argv)
 	return_value = ft_readline(fd, &scene);
 	if (init_window(&scene))
 		return (1);
-	// print_scene(scene);
 	if (!return_value)
 		hooking(&scene);
 	else
@@ -45,11 +45,8 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-
-
 void print_scene(t_scene s)
 {
-
 	printf("-------- Ambient light: ------\n");
 	printf(" -Intensity: %f\n", s.ambient.intensity);
 	printf(" -Color: %d %d %d\n", s.ambient.color.r, s.ambient.color.g, s.ambient.color.b);

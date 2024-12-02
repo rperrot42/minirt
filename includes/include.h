@@ -17,8 +17,10 @@
 # include <stdio.h>
 # include "errno.h"
 # include "libft.h"
+# include "fcntl.h"
 # include "error.h"
 # include <math.h>
+#
 # include <string.h>
 #endif
 
@@ -84,6 +86,8 @@
 #  define KEY_SP 32
 #  define KEY_SHIFT 65505
 #  define RIGHT_CLICK 3
+#  define ROLL_UP 5
+#  define ROLL_DOWN 4
 #  define KEY_ESC 65307
 #  define KEY_TAB 65289
 # endif

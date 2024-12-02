@@ -12,7 +12,7 @@ OS := $(shell uname)
 
 LIBFT_DIRECTORY = ./libft/
 
-FLAGS = -Wall -Werror -Wextra -g3
+FLAGS = -Wall -Werror -Wextra -o3
 
 DFLAGS = -MD -MP
 
@@ -42,6 +42,8 @@ SRC_ANGLE = 	create_line.c	\
 
 SRC_INIT =		init_mlx.c		\
 
+SRC_UTILS =		ft_clock.c			\
+
 SRC_OBJECT =	move.c
 
 ifeq ($(OS), Darwin)
@@ -61,6 +63,7 @@ SRC =	$(addprefix parsing/, $(SRC_PARSING))		\
 		$(addprefix color/, $(SRC_COLOR))			\
 		$(addprefix mlx_functions/, $(SRC_MLX))		\
 		$(addprefix object/, $(SRC_OBJECT))			\
+		$(addprefix utils/, $(SRC_UTILS))			\
 		main.c										\
 
 SRC_PATH = src/
@@ -106,7 +109,7 @@ else
 endif
 	@echo "$(CYAN)$@ created $(CHECK)$(RESET_COLOR)"
 
-$(NAME): $(OBJ) $(LIBFT) mlx
+$(NAME): $(OBJ) $(LIBFT) | mlx
 ifeq ($(OS), Linux)
 	@$(CC) $(OBJ)  -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
 else

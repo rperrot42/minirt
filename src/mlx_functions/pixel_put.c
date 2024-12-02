@@ -13,10 +13,11 @@
 #include "struct.h"
 #include "collison.h"
 #include "mini_rt.h"
-#include "angle.h"
 #include "math.h"
 #include "color.h"
 #include "mlx.h"
+#include "move.h"
+#include "utils.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -49,10 +50,13 @@ int draw_window(t_scene *scene)
     int     y;
     t_line  line;
     float fov = scene->cameras.fov * M_PI / 360;
+	long actual_fps;
 
     y = 0;
+	actual_fps = ft_clock();
     line = (t_line){0};
     line.vector.z = 1;
+	all_deplacement(scene, actual_fps - scene->last_fps);
     while (y < LENGTH)
     {
         x = 0;
@@ -65,6 +69,14 @@ int draw_window(t_scene *scene)
         }
         y++;
     }
+	scene->fps++;
+	if (scene->second_actual != actual_fps / 100)
+	{
+		scene->second_actual = ft_clock() / 100;
+		printf("fps: %d\n", scene->fps);
+		scene->fps = 0;
+	}
 	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
+	scene->last_fps = actual_fps;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:01:43 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 18:03:41 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:54:04 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	add_sphere(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        sphere.radius = ft_atof(&str);
+        sphere.radius = ft_atof(&str) / 2;
     else
         return (print_error(E_FILE_PARS));
     if (errno)
