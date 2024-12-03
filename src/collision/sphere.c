@@ -17,7 +17,7 @@
 t_point	intersection_sphere_line(t_line *line, t_sphere *sphere)
 {
 	float	A = line->vector.x * line->vector.x + line->vector.y * line->vector.y + line->vector.z * line->vector.z;
-	float	B = 2 * ((line->position.x - sphere->position.x) * line->vector.x + (line->position.y - sphere->position.y) * line->vector.y + (line->position.z - sphere->position.z * line->vector.z));
+	float	B = 2 * ((line->position.x - sphere->position.x) * line->vector.x + (line->position.y - sphere->position.y) * line->vector.y + (line->position.z - sphere->position.z) * line->vector.z);
 	float	C = (line->position.x - sphere->position.x) * (line->position.x - sphere->position.x) + (line->position.y - sphere->position.y) * (line->position.y - sphere->position.y) + (line->position.z - sphere->position.z) * (line->position.z - sphere->position.z) - sphere->radius * sphere->radius;
 
 	float	b4ac = B * B - 4 * A * C;
@@ -37,14 +37,16 @@ t_point	intersection_sphere_line(t_line *line, t_sphere *sphere)
 	p1.z = line->position.z + t1 * line->vector.z;
 	p2.z = line->position.z + t2 * line->vector.z;
 
-	if (p1.z <= p2.z)
+	if (t1 <= t2)
 	{
 		p1.x = line->position.x + t1 * line->vector.x;
 		p1.y = line->position.y + t1 * line->vector.y;
+		// printf("p1 :%f %f %f // rgb :%d %d %d\n", p1.x, p1.y, p1.z, sphere->color.r, sphere->color.g, sphere->color.b);
 		return (p1);
 	}
 	p2.x = line->position.x + t2 * line->vector.x;
 	p2.y = line->position.y + t2 * line->vector.y;
+	// printf("p2 :%f %f %f // rgb :%d %d %d\n", p2.x, p2.y, p2.z, sphere->color.r, sphere->color.g, sphere->color.b);
 	return (p2);
 }
 

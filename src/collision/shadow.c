@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:58:10 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/02 19:30:19 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:59:14 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	*get_closest_obj(t_line *line, t_scene *scene, t_line_color *l)
 
 		temp = get_closest_plan(line, scene, l);
 		obj = temp;
+	}
+	if (scene->nb_spheres > 0)
+	{
+		temp = get_closest_sphere(line, scene, l);
 	}
 	if (l->type == PLANE)
 		return (obj);
@@ -87,8 +91,8 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
 			// // 	printf("l.vec :%f %f %f\n", l->vector.x, l->vector.y, l->vector.z);
 			// // 	printf("scalar result :%f\n", l->scalar_light_obj);
 			// // }
-			// if (l->scalar_light_obj < 0)
-			// 	return (1);
+			if (l->scalar_light_obj < 0)
+				return (1);
 		}
 	}
 	//-------------------------OBJECT HIMSELF------------------------------//
