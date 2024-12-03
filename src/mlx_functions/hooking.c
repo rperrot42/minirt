@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:29:15 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/29 14:33:52 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:47:53 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int	motion_notify(int x, int y, t_scene *scene)
 
 void	hooking(t_scene *scene)
 {
+	draw_window(scene);
 	mlx_hook(scene->window, 17,  0L, free_scene, scene);
 	mlx_hook(scene->window, 2,  (1L<<0), key_press, scene);
 	mlx_hook(scene->window, 3,  (1L<<1), key_release, scene);
