@@ -149,6 +149,12 @@ typedef enum e_move
 	BACK
 }	t_move;
 
+typedef struct s_second_degree
+{
+	float	x1;
+	float	x2;
+}	t_second_degree;
+
 typedef enum e_coordinate
 {
 	X,
