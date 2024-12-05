@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/27 19:04:15 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:00:42 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_cylinder
 {
 	t_point	position;
 	t_point	vector;
-	float	diameter;
+	float	radius;
 	float	height;
 	t_color	color;
 }	t_cylinder;

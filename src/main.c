@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:24:17 by rperrot           #+#    #+#             */
-/*   Updated: 2024/12/02 15:59:36 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:02:15 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void print_scene(t_scene s)
 	{
 		printf("cylindre [%d]:\n", i + 1);
 		printf(" -Position: %f %f %f\n", s.cylinders[i].position.x,s.cylinders[i].position.y, s.cylinders[i].position.z);
-		printf(" -diametre: %f\n", s.cylinders[i].diameter);
+		printf(" -Radius: %f\n", s.cylinders[i].radius);
 		printf(" -Color: %d %d %d\n",s.cylinders[i].color.r,s.cylinders[i].color.g,s.cylinders[i].color.b);
 		printf(" -Direction: %f %f %f\n", s.cylinders[i].vector.x,s.cylinders[i].vector.y,s.cylinders[i].vector.z);
 		printf(" -Height: %f\n", s.cylinders[i].height);

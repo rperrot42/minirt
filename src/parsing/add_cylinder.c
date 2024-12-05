@@ -6,11 +6,12 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:01:14 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/10/16 18:02:44 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:58:53 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "angle.h"
 
 int add_cylinder(t_scene *scene, char *str)
 {
@@ -27,7 +28,13 @@ int add_cylinder(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
+    {
         cylinder.vector = get_vector(&str);
+        float   n = calc_norm(cylinder.vector);
+        cylinder.vector.x /= n;
+        cylinder.vector.y /= n;
+        cylinder.vector.z /= n;
+    }
     else
         return (print_error(E_FILE_PARS));
     if (errno)
@@ -35,7 +42,7 @@ int add_cylinder(t_scene *scene, char *str)
     while (*str && *str == ' ')
         str++;
     if (*str)
-        cylinder.diameter = ft_atof(&str);
+        cylinder.radius = ft_atof(&str) / 2;
     else
         return (print_error(E_FILE_PARS));
     if (errno)

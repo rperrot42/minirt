@@ -34,19 +34,17 @@ t_point	intersection_sphere_line(t_line *line, t_sphere *sphere)
 
 	t_point	p1;
 	t_point	p2;
-	p1.z = line->position.z + t1 * line->vector.z;
-	p2.z = line->position.z + t2 * line->vector.z;
 
 	if (t1 <= t2)
 	{
 		p1.x = line->position.x + t1 * line->vector.x;
 		p1.y = line->position.y + t1 * line->vector.y;
-		// printf("p1 :%f %f %f // rgb :%d %d %d\n", p1.x, p1.y, p1.z, sphere->color.r, sphere->color.g, sphere->color.b);
+		p1.z = line->position.z + t1 * line->vector.z;
 		return (p1);
 	}
 	p2.x = line->position.x + t2 * line->vector.x;
 	p2.y = line->position.y + t2 * line->vector.y;
-	// printf("p2 :%f %f %f // rgb :%d %d %d\n", p2.x, p2.y, p2.z, sphere->color.r, sphere->color.g, sphere->color.b);
+	p2.z = line->position.z + t2 * line->vector.z;
 	return (p2);
 }
 
@@ -63,7 +61,6 @@ t_sphere    *get_closest_sphere(t_line *line, t_scene *scene, t_line_color *l)
     while (++i < scene->nb_spheres)
     {
         p_temp = intersection_sphere_line(line, scene->spheres + i);
-		//printf("sphere : %f / %f / %f\n", p_temp.x, p_temp.y, p_temp.z);
         if (p_temp.z < l->position.z && p_temp.z > 0)
         {
             obj = scene->spheres + i;
