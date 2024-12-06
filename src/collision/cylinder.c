@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:44:52 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/05 18:20:31 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:26:55 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,37 @@
 #include "angle.h"
 #include <math.h>
 
+void	unit_vector(t_point *v)
+{
+	float	n = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+	v->x /= n;
+	v->y /= n;
+	v->z /= n;
+}
+
 t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder)
 {
 	t_point	Va;
 
-	Va.x = cylinder->vector.x * cylinder->vector.x * line->vector.x;
-	Va.y = cylinder->vector.y * cylinder->vector.y * line->vector.y;
-	Va.z = cylinder->vector.z * cylinder->vector.z * line->vector.z;
+	unit_vector(&cylinder->vector);
+	Va.x = cylinder->vector.y * line->vector.z - cylinder->vector.z * line->vector.y;
+	Va.y = cylinder->vector.z * line->vector.x - cylinder->vector.x * line->vector.z;
+	Va.z = cylinder->vector.x * line->vector.y - cylinder->vector.y * line->vector.x;
+
+	t_point	R0t;
+
+	R0t.x = line->position.x - cylinder->position.x;
+	R0t.y = line->position.y - cylinder->position.y;
+	R0t.z = line->position.z - cylinder->position.z;
 
 	t_point	Ra0;
 
-	Ra0.x = cylinder->vector.x * cylinder->vector.x * (line->position.x - cylinder->position.x);
-	Ra0.y = cylinder->vector.y * cylinder->vector.y * (line->position.y - cylinder->position.y);
-	Ra0.z = cylinder->vector.z * cylinder->vector.z * (line->position.z - cylinder->position.z);
+	Ra0.x = cylinder->vector.y * R0t.z - cylinder->vector.z * R0t.y;
+	Ra0.y = cylinder->vector.z * R0t.x - cylinder->vector.x * R0t.z;
+	Ra0.z = cylinder->vector.x * R0t.y - cylinder->vector.y * R0t.x;
+	// Ra0.x = cylinder->vector.x * cylinder->vector.x * (line->position.x - cylinder->position.x);
+	// Ra0.y = cylinder->vector.y * cylinder->vector.y * (line->position.y - cylinder->position.y);
+	// Ra0.z = cylinder->vector.z * cylinder->vector.z * (line->position.z - cylinder->position.z);
 
 	float	A = Va.x * Va.x + Va.y * Va.y + Va.z * Va.z;
 	float	B = 2 * (Ra0.x * Va.x + Ra0.y * Va.y + Ra0.z * Va.z);
@@ -47,7 +65,7 @@ t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder)
 	t_point	p1;
 	t_point	p2;
 
-	if (t1 <= t2)
+	if (t1 <= t2 && t1 > 0)
 	{
 		p1.x = line->position.x + t1 * line->vector.x;
 		p1.y = line->position.y + t1 * line->vector.y;

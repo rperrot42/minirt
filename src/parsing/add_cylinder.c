@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:01:14 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/05 17:58:53 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:31:05 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ int add_cylinder(t_scene *scene, char *str)
     if (*str)
     {
         cylinder.vector = get_vector(&str);
-        float   n = calc_norm(cylinder.vector);
-        cylinder.vector.x /= n;
-        cylinder.vector.y /= n;
-        cylinder.vector.z /= n;
     }
     else
         return (print_error(E_FILE_PARS));
