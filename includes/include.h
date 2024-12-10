@@ -91,4 +91,5 @@
 #  define KEY_ESC 65307
 #  define KEY_TAB 65289
 # endif
+# define Z_NEAR 10
 # define LEFT_CLICK 1

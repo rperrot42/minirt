@@ -129,6 +129,9 @@ static void rotation_plane(t_scene *scene, float rotation, t_coordinate rotate)
 	int		i;
 
 	i = -1;
+	printf("rotatopn %f\n", rotation);
+	if (rotation > 0.1)
+		rotation = 0.1;
 	while (++i < scene->nb_planes)
 	{
 		if (rotate == X)
@@ -157,6 +160,8 @@ static void rotation_light(t_scene *scene, float rotation, t_coordinate rotate)
 	int		i;
 
 	i = -1;
+	if (rotation > 0.1)
+		rotation = 0.1;
 	while (++i < scene->nb_lights)
 	{
 		if (rotate == X)
@@ -177,6 +182,8 @@ static void rotation_sphere(t_scene *scene, float rotation, t_coordinate rotate)
 	int		i;
 
 	i = -1;
+	if (rotation > 0.1)
+		rotation = 0.1;
 	while (++i < scene->nb_spheres)
 	{
 		if (rotate == X)

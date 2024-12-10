@@ -44,6 +44,7 @@ SRC_INIT =		init_mlx.c		\
 
 SRC_UTILS =		ft_clock.c			\
 				solve_second_degree.c	\
+				print_fps.c
 
 SRC_OBJECT =	move.c
 

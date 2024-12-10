@@ -138,7 +138,8 @@ typedef struct s_scene
 	t_press_key		press_key;
 	int			    fps;
 	int				second_actual;
-	float			last_fps;
+	long 			last_frame;
+	int 			last_fps;
 }	t_scene;
 
 typedef enum e_move

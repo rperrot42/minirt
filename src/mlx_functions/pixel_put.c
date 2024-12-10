@@ -49,21 +49,28 @@ int draw_window(t_scene *scene)
     int     x;
     int     y;
     t_line  line;
-    float fov = scene->cameras.fov * M_PI / 360;
+    double fov = scene->cameras.fov * M_PI / 360;
 	long actual_fps;
+	float avancment;
+	float min;
 
     y = 0;
 	actual_fps = ft_clock();
     line = (t_line){0};
-    line.vector.z = 1;
-	all_deplacement(scene, actual_fps - scene->last_fps);
+    line.vector.z = Z_NEAR;
+	avancment = tanf(fov) * Z_NEAR * 2 / LENGTH;
+	min =  -tanf(fov) * Z_NEAR;
+	all_deplacement(scene, actual_fps - scene->last_frame);
+	printf("%f\n", avancment);
     while (y < LENGTH)
     {
         x = 0;
-        line.vector.y = -tanf(((2.0 * y) -  LENGTH) / (LENGTH - 2) * fov);
+        line.vector.y = min + (LENGTH - y - 1) * avancment;
+
         while (x < LENGTH)
         {
-            line.vector.x = -tanf(((2.0 * x) -  LENGTH) / (LENGTH - 2) * fov);
+            line.vector.x =  min + x * avancment;
+			//printf("%f %f %f\n", line.vector.x, line.vector.y, line.vector.z);
 			my_mlx_pixel_put(&scene->img, x, y, color_to_int(draw_pixel(scene, &line)));
             x++;
         }
@@ -73,10 +80,12 @@ int draw_window(t_scene *scene)
 	if (scene->second_actual != actual_fps / 100)
 	{
 		scene->second_actual = ft_clock() / 100;
-		printf("fps: %d\n", scene->fps);
+		scene->last_fps = scene->fps;
 		scene->fps = 0;
 	}
+	printf("%f\n",line.vector.y);
 	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
-	scene->last_fps = actual_fps;
+	printf_fps(scene);
+	scene->last_frame = actual_fps;
 	return (0);
 }
