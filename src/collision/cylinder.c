@@ -6,13 +6,32 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:44:52 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/10 13:25:38 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:08:02 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collison.h"
 #include "angle.h"
 #include <math.h>
+
+static int	out_of_ends(t_line *line, t_cylinder *cylinder)
+{
+	t_point	c1;
+	t_point	c2;
+
+	c1.x = cylinder->position.x - cylinder->vector.x * (cylinder->height / 2);
+	c1.y = cylinder->position.y - cylinder->vector.y * (cylinder->height / 2);
+	c1.z = cylinder->position.z - cylinder->vector.z * (cylinder->height / 2);
+
+	c2.x = cylinder->position.x + cylinder->vector.x * (cylinder->height / 2);
+	c2.y = cylinder->position.y + cylinder->vector.y * (cylinder->height / 2);
+	c2.z = cylinder->position.z + cylinder->vector.z * (cylinder->height / 2);
+
+	if ((scalar_product(get_line_2point(&c1, &line->position).vector, cylinder->vector) > 0 && scalar_product(get_line_2point(&c2, &line->position).vector, cylinder->vector) < 0) || \
+		(scalar_product(get_line_2point(&c1, &line->position).vector, cylinder->vector) < 0 && scalar_product(get_line_2point(&c2, &line->position).vector, cylinder->vector) > 0))
+		return (0);
+	return (1);
+}
 
 t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder)
 {
@@ -42,7 +61,7 @@ t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder)
 	float	C = Ra0.x * Ra0.x + Ra0.y * Ra0.y + Ra0.z * Ra0.z - cylinder->radius * cylinder->radius;
 
 	float	b4ac = B * B - 4 * A * C;
-	if (b4ac < 0)
+	if (b4ac < 0 || out_of_ends(line, cylinder))
 	{
 		t_point p;
 		p.x = 0;
