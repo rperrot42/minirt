@@ -12,7 +12,7 @@ OS := $(shell uname)
 
 LIBFT_DIRECTORY = ./libft/
 
-FLAGS = -Wall -Werror -Wextra -o3
+FLAGS = -Wall -Werror -Wextra -g3
 
 DFLAGS = -MD -MP
 
@@ -44,6 +44,8 @@ SRC_ANGLE = 	create_line.c	\
 SRC_INIT =		init_mlx.c		\
 
 SRC_UTILS =		ft_clock.c			\
+				solve_second_degree.c	\
+				print_fps.c
 
 SRC_OBJECT =	move.c
 

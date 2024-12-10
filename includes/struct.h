@@ -138,7 +138,8 @@ typedef struct s_scene
 	t_press_key		press_key;
 	int			    fps;
 	int				second_actual;
-	float			last_fps;
+	long 			last_frame;
+	int 			last_fps;
 }	t_scene;
 
 typedef enum e_move
@@ -148,6 +149,12 @@ typedef enum e_move
 	FORWARD,
 	BACK
 }	t_move;
+
+typedef struct s_second_degree
+{
+	float	x1;
+	float	x2;
+}	t_second_degree;
 
 typedef enum e_coordinate
 {
