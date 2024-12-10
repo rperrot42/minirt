@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:01:14 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/06 15:31:05 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:21:44 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int add_cylinder(t_scene *scene, char *str)
         return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
+    unit_vector(&cylinder.vector);
     while (*str && *str == ' ')
         str++;
     if (*str)

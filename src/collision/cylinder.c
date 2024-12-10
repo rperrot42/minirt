@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:44:52 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/06 17:26:55 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:25:38 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,10 @@
 #include "angle.h"
 #include <math.h>
 
-void	unit_vector(t_point *v)
-{
-	float	n = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
-	v->x /= n;
-	v->y /= n;
-	v->z /= n;
-}
-
 t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder)
 {
 	t_point	Va;
 
-	unit_vector(&cylinder->vector);
 	Va.x = cylinder->vector.y * line->vector.z - cylinder->vector.z * line->vector.y;
 	Va.y = cylinder->vector.z * line->vector.x - cylinder->vector.x * line->vector.z;
 	Va.z = cylinder->vector.x * line->vector.y - cylinder->vector.y * line->vector.x;

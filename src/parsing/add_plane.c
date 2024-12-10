@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:01:40 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/24 22:02:24 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:22:56 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int add_plane(t_scene *scene, char *str)
         return (print_error(E_FILE_PARS));
     if (errno)
         return (print_error(strerror(errno)));
+    unit_vector(&plane.vector);
     while (*str && *str == ' ')
         str++;
     if (*str)

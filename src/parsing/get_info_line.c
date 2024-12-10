@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_info_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:14:11 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/15 21:14:20 by rperrot          ###   ########.fr       */
+/*   Updated: 2024/12/10 13:24:24 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,12 @@ t_point	get_vector(char **line)
 		return (errno = EINVAL, (t_point){0, 0, 0});
 	point.z = result;
 	return (point);
+}
+
+void	unit_vector(t_point *v)
+{
+	float	n = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+	v->x /= n;
+	v->y /= n;
+	v->z /= n;
 }
