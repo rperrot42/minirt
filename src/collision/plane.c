@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:35:25 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/28 16:10:08 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:42:13 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,5 @@ void    *get_closest_plan(t_line *line, t_scene *scene, t_line_color *l)
         l->color = obj->color;
         l->type = PLANE;
     }
-    // printf("r : %d\n", l->color.r);
-    // printf("g : %d\n", l->color.g);
-    // printf("b : %d\n", l->color.b);
-    // printf("Vx : %f\n", l->vector.x);
-    // printf("Vy : %f\n", l->vector.y);
-    // printf("Vz : %f\n", l->vector.z);
-    // printf("Px : %f\n", l->position.x);
-    // printf("Py : %f\n", l->position.y);
-    // printf("Pz : %f\n", l->position.z);
     return (obj);
 }

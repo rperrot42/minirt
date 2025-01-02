@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:58:10 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/05 17:09:57 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:25:04 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	*get_closest_obj(t_line *line, t_scene *scene, t_line_color *l)
 	
 	if (scene->nb_planes > 0)
 	{
-
 		plan = get_closest_plan(line, scene, l);
 	}
 	if (scene->nb_spheres > 0)
@@ -55,6 +54,7 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
 	//-------------------------OTHER OBJECT------------------------------//
 	t_line	lineLight = get_line_2point(&scene->lights[0].position, &l->position);
 	int i;
+	// int	t;
 
 	i = -1;
 	while (++i < scene->nb_planes)
@@ -76,30 +76,35 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
                 return (1);
         }
     }
-	i = -1;
-	while (++i < scene->nb_cylinders)
-    {
-        if (obj != scene->cylinders + i)
-        {
-            t_point p = intersection_cylinder_line(&lineLight, scene->cylinders + i);
-            if (p.z != INFINITY && point_between(lineLight.position, l->position, p))
-                return (1);
-        }
-    }
+	// i = -1;
+	// while (++i < scene->nb_cylinders)
+    // {
+    //     if (obj != scene->cylinders + i)
+    //     {
+    //         t_point p = intersection_cylinder_line(&lineLight, scene->cylinders + i, &t);
+    //         if (p.z != INFINITY && point_between(lineLight.position, l->position, p))
+    //             return (1);
+    //     }
+    // }
 	//-------------------------OTHER OBJECT------------------------------//
 
 	//-------------------------OBJECT HIMSELF------------------------------//
-	l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
 	if (l->position.z != INFINITY)
 	{
 		if (l->type == PLANE)
 		{
-			//l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
+			l->scalar_light_obj = scalar_product(lineLight.vector, l->vector);
 			float	scalar_cam_obj = scalar_product(line->vector, l->vector);
 			if ((l->scalar_light_obj < 0 && scalar_cam_obj > 0) || (l->scalar_light_obj > 0 && scalar_cam_obj < 0))
 				return (1);
 		}
-		if (l->type == SPHERE || l->type == CYLINDER)
+		if (l->type == SPHERE)
+		{
+			l->scalar_light_obj = scalar_product(get_line_2point(&l->position, &scene->lights[0].position).vector, l->vector);
+			if (l->scalar_light_obj < 0)
+				return (1);
+		}
+		if (l->type == CYLINDER)
 		{
 			l->scalar_light_obj = scalar_product(get_line_2point(&l->position, &scene->lights[0].position).vector, l->vector);
 			if (l->scalar_light_obj < 0)

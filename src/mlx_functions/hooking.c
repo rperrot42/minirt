@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:29:15 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/02 17:47:53 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:27:32 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ static void rotation_plane(t_scene *scene, float rotation, t_coordinate rotate)
 	int		i;
 
 	i = -1;
-	printf("rotatopn %f\n", rotation);
 	if (rotation > 0.1)
 		rotation = 0.1;
 	while (++i < scene->nb_planes)

@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:22:35 by rperrot           #+#    #+#             */
-/*   Updated: 2024/12/05 17:00:42 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/31 10:48:20 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_line_color{
 	float	scalar_light_obj;
 	float	norm;
 	t_obj	type;
+	int		is_cylinder_end;
 }	t_line_color;
 
 typedef struct s_camera

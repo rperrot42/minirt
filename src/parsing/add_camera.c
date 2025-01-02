@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:00:19 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/10 13:20:45 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:13:08 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int  add_camera(t_scene *scene, char *str)
         scene->cameras.vector = get_vector(&str);
     if (errno)
         return (print_error(strerror(errno)));
-    unit_vector(&scene->cameras.vector);
     while (*str && *str == ' ')
         str++;
     if (*str)

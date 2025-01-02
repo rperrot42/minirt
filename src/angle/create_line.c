@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 11:51:09 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/05 17:14:50 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:46:58 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,14 @@ int	point_between(t_point a, t_point b, t_point c)
 float	calc_norm(t_point v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+t_point	vectorial_product(t_point u, t_point v)
+{
+	t_point r;
+
+	r.x = u.y * v.z - u.z * v.y;
+	r.y = u.z * v.x - u.x * v.z;
+	r.z = u.x * v.y - u.y * v.x;
+	return (r);
 }
