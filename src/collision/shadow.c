@@ -54,7 +54,7 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
 	//-------------------------OTHER OBJECT------------------------------//
 	t_line	lineLight = get_line_2point(&scene->lights[0].position, &l->position);
 	int i;
-	// int	t;
+	int	t;
 
 	i = -1;
 	while (++i < scene->nb_planes)
@@ -76,16 +76,16 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
                 return (1);
         }
     }
-	// i = -1;
-	// while (++i < scene->nb_cylinders)
-    // {
-    //     if (obj != scene->cylinders + i)
-    //     {
-    //         t_point p = intersection_cylinder_line(&lineLight, scene->cylinders + i, &t);
-    //         if (p.z != INFINITY && point_between(lineLight.position, l->position, p))
-    //             return (1);
-    //     }
-    // }
+	i = -1;
+	while (++i < scene->nb_cylinders)
+    {
+        if (obj != scene->cylinders + i)
+        {
+            t_point p = intersection_cylinder_line(&lineLight, scene->cylinders + i, &t);
+            if (p.z != INFINITY && point_between(lineLight.position, l->position, p))
+                return (1);
+        }
+    }
 	//-------------------------OTHER OBJECT------------------------------//
 
 	//-------------------------OBJECT HIMSELF------------------------------//

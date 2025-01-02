@@ -154,15 +154,6 @@ t_cylinder    *get_closest_cylinder(t_line *line, t_scene *scene, t_line_color *
     while (++i < scene->nb_cylinders)
     {
         p_temp = intersection_cylinder_line(line, scene->cylinders + i, &cylinder_end);
-		// printf("%i yeee\n", cylinder_end);
-		// if (cylinder_end == 2)
-		// 	printf("yolo");
-		// if (p_temp.z != INFINITY)
-		// {
-		// 	printf("cylinder_end :%d\n", cylinder_end);
-		// 	printf("p_temp.z :%f\n", p_temp.z);
-		// 	printf("l.position.z :%f\n", l->position.z);
-		// }
         if (p_temp.z < l->position.z && p_temp.z > 0)
         {
             obj = scene->cylinders + i;
@@ -184,11 +175,14 @@ t_cylinder    *get_closest_cylinder(t_line *line, t_scene *scene, t_line_color *
 
 			float	d = sqrt((Vop.x * Vop.x + Vop.y * Vop.y + Vop.z * Vop.z) - obj->radius * obj->radius);
 
+			//  /!\\ ATTENTION ERREUR A CORRIGER /!\\ 
+			//CA DOIT ETRE +d pour la partie superieur et -d pour la partie inferieur du cylindre
 			t_point	c;
 			c.x = obj->position.x + d * obj->vector.x;
 			c.y = obj->position.y + d * obj->vector.y;
 			c.z = obj->position.z + d * obj->vector.z;
 			l->vector = get_line_2point(&c, &l->position).vector;
+			//  /!\\ ATTENTION ERREUR A CORRIGER /!\\ 
 		}
 		else if (l->is_cylinder_end == 1)
 			l->vector = obj->vector;
