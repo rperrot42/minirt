@@ -77,26 +77,6 @@ t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder, int *is_c
 	p.z = line->position.z + t2 * line->vector.z;
 //--------------------------CYLINDRE INFINI--------------------------------//
 
-//--------------------------CYLINDRE FINI----------------------------------//
-	t_line	end;
-
-	end.position.x = cylinder->position.x - cylinder->vector.x * (cylinder->height / 2);
-	end.position.y = cylinder->position.y - cylinder->vector.y * (cylinder->height / 2);
-	end.position.z = cylinder->position.z - cylinder->vector.z * (cylinder->height / 2);
-	end = get_line_2point(&end.position, &cylinder->position);
-	float	d = sqrt((end.vector.x * end.vector.x + end.vector.y * end.vector.y + end.vector.z * end.vector.z) + cylinder->radius * cylinder->radius);
-
-	t_line	Vci = get_line_2point(&p, &cylinder->position);
-	if (d < calc_norm(Vci.vector))
-	{
-		t_point p;
-		p.x = 0;
-		p.y = 0;
-		p.z = INFINITY;
-		return (p);
-	}
-//--------------------------CYLINDRE FINI----------------------------------//
-
 //--------------------------BOUT DU CYLINDRE-------------------------------//
 	t_plane	d1;
 	d1.vector = cylinder->vector;
@@ -115,8 +95,6 @@ t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder, int *is_c
 	d2.d = -(d2.p.x * d2.vector.x + d2.p.y * d2.vector.y + d2.p.z * d2.vector.z);
 
 	t_point	disk;
-	// printf("d1.p.z : %f\n", d1.p.z);
-	// printf("d2.p.z : %f\n\n", d2.p.z);
 	
 	if (d1.p.z < d2.p.z && d1.p.z > 0)
 	{
@@ -130,21 +108,35 @@ t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder, int *is_c
 	else if (d2.p.z < d1.p.z && d2.p.z > 0)
 	{
 		disk = intersection_plane_line(line, &d2);
-		if (disk.z != INFINITY)
-		{
-			printf("norm disk/intersection :%f\n", calc_norm(get_line_2point(&disk, &d2.p).vector));
-			printf("radius :%f\n", cylinder->radius);
-		}
 		if (disk.z != INFINITY && calc_norm(get_line_2point(&disk, &d2.p).vector) < cylinder->radius)
 		{
 			*is_cylinder_end = 2;
-			// printf("is_cylinder_end :%d\n", *is_cylinder_end);
-			// printf("disk.z :%p\n", is_cylinder_end);
 			return (disk);
 		}
 	}
+	//--------------------------BOUT DU CYLINDRE-------------------------------//
+
+	//--------------------------CYLINDRE FINI----------------------------------//
+	t_line	end;
+
+	end.position.x = cylinder->position.x - cylinder->vector.x * (cylinder->height / 2);
+	end.position.y = cylinder->position.y - cylinder->vector.y * (cylinder->height / 2);
+	end.position.z = cylinder->position.z - cylinder->vector.z * (cylinder->height / 2);
+	end = get_line_2point(&end.position, &cylinder->position);
+
+	float	d = sqrt((end.vector.x * end.vector.x + end.vector.y * end.vector.y + end.vector.z * end.vector.z) + cylinder->radius * cylinder->radius);
+	t_line	Vci = get_line_2point(&p, &cylinder->position);
+
+	if (d < calc_norm(Vci.vector))
+	{
+		t_point p;
+		p.x = 0;
+		p.y = 0;
+		p.z = INFINITY;
+		return (p);
+	}
+	//--------------------------CYLINDRE FINI----------------------------------//
 	*is_cylinder_end = 0;
-//--------------------------BOUT DU CYLINDRE-------------------------------//
 	return (p);
 }
 
@@ -182,8 +174,6 @@ t_cylinder    *get_closest_cylinder(t_line *line, t_scene *scene, t_line_color *
 	if (l->position.z != INFINITY && l->type == CYLINDER)
     {
         l->color = obj->color;
-		if (l->is_cylinder_end)
-			printf("cylinder_end :%d\n", l->is_cylinder_end);
 		if (l->is_cylinder_end == 0)
 		{
 			t_point	Vop;
