@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:14:11 by rperrot           #+#    #+#             */
-/*   Updated: 2024/12/10 13:24:24 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:15:14 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ t_point	get_vector(char **line)
 
 void	unit_vector(t_point *v)
 {
-	float	n = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+	float	n;
+
+	n = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
 	v->x /= n;
 	v->y /= n;
 	v->z /= n;

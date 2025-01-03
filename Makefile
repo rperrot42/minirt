@@ -37,6 +37,8 @@ SRC_COLLISION = plane.c			\
 				sphere.c		\
 				shadow.c		\
 				cylinder.c		\
+				cylinder_shadow.c	\
+				closest_cylinder.c	\
 
 SRC_ANGLE = 	create_line.c	\
 				scalar_product.c
@@ -45,7 +47,8 @@ SRC_INIT =		init_mlx.c		\
 
 SRC_UTILS =		ft_clock.c			\
 				solve_second_degree.c	\
-				print_fps.c
+				print_fps.c	\
+				parametric_equation.c	\
 
 SRC_OBJECT =	move.c
 
@@ -89,11 +92,6 @@ all:$(NAME)
 
 IFLAGS =	-Ilibft/includes			\
 			-I$(INCLUDE_DIR)			\
-			-I$(INCLUDE_DIR)/parsing	\
-			-I$(INCLUDE_DIR)/collision	\
-			-I$(INCLUDE_DIR)/angle		\
-			-I$(INCLUDE_DIR)/init		\
-			-I$(INCLUDE_DIR)/color		\
 
 ifeq ($(OS), Linux)
 	DIR_MLX = mlx_linux

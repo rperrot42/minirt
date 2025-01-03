@@ -16,7 +16,7 @@
 
 t_line	get_line_2point(t_point *a, t_point *b)
 {
-	t_line line;
+	t_line	line;
 
 	line.vector.x = b->x - a->x;
 	line.vector.y = b->y - a->y;
@@ -27,10 +27,13 @@ t_line	get_line_2point(t_point *a, t_point *b)
 
 int	point_between(t_point a, t_point b, t_point c)
 {
-	if (scalar_product(get_line_2point(&a, &b).vector, get_line_2point(&a, &c).vector) < 0)
+	if (scalar_product(get_line_2point(&a, &b).vector, \
+	get_line_2point(&a, &c).vector) < 0)
 		return (0);
-	if (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z)) < \
-		sqrt((c.x - a.x) * (c.x - a.x) + (c.y - a.y) * (c.y - a.y) + (c.z - a.z) * (c.z - a.z)))
+	if (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * \
+	(b.y - a.y) + (b.z - a.z) * (b.z - a.z)) < \
+		sqrt((c.x - a.x) * (c.x - a.x) + (c.y - a.y) * \
+		(c.y - a.y) + (c.z - a.z) * (c.z - a.z)))
 		return (0);
 	return (1);
 }
@@ -42,7 +45,7 @@ float	calc_norm(t_point v)
 
 t_point	vectorial_product(t_point u, t_point v)
 {
-	t_point r;
+	t_point	r;
 
 	r.x = u.y * v.z - u.z * v.y;
 	r.y = u.z * v.x - u.x * v.z;

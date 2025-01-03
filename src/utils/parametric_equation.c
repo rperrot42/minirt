@@ -1,17 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
+/*   parametric_equation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 11:16:40 by rperrot           #+#    #+#             */
-/*   Updated: 2025/01/03 09:46:39 by sabitbol         ###   ########.fr       */
+/*   Created: 2025/01/03 11:36:03 by sabitbol          #+#    #+#             */
+/*   Updated: 2025/01/03 11:40:32 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	mlx_destroy_display(void *ptr)
+#include "struct.h"
+
+t_point	parametric_equation(t_line l, float t)
 {
-	(void)ptr;
-	return (0);
+	t_point	p;
+
+	p.x = l.position.x + t * l.vector.x;
+	p.y = l.position.y + t * l.vector.y;
+	p.z = l.position.z + t * l.vector.z;
+	return (p);
 }

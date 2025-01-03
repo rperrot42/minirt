@@ -15,7 +15,9 @@
 
 float	scalar_product(t_point a, t_point b)
 {
-	return ((a.x * b.x + a.y * b.y + a.z * b.z) / (sqrt(a.x * a.x + a.y * a.y + a.z * a.z) * sqrt(b.x * b.x + b.y * b.y + b.z * b.z)));
+	return ((a.x * b.x + a.y * b.y + a.z * b.z) / \
+	(sqrt(a.x * a.x + a.y * a.y + a.z * a.z) * \
+	sqrt(b.x * b.x + b.y * b.y + b.z * b.z)));
 }
 
 //Scalar product with normalized vectors

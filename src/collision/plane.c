@@ -20,6 +20,7 @@ t_point intersection_plane_line(t_line *line, t_plane *plane)
 	float t;
 	t_point point;
 
+    unit_vector(&plane->vector);
 	t = -(plane->d + (plane->vector.x * line->position.x + plane->vector.y * line->position.y + plane->vector.z * line->position.z)) \
 	/ (plane->vector.x * line->vector.x + plane->vector.y * line->vector.y + plane->vector.z * line->vector.z);
 	if (fabs(t) < 1e-6)

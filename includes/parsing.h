@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 18:35:47 by rperrot           #+#    #+#             */
-/*   Updated: 2024/12/10 13:24:44 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:29:54 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ int		add_cylinder(t_scene *scene, char *str);
 t_bool	check_filename(char *str);
 int		ft_readline(int fd, t_scene *scene);
 int		add_elem(t_scene *scene, char *str, t_bool *camera, t_bool *ambient);
-void	unit_vector(t_point *v);
 
 #endif

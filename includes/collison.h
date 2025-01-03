@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:40:45 by rperrot           #+#    #+#             */
-/*   Updated: 2024/12/31 11:01:45 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:34:54 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ t_sphere    *get_closest_sphere(t_line *line, t_scene *scene, t_line_color *l);
 t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line);
 t_cylinder    *get_closest_cylinder(t_line *line, t_scene *scene, t_line_color *l);
 t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder, int *is_cylinder_end);
+t_point	intersection_cylinder_line_shadow(t_line *line, t_cylinder *cyl);
 
 #endif //MINIRT_COLLISON_H

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   cylinder_shadow.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:35:00 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/03 17:37:50 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:30:19 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,35 @@
 #include <math.h>
 #include "utils.h"
 
-static void	set_second_plane(t_plane *d, float z2, \
-int *cylinder_end, t_cylinder *cylinder);
-
-static t_point	get_closest_disk(t_line *line, t_cylinder *cylinder, int *cylinder_end)
+static t_point	get_disk(t_line *line, t_cylinder *cylinder)
 {
 	t_plane	d;
 	t_point	disk;
-	float	z1;
-	float	z2;
 
-	z1 = cylinder->position.z + cylinder->vector.z * (cylinder->height / 2);
-	z2 = cylinder->position.z - cylinder->vector.z * (cylinder->height / 2);
-	if (z1 < z2 && z1 > 0)
-	{
-		d.vector = cylinder->vector;
-		d.p.z = z1;
-		*cylinder_end = 1;
-	}
-	else if (z2 < z1 && z2 > 0)
-		set_second_plane(&d, z2, cylinder_end, cylinder);
-	else
-		return (disk.z = INFINITY, disk);
+	d.vector = cylinder->vector;
 	d.p.x = cylinder->position.x + d.vector.x * (cylinder->height / 2);
 	d.p.y = cylinder->position.y + d.vector.y * (cylinder->height / 2);
+	d.p.z = cylinder->position.z + d.vector.z * (cylinder->height / 2);
 	d.d = -(d.p.x * d.vector.x + d.p.y * d.vector.y + d.p.z * d.vector.z);
 	disk = intersection_plane_line(line, &d);
-	if (disk.z != INFINITY && calc_norm(get_line_2point(&disk, &d.p).vector) < \
+	if (disk.z != INFINITY && calc_norm(get_line_2point(&disk, &d.p).vector) <= \
+	cylinder->radius)
+		return (disk);
+	d.vector.x = -cylinder->vector.x;
+	d.vector.y = -cylinder->vector.y;
+	d.vector.z = -cylinder->vector.z;
+	d.p.x = cylinder->position.x + d.vector.x * (cylinder->height / 2);
+	d.p.y = cylinder->position.y + d.vector.y * (cylinder->height / 2);
+	d.p.z = cylinder->position.z + d.vector.z * (cylinder->height / 2);
+	d.d = -(d.p.x * d.vector.x + d.p.y * d.vector.y + d.p.z * d.vector.z);
+	disk = intersection_plane_line(line, &d);
+	if (disk.z != INFINITY && calc_norm(get_line_2point(&disk, &d.p).vector) <= \
 	cylinder->radius)
 		return (disk);
 	return (disk.z = INFINITY, disk);
 }
 
-static void	set_second_plane(t_plane *d, float z2, \
-int *cylinder_end, t_cylinder *cylinder)
-{
-	d->vector.x = -cylinder->vector.x;
-	d->vector.y = -cylinder->vector.y;
-	d->vector.z = -cylinder->vector.z;
-	d->p.z = z2;
-	*cylinder_end = 2;
-}
-
-t_point	intersection_cylinder_line(t_line *line, t_cylinder *cyl, \
-int *cylinder_end)
+t_point	intersection_cylinder_line_shadow(t_line *line, t_cylinder *cyl)
 {
 	t_point	p;
 	t_point	va;
@@ -73,7 +58,7 @@ int *cylinder_end)
 	p = parametric_equation(*line, second_degree_equation(va.x * va.x + va.y * \
 	va.y + va.z * va.z, 2 * (ra0.x * va.x + ra0.y * va.y + ra0.z * va.z), ra0.x \
 	* ra0.x + ra0.y * ra0.y + ra0.z * ra0.z - cyl->radius * cyl->radius));
-	disk = get_closest_disk(line, cyl, cylinder_end);
+	disk = get_disk(line, cyl);
 	if (disk.z != INFINITY)
 		return (disk);
 	end.position.x = cyl->position.x - cyl->vector.x * (cyl->height / 2);
@@ -81,8 +66,8 @@ int *cylinder_end)
 	end.position.z = cyl->position.z - cyl->vector.z * (cyl->height / 2);
 	end = get_line_2point(&end.position, &cyl->position);
 	if (sqrt((end.vector.x * end.vector.x + end.vector.y * end.vector.y + \
-	end.vector.z * end.vector.z) + cyl->radius * cyl->radius) < \
+	end.vector.z * end.vector.z) + cyl->radius * cyl->radius) <= \
 	calc_norm(get_line_2point(&p, &cyl->position).vector))
 		return (p.z = INFINITY, p);
-	return (*cylinder_end = 0, p);
+	return (p);
 }

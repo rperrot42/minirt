@@ -39,6 +39,13 @@ void	move_plane(t_scene *scene, int x, int y, int z)
 		scene->spheres[i].position.y -= y;
 		scene->spheres[i].position.z -= z;
 	}
+	i = -1;
+	while (++i < scene->nb_cylinders)
+	{
+		scene->cylinders[i].position.x -= x;
+		scene->cylinders[i].position.y -= y;
+		scene->cylinders[i].position.z -= z;
+	}
 }
 
 static void translation(t_move move, t_scene *scene, int deplacement)

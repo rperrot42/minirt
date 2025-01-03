@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:58:10 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/02 15:25:04 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:32:52 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
 	//-------------------------OTHER OBJECT------------------------------//
 	t_line	lineLight = get_line_2point(&scene->lights[0].position, &l->position);
 	int i;
-	int	t;
 
 	i = -1;
 	while (++i < scene->nb_planes)
@@ -81,7 +80,7 @@ int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *li
     {
         if (obj != scene->cylinders + i)
         {
-            t_point p = intersection_cylinder_line(&lineLight, scene->cylinders + i, &t);
+            t_point p = intersection_cylinder_line_shadow(&lineLight, scene->cylinders + i);
             if (p.z != INFINITY && point_between(lineLight.position, l->position, p))
                 return (1);
         }
