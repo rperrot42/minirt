@@ -6,11 +6,12 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:16:23 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/28 22:18:56 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:36:01 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct.h"
+#include "collison.h"
 
 int	create_trgb(int t, int r, int g, int b)
 {
@@ -62,4 +63,11 @@ t_color	get_ambiant_color(t_color obj, t_scene *scene)
 int	color_to_int(t_color color)
 {
 	return (create_trgb(0, color.r, color.g, color.b));
+}
+
+t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line)
+{
+	if (intersection_obj_line(scene, obj, l, line))
+		return (get_ambiant_color(l->color, scene));
+	return (get_multiple_color(l->color, scene, fabs(l->scalar_light_obj)));
 }

@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:35:00 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/03 17:37:50 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/06 14:23:04 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 static void	set_second_plane(t_plane *d, float z2, \
 int *cylinder_end, t_cylinder *cylinder);
 
-static t_point	get_closest_disk(t_line *line, t_cylinder *cylinder, int *cylinder_end)
+static t_point	get_closest_disk(t_line *line, t_cylinder *cylinder, \
+int *cylinder_end)
 {
 	t_plane	d;
 	t_point	disk;

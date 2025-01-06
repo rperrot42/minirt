@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:58:10 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/03 18:32:52 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:31:58 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,11 @@ void	*get_closest_obj(t_line *line, t_scene *scene, t_line_color *l)
 	void	*cylinder;
 	
 	if (scene->nb_planes > 0)
-	{
 		plan = get_closest_plan(line, scene, l);
-	}
 	if (scene->nb_spheres > 0)
-	{
 		sphere = get_closest_sphere(line, scene, l);
-	}
 	if (scene->nb_cylinders > 0)
-	{
 		cylinder = get_closest_cylinder(line, scene, l);
-	}
 	if (l->type == PLANE)
 		return (plan);
 	if (l->type == SPHERE)
@@ -40,13 +34,6 @@ void	*get_closest_obj(t_line *line, t_scene *scene, t_line_color *l)
 	if (l->type == CYLINDER)
 		return (cylinder);
 	return (NULL);
-}
-
-t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line)
-{
-	if (intersection_obj_line(scene, obj, l, line))
-		return (get_ambiant_color(l->color, scene));
-	return (get_multiple_color(l->color, scene, fabs(l->scalar_light_obj)));
 }
 
 int	intersection_obj_line(t_scene *scene, void *obj, t_line_color *l, t_line *line)
