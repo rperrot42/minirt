@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:37:07 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/03 15:31:08 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:10:19 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ static void	rotation_plane(t_scene *scene, float rotation, t_coordinate rotate)
 			scene->planes[i].p.x = cosf(rotation) * scene->planes[i].p.x + sinf(rotation) * scene->planes[i].p .z;
 			scene->planes[i].p.z = -sinf(rotation) * scene->planes[i].p.x + cosf(rotation) * scene->planes[i].p.z;
 		}
-		scene->planes[i].d = (scene->planes[i].vector.x * scene->planes[i].p.x + scene->planes[i].vector.y * scene->planes[i].p.y +
+		scene->planes[i].d = (scene->planes[i].vector.x * scene->planes[i].p.x + scene->planes[i].vector.y * scene->planes[i].p.y + \
 				scene->planes[i].vector.z * scene->planes[i].p.z) * -1;
 	}
 }

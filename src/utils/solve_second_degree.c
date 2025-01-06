@@ -6,17 +6,17 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:30:53 by rperrot           #+#    #+#             */
-/*   Updated: 2025/01/06 13:07:56 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:07:42 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "struct.h"
 
-t_second_degree solve_second_degre(float a, float b, float c)
+t_second_degree	solve_second_degre(float a, float b, float c)
 {
 	float			delta;
-	t_second_degree result;
+	t_second_degree	result;
 
 	delta = b * b - 4 * a * c;
 	if (delta < 0)
@@ -35,7 +35,7 @@ t_second_degree solve_second_degre(float a, float b, float c)
 float	second_degree_equation(float a, float b, float c)
 {
 	float			delta;
-	t_second_degree result;
+	t_second_degree	result;
 
 	delta = b * b - 4 * a * c;
 	if (delta < 0)

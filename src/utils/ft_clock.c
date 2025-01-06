@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clock.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:38:55 by rperrot           #+#    #+#             */
-/*   Updated: 2024/11/29 15:38:55 by rperrot          ###   ########.fr       */
+/*   Updated: 2025/01/06 17:08:53 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long	ft_atoif_toint(char *string);
 
-long	ft_clock()
+long	ft_clock(void)
 {
 	char	time[100];
 	int		fd;
@@ -28,13 +28,13 @@ long	ft_clock()
 		return (-1);
 	}
 	close(fd);
-	return ft_atoif_toint(time);
+	return (ft_atoif_toint(time));
 }
 
-long ft_atoif_toint(char *string)
+long	ft_atoif_toint(char *string)
 {
-	int i;
-	int res;
+	int	i;
+	int	res;
 
 	i = 0;
 	res = 0;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 11:42:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/12/31 11:04:13 by sabitbol         ###   ########.fr       */
+/*   Created: 2025/01/06 16:59:25 by sabitbol          #+#    #+#             */
+/*   Updated: 2025/01/06 17:01:15 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,53 +27,53 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-t_color    draw_pixel(t_scene *scene, t_line *line)
+t_color	draw_pixel(t_scene *scene, t_line *line)
 {
-    t_line_color    l = (t_line_color){0};
-    void    *obj;
-    
-    l.position.z = INFINITY;
-    if (line->vector.z == 0)
+	t_line_color	l;
+	t_color			c;
+	void			*obj;
+	
+	l = (t_line_color){0};
+	c = (t_color){0};
+	l.position.z = INFINITY;
+	if (line->vector.z == 0)
 		line->vector.z = 1e-4;
-    obj = get_closest_obj(line, scene, &l);
+	obj = get_closest_obj(line, scene, &l);
 	if (l.position.z == INFINITY)
-    {
-        t_color c = {0};
 		return (c);
-    }
-    return (get_color_obj(scene, obj, &l, line));
+	return (get_color_obj(scene, obj, &l, line));
 }
 
 int draw_window(t_scene *scene)
 {
-    int     x;
-    int     y;
-    t_line  line;
-    double fov = scene->cameras.fov * M_PI / 360;
+	int	 x;
+	int	 y;
+	t_line  line;
+	double fov = scene->cameras.fov * M_PI / 360;
 	long actual_fps;
 	float avancment;
 	float min;
 
-    y = 0;
+	y = 0;
 	actual_fps = ft_clock();
-    line = (t_line){0};
-    line.vector.z = Z_NEAR;
+	line = (t_line){0};
+	line.vector.z = Z_NEAR;
 	avancment = tanf(fov) * Z_NEAR * 2 / LENGTH;
 	min =  -tanf(fov) * Z_NEAR;
 	all_deplacement(scene, actual_fps - scene->last_frame);
-    while (y < LENGTH)
-    {
-        x = 0;
-        line.vector.y = min + (LENGTH - y - 1) * avancment;
+	while (y < LENGTH)
+	{
+		x = 0;
+		line.vector.y = min + (LENGTH - y - 1) * avancment;
 
-        while (x < LENGTH)
-        {
-            line.vector.x =  min + x * avancment;
+		while (x < LENGTH)
+		{
+			line.vector.x =  min + x * avancment;
 			my_mlx_pixel_put(&scene->img, x, y, color_to_int(draw_pixel(scene, &line)));
-            x++;
-        }
-        y++;
-    }
+			x++;
+		}
+		y++;
+	}
 	scene->fps++;
 	if (scene->second_actual != actual_fps / 100)
 	{

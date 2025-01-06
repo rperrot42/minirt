@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_fps.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:48:53 by rperrot           #+#    #+#             */
-/*   Updated: 2024/12/04 12:48:53 by rperrot          ###   ########.fr       */
+/*   Updated: 2025/01/06 17:07:50 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_itoa_simple(int n, char *s);
 void	printf_fps(t_scene *scene)
 {
 	char	fps_str[20];
-	int 	len_str_fps;
+	int		len_str_fps;
 
 	ft_itoa_simple(scene->last_fps, fps_str);
 	len_str_fps = ft_strlen(fps_str);

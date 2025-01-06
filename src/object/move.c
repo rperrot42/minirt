@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 20:05:20 by rperrot           #+#    #+#             */
-/*   Updated: 2024/12/02 15:58:49 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:09:26 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	move_plane(t_scene *scene, int x, int y, int z)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < scene->nb_planes)
@@ -48,17 +48,19 @@ void	move_plane(t_scene *scene, int x, int y, int z)
 	}
 }
 
-static void translation(t_move move, t_scene *scene, int deplacement)
+static void	translation(t_move move, t_scene *scene, int deplacement)
 {
 	if (move == LEFT || move == BACK)
 		deplacement = -deplacement;
 	if (move == LEFT || move == RIGHT)
-		move_plane(scene, deplacement * cosf(scene->cameras.vector.x), 0, deplacement * sinf(scene->cameras.vector.x));
+		move_plane(scene, deplacement * cosf(scene->cameras.vector.x), \
+	0, deplacement * sinf(scene->cameras.vector.x));
 	else
-		move_plane(scene, deplacement * sinf(scene->cameras.vector.x), 0, deplacement * cosf(scene->cameras.vector.x));
+		move_plane(scene, deplacement * sinf(scene->cameras.vector.x), \
+	0, deplacement * cosf(scene->cameras.vector.x));
 }
 
-int all_deplacement(t_scene *scene, int deplacement)
+int	all_deplacement(t_scene *scene, int deplacement)
 {
 	if (scene->press_key.w_press == true)
 		translation(FORWARD, scene, deplacement);
@@ -69,8 +71,8 @@ int all_deplacement(t_scene *scene, int deplacement)
 	if (scene->press_key.d_press == true)
 		translation(RIGHT, scene, deplacement);
 	if (scene->press_key.sp_press == true)
-		move_plane(scene, 0, deplacement, 0                                                                                                                                         );
+		move_plane(scene, 0, deplacement, 0);
 	if (scene->press_key.tab_press == true)
-		move_plane(scene, 0,-deplacement, 0);
+		move_plane(scene, 0, -deplacement, 0);
 	return (0);
 }
