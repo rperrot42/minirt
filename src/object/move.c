@@ -6,12 +6,19 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 20:05:20 by rperrot           #+#    #+#             */
-/*   Updated: 2025/01/06 17:09:26 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/07 13:18:40 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <printf.h>
 #include "move.h"
+
+static void	move_point(t_point *p, int x, int y, int z)
+{
+	p->x -= x;
+	p->y -= y;
+	p->z -= z;
+}
 
 void	move_plane(t_scene *scene, int x, int y, int z)
 {
@@ -20,32 +27,19 @@ void	move_plane(t_scene *scene, int x, int y, int z)
 	i = -1;
 	while (++i < scene->nb_planes)
 	{
-		scene->planes[i].p.x -= x;
-		scene->planes[i].p.y -= y;
-		scene->planes[i].p.z -= z;
-		scene->planes[i].d += x * scene->planes[i].vector.x + y * scene->planes[i].vector.y + z * scene->planes[i].vector.z;
+		move_point(&scene->planes[i].p, x, y, z);
+		scene->planes[i].d += x * scene->planes[i].vector.x + \
+		y * scene->planes[i].vector.y + z * scene->planes[i].vector.z;
 	}
 	i = -1;
 	while (++i < scene->nb_lights)
-	{
-		scene->lights[i].position.x -= x;
-		scene->lights[i].position.y -= y;
-		scene->lights[i].position.z -= z;
-	}
+		move_point(&scene->lights[i].position, x, y, z);
 	i = -1;
 	while (++i < scene->nb_spheres)
-	{
-		scene->spheres[i].position.x -= x;
-		scene->spheres[i].position.y -= y;
-		scene->spheres[i].position.z -= z;
-	}
+		move_point(&scene->spheres[i].position, x, y, z);
 	i = -1;
 	while (++i < scene->nb_cylinders)
-	{
-		scene->cylinders[i].position.x -= x;
-		scene->cylinders[i].position.y -= y;
-		scene->cylinders[i].position.z -= z;
-	}
+		move_point(&scene->cylinders[i].position, x, y, z);
 }
 
 static void	translation(t_move move, t_scene *scene, int deplacement)
