@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:31:09 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/11/02 16:12:53 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:13:16 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 # define E_CAM_NB			"Wrong number of cameras\n"
 # define E_AMB_NB			"Wrong number of ambient lights\n"
+# define E_LIG_NB		 	"Wrong number of lights\n"
 # define E_NB_ARGS		 	"Wrong number of arguments\n"
 # define E_NOT_CAMERAS		 "No cameras\n"
 # define E_NOT_AMBIENT		 "No ambient light\n"

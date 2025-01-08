@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:50:07 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/03 10:08:27 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:20:50 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	add_light(t_scene *scene, char *str)
 {
 	t_light	light;
 
+	if (scene->nb_lights)
+		return (print_error(E_LIG_NB));
 	while (*str && *str == ' ')
 		str++;
 	if (*str)

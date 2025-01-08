@@ -12,7 +12,7 @@ OS := $(shell uname)
 
 LIBFT_DIRECTORY = ./libft/
 
-FLAGS = -Wall -Werror -Wextra -g3
+FLAGS = -Wall -Werror -Wextra -O3 
 
 DFLAGS = -MD -MP
 
@@ -33,21 +33,21 @@ SRC_PARSING =	check_file.c	\
 				add_plane.c		\
 				add_sphere.c	\
 
-SRC_COLLISION = plane.c			\
-				sphere.c		\
-				shadow.c		\
-				cylinder.c		\
+SRC_COLLISION = plane.c				\
+				sphere.c			\
+				shadow.c			\
+				cylinder.c			\
 				cylinder_shadow.c	\
 				closest_cylinder.c	\
 
-SRC_ANGLE = 	create_line.c	\
-				scalar_product.c
+SRC_ANGLE = 	create_line.c		\
+				scalar_product.c	\
 
 SRC_INIT =		init_mlx.c		\
 
-SRC_UTILS =		ft_clock.c			\
+SRC_UTILS =		ft_clock.c				\
 				solve_second_degree.c	\
-				print_fps.c	\
+				print_fps.c				\
 				parametric_equation.c	\
 
 SRC_OBJECT =	move.c
