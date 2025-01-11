@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 14:57:36 by rperrot           #+#    #+#             */
-/*   Updated: 2024/10/16 20:59:02 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:14:25 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	rotate_camera(t_scene *scene);
 
-static int	error_camera_ambient(t_bool camera, t_bool ambient);
+static int	error_camera_ambient(t_bool camera, t_bool ambient, t_scene *scene);
 
 int	ft_readline(int fd, t_scene *scene)
 {
@@ -35,21 +35,21 @@ int	ft_readline(int fd, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (camera == false || ambient == false)
-		error_camera_ambient(camera, ambient);
-	if (scene->nb_lights == 0)
-		return (print_error(E_NOT_LIGHTS));
 	rotate_camera(scene);
+	if (camera == false || ambient == false || scene->lights == false)
+		return (error_camera_ambient(camera, ambient, scene));
 	return (0);
 }
 
-static int	error_camera_ambient(t_bool camera, t_bool ambient)
+static int	error_camera_ambient(t_bool camera, t_bool ambient, t_scene *scene)
 {
 	errno = 1;
 	if (camera == false)
 		ft_dprintf(STDERR_FILENO, "Error: %s", E_NOT_CAMERAS);
 	if (ambient == false)
 		ft_dprintf(STDERR_FILENO, "Error: %s", E_NOT_AMBIENT);
+	if (scene->lights == false)
+		ft_dprintf(STDERR_FILENO, "Error: %s", E_NOT_LIGHTS);
 	return (1);
 }
 

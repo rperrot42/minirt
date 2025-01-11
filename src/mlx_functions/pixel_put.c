@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:25 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/07 13:12:58 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:05:11 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "mlx.h"
 #include "move.h"
 #include "utils.h"
+#include "angle.h"
 
 static void	calculus_fps(t_scene *scene, long actual_fps);
 
