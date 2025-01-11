@@ -14,11 +14,11 @@
 # define ANGLE_H
 # include "struct.h"
 
-float 	get_angle_plan(t_line l, t_plane *plan, float dot_product);
+float	get_angle_plan(t_line l, t_plane *plan, float dot_product);
 float	scalar_product(t_point a, t_point b);
 t_point	normalize_vector(t_point vector);
 t_line	get_line_2point(t_point *a, t_point *b);
-int	point_between(t_point a, t_point b, t_point c);
+int		point_between(t_point a, t_point b, t_point c);
 float	calc_norm(t_point v);
 t_point	vectorial_product(t_point u, t_point v);
 void	unit_vector(t_point *v);

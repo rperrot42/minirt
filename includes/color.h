@@ -12,12 +12,12 @@
 
 #ifndef COLOR_H
 # define COLOR_H
-#include "struct.h"
-#include "collison.h"
+# include "struct.h"
+# include "collison.h"
 
-int	create_trgb(int t, int r, int g, int b);
+int		create_trgb(int t, int r, int g, int b);
 t_color	get_multiple_color(t_color obj, t_scene *scene, float scalar_product);
-int color_to_int(t_color color);
+int		color_to_int(t_color color);
 t_color	get_ambiant_color(t_color obj, t_scene *scene);
 t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line);
 #endif

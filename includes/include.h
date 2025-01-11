@@ -22,7 +22,6 @@
 # include <math.h>
 #
 # include <string.h>
-#endif
 
 # ifdef __APPLE__
 #  define KEY_A 0
@@ -93,3 +92,4 @@
 # endif
 # define Z_NEAR 10
 # define LEFT_CLICK 1
+#endif

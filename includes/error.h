@@ -35,6 +35,6 @@
 # define E_NOT_LIGHTS		 "No lights\n"
 
 int		print_error(char *error);
-int     free_scene(t_scene *scene);
+int		free_scene(t_scene *scene);
 
 #endif

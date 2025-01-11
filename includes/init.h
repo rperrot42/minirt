@@ -13,10 +13,11 @@
 #ifndef INIT_H
 # define INIT_H
 
-int init_window(t_scene *scene);
+int		init_window(t_scene *scene);
 void	hooking(t_scene *scene);
 
-#  ifdef __APPLE__
-	int mlx_destroy_display(void *ptr);
+# ifdef __APPLE__
+
+int		mlx_destroy_display(void *ptr);
 # endif
 #endif

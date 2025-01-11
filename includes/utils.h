@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef UTILS_H
-#define UTILS_H
+# define UTILS_H
 
-long	ft_clock();
-void 	printf_fps(t_scene *scene);
+long	ft_clock(void);
+void	printf_fps(t_scene *scene);
 float	second_degree_equation(float a, float b, float c);
 t_point	parametric_equation(t_line l, float t);
 void	unit_vector(t_point *v);

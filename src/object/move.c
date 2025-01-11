@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <printf.h>
 #include "move.h"
 
 static void	move_point(t_point *p, int x, int y, int z)

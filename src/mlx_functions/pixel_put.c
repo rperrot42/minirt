@@ -19,6 +19,8 @@
 #include "move.h"
 #include "utils.h"
 
+static void	calculus_fps(t_scene *scene, long actual_fps);
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -44,35 +46,47 @@ t_color	draw_pixel(t_scene *scene, t_line *line)
 	return (get_color_obj(scene, obj, &l, line));
 }
 
+void	init_line_avancement_y(t_line *line, t_scene *scene, \
+float *avancement, int *y)
+{
+	*line = (t_line){0};
+	line->position = scene->cameras.position;
+	line->vector.z = Z_NEAR;
+	*avancement = tanf(scene->cameras.fov * M_PI / 360) * Z_NEAR * 2 / LENGTH;
+	*y = -1;
+}
+
 int	draw_window(t_scene *scene)
 {
 	int		x;
 	int		y;
 	t_line	line;
-	double	fov = scene->cameras.fov * M_PI / 360;
 	long	actual_fps;
-	float	avancment;
-	float	min;
+	float	avancement;
 
-	y = 0;
 	actual_fps = ft_clock();
-	line = (t_line){0};
-	line.vector.z = Z_NEAR;
-	avancment = tanf(fov) * Z_NEAR * 2 / LENGTH;
-	min = -tanf(fov) * Z_NEAR;
+	init_line_avancement_y(&line, scene, &avancement, &y);
 	all_deplacement(scene, actual_fps - scene->last_frame);
-	while (y < LENGTH)
+	while (++y < LENGTH)
 	{
-		x = 0;
-		line.vector.y = min + (LENGTH - y - 1) * avancment;
-		while (x < LENGTH)
+		x = -1;
+		line.vector.y = -tanf(scene->cameras.fov * M_PI / 360) * Z_NEAR + \
+		(LENGTH - y - 1) * avancement;
+		while (++x < LENGTH)
 		{
-			line.vector.x =  min + x * avancment;
-			my_mlx_pixel_put(&scene->img, x, y, color_to_int(draw_pixel(scene, &line)));
-			x++;
+			line.vector.x = -tanf(scene->cameras.fov * M_PI / 360) * \
+Z_NEAR + x * avancement;
+			my_mlx_pixel_put(&scene->img, x, y, \
+			color_to_int(draw_pixel(scene, &line)));
 		}
-		y++;
 	}
+	calculus_fps(scene, actual_fps);
+	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
+	return (0);
+}
+
+static void	calculus_fps(t_scene *scene, long actual_fps)
+{
 	scene->fps++;
 	if (scene->second_actual != actual_fps / 100)
 	{
@@ -80,8 +94,6 @@ int	draw_window(t_scene *scene)
 		scene->last_fps = scene->fps;
 		scene->fps = 0;
 	}
-	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
 	printf_fps(scene);
 	scene->last_frame = actual_fps;
-	return (0);
 }

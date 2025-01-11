@@ -16,6 +16,6 @@
 # include "struct.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int draw_window(t_scene *scene);
+int		draw_window(t_scene *scene);
 
 #endif

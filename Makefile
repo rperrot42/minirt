@@ -50,7 +50,8 @@ SRC_UTILS =		ft_clock.c			\
 				print_fps.c	\
 				parametric_equation.c	\
 
-SRC_OBJECT =	move.c
+SRC_OBJECT =	move.c \
+				rotation.c
 
 ifeq ($(OS), Darwin)
 	SRC_INIT += mlx_destroy_display.c
@@ -60,6 +61,7 @@ SRC_COLOR =		color.c			\
 
 SRC_MLX =		pixel_put.c		\
 				hooking.c		\
+				key_press.c
 
 SRC =	$(addprefix parsing/, $(SRC_PARSING))		\
 		$(addprefix error/, $(SRC_ERROR))			\

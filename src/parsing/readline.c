@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "angle.h"
+#include "move.h"
+
+static void	rotate_camera(t_scene *scene);
 
 static int	error_camera_ambient(t_bool camera, t_bool ambient);
 
@@ -35,6 +39,7 @@ int	ft_readline(int fd, t_scene *scene)
 		error_camera_ambient(camera, ambient);
 	if (scene->nb_lights == 0)
 		return (print_error(E_NOT_LIGHTS));
+	rotate_camera(scene);
 	return (0);
 }
 
@@ -46,4 +51,23 @@ static int	error_camera_ambient(t_bool camera, t_bool ambient)
 	if (ambient == false)
 		ft_dprintf(STDERR_FILENO, "Error: %s", E_NOT_AMBIENT);
 	return (1);
+}
+
+static void	rotate_camera(t_scene *scene)
+{
+	t_point	camera_vector;
+	double	rotation_x;
+	double	rotation_y;
+	int		i;
+
+	camera_vector = scene->cameras.vector;
+	rotation_y = atan2(camera_vector.x, camera_vector.z);
+	rotation_x = -asin(camera_vector.y / calc_norm(camera_vector));
+	i = -1;
+	while (++i < 100)
+	{
+		rotation_obj(scene, -rotation_x / 100, X);
+		rotation_obj(scene, -rotation_y / 100, Y);
+	}
+	scene->cameras.vector = (t_point){0};
 }

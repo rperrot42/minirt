@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	errno = 0;
 	scene = (t_scene){0};
 	if (argc != 2)
-		return print_error(E_NB_ARGS);
+		return (print_error(E_NB_ARGS));
 	fd = check_file(argv[1]);
 	if (fd == -1)
 		return (1);
@@ -42,7 +42,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	free_scene(&scene);
-
 	return (0);
 }
 

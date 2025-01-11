@@ -13,13 +13,13 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include "libft.h"
+# include "libft.h"
 
 typedef struct s_point
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_point;
 
 typedef struct s_color
@@ -40,20 +40,21 @@ typedef struct s_sphere
 {
 	t_point	position;
 	t_color	color;
-	float	radius;
+	double	radius;
 }	t_sphere;
 
-typedef struct s_line{
+typedef struct s_line
+{
 	t_point	position;
 	t_point	vector;
 }	t_line;
 
-typedef struct s_line_color{
+typedef struct s_line_color
+{
 	t_point	position;
 	t_point	vector;
 	t_color	color;
-	float	scalar_light_obj;
-	float	norm;
+	double	scalar_light_obj;
 	t_obj	type;
 	int		cylinder_end;
 }	t_line_color;
@@ -62,28 +63,28 @@ typedef struct s_camera
 {
 	t_point	position;
 	t_point	vector;
-	float	fov;
+	double	fov;
 }	t_camera;
 
 typedef struct s_light
 {
 	t_point	position;
 	t_color	color;
-	float	intensity;
+	double	intensity;
 }	t_light;
 
 typedef struct s_cylinder
 {
 	t_point	position;
 	t_point	vector;
-	float	radius;
-	float	height;
+	double	radius;
+	double	height;
 	t_color	color;
 }	t_cylinder;
 
 typedef struct s_plane
 {
-	float	d;
+	double	d;
 	t_point	vector;
 	t_point	p;
 	t_color	color;
@@ -92,10 +93,11 @@ typedef struct s_plane
 typedef struct s_ambient
 {
 	t_color	color;
-	float	intensity;
+	double	intensity;
 }	t_ambient;
 
-typedef struct	s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -137,10 +139,10 @@ typedef struct s_scene
 	t_data			img;
 	t_move_mouse	move_mouse;
 	t_press_key		press_key;
-	int			    fps;
+	int				fps;
 	int				second_actual;
-	long 			last_frame;
-	int 			last_fps;
+	long			last_frame;
+	int				last_fps;
 }	t_scene;
 
 typedef enum e_move
@@ -153,8 +155,8 @@ typedef enum e_move
 
 typedef struct s_second_degree
 {
-	float	x1;
-	float	x2;
+	double	x1;
+	double	x2;
 }	t_second_degree;
 
 typedef enum e_coordinate
