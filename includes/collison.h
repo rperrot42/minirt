@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:40:45 by rperrot           #+#    #+#             */
-/*   Updated: 2025/01/06 15:35:38 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:01:27 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line);
 t_cylinder    *get_closest_cylinder(t_line *line, t_scene *scene, t_line_color *l);
 t_point	intersection_cylinder_line(t_line *line, t_cylinder *cylinder, int *is_cylinder_end);
 t_point	intersection_cylinder_line_shadow(t_line *line, t_cylinder *cylinder);
+int	camera_in_obj(t_scene *scene);
+int	camera_in_sphere(t_scene *scene, t_sphere *sphere);
 
 #endif

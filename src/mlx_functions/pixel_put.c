@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:25 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/07 13:12:58 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:05:11 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "mlx.h"
 #include "move.h"
 #include "utils.h"
+#include "angle.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -54,6 +55,11 @@ int	draw_window(t_scene *scene)
 	float	avancment;
 	float	min;
 
+	if (camera_in_obj(scene))
+	{
+		mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
+		return (0);
+	}
 	y = 0;
 	actual_fps = ft_clock();
 	line = (t_line){0};
