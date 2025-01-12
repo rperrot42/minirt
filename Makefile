@@ -39,7 +39,7 @@ SRC_COLLISION = plane.c				\
 				cylinder.c			\
 				cylinder_shadow.c	\
 				closest_cylinder.c	\
-				camera_in_obj.c		\
+				point_in_obj.c		\
 
 SRC_ANGLE = 	create_line.c		\
 				scalar_product.c	\

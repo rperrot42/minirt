@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 16:59:25 by sabitbol          #+#    #+#             */
-/*   Updated: 2025/01/11 16:05:11 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:36:23 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	draw_window(t_scene *scene)
 	float	avancment;
 	float	min;
 
-	if (camera_in_obj(scene))
+	if (point_in_obj(scene, &scene->cameras.position))
 	{
 		mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
 		return (0);

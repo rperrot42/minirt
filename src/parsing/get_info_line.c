@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:14:11 by rperrot           #+#    #+#             */
-/*   Updated: 2025/01/03 10:15:14 by sabitbol         ###   ########.fr       */
+/*   Updated: 2025/01/11 19:56:45 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_point	get_vector(char **line)
 	if (errno || result < -1 || result > 1)
 		return (errno = EINVAL, (t_point){0, 0, 0});
 	point.z = result;
+	if (!point.x && !point.y && !point.z)
+		return (errno = EINVAL, point);
 	return (point);
 }
 
