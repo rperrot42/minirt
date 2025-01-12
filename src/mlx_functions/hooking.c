@@ -75,8 +75,8 @@ int	motion_notify(int x, int y, t_scene *scene)
 
 void	hooking(t_scene *scene)
 {
-	if (camera_in_obj(scene))
-		mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
+//	if (camera_in_obj(scene))
+//		mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
 	draw_window(scene);
 	mlx_hook(scene->window, 17, 0L, free_scene, scene);
 	mlx_hook(scene->window, 2, (1L << 0), key_press, scene);
