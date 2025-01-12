@@ -59,6 +59,7 @@ ifeq ($(OS), Darwin)
 endif
 
 SRC_COLOR =		color.c			\
+				draw_scene_black.c
 
 SRC_MLX =		pixel_put.c		\
 				hooking.c		\

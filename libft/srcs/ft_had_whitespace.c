@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
 t_bool	ft_had_whitespace(char *str)
 {
 	while (*str)
 	{
-		if (((*str) < 7	|| (*str) > 13) && (*str) != 32)
+		if (((*str) < 7 || (*str) > 13) && (*str) != 32)
 			return (false);
 		str++;
 	}

@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_initstack.c                                     :+:      :+:    :+:   */
+/*   draw_scene_black.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rperrot <rperrot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 13:38:51 by rperrot           #+#    #+#             */
-/*   Updated: 2023/12/05 13:41:53 by rperrot          ###   ########.fr       */
+/*   Created: 2025/01/12 17:35:19 by rperrot           #+#    #+#             */
+/*   Updated: 2025/01/12 17:35:19 by rperrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini_rt.h"
+#include "draw.h"
+#include "mlx.h"
 
-t_stack	*ft_init_stack(void)
+void	draw_scene_black(t_scene *scene)
 {
-	t_stack	*new_stack;
+	int	x;
+	int	y;
 
-	new_stack = malloc(sizeof(t_stack));
-	if (!new_stack)
-		return (NULL);
-	new_stack -> first = NULL;
-	return (new_stack);
+	y = -1;
+	while (++y < LENGTH)
+	{
+		x = -1;
+		while (++x < LENGTH)
+		{
+			my_mlx_pixel_put(&scene->img, x, y, 0);
+		}
+	}
+	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
 }

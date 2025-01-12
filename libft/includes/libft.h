@@ -127,7 +127,8 @@ int				ft_strcmp(char *s1, char *s2);
 t_bool			char_is_number(char *str);
 float			ft_atof(char **str);
 int				ft_atoi(char **str);
-int				ft_realloc(void **ptr, short *size, int size_struct, void *new_obkect);
-t_bool	ft_had_whitespace(char *str);
+int				ft_realloc(void **ptr, short *size, int size_struct, \
+void *new_obkect);
+t_bool			ft_had_whitespace(char *str);
 
 #endif

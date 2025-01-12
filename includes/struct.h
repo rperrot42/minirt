@@ -103,7 +103,7 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_data;
+}	t_data;
 
 typedef struct s_move_mouse
 {
@@ -143,6 +143,7 @@ typedef struct s_scene
 	int				second_actual;
 	long			last_frame;
 	int				last_fps;
+	t_bool			light_in_obj;
 }	t_scene;
 
 typedef enum e_move

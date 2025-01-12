@@ -18,9 +18,10 @@
 #include "mlx.h"
 #include "move.h"
 #include "utils.h"
-#include "angle.h"
 
 static void	calculus_fps(t_scene *scene, long actual_fps);
+
+static void	create_img(t_scene *scene);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -47,33 +48,29 @@ t_color	draw_pixel(t_scene *scene, t_line *line)
 	return (get_color_obj(scene, obj, &l, line));
 }
 
-void	init_line_avancement_y(t_line *line, t_scene *scene, \
-float *avancement, int *y)
-{
-	*line = (t_line){0};
-	line->position = scene->cameras.position;
-	line->vector.z = Z_NEAR;
-	*avancement = tanf(scene->cameras.fov * M_PI / 360) * Z_NEAR * 2 / LENGTH;
-	*y = -1;
-}
-
 int	draw_window(t_scene *scene)
 {
-	int		x;
-	int		y;
-	t_line	line;
 	long	actual_fps;
-	float	avancement;
 
-	if (point_in_obj(scene, &scene->cameras.position))
-	{
-		mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
-		return (0);
-	}
-	y = 0;
 	actual_fps = ft_clock();
-	init_line_avancement_y(&line, scene, &avancement, &y);
 	all_deplacement(scene, actual_fps - scene->last_frame);
+	create_img(scene);
+	calculus_fps(scene, actual_fps);
+	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
+	return (0);
+}
+
+static void	create_img(t_scene *scene)
+{
+	int		y;
+	int		x;
+	float	avancement;
+	t_line	line;
+
+	line.position = scene->cameras.position;
+	line.vector.z = Z_NEAR;
+	avancement = tanf(scene->cameras.fov * M_PI / 360) * Z_NEAR * 2 / LENGTH;
+	y = -1;
 	while (++y < LENGTH)
 	{
 		x = -1;
@@ -87,9 +84,6 @@ Z_NEAR + x * avancement;
 			color_to_int(draw_pixel(scene, &line)));
 		}
 	}
-	calculus_fps(scene, actual_fps);
-	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
-	return (0);
 }
 
 static void	calculus_fps(t_scene *scene, long actual_fps)

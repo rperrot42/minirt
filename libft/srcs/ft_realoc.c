@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
-int ft_realloc(void **ptr, short *size, int size_struct, void *new_object)
+int	ft_realloc(void **ptr, short *size, int size_struct, void *new_object)
 {
-	char *new_ptr;
+	char	*new_ptr;
 
 	new_ptr = malloc(((*size) + 1) * size_struct);
 	if (!new_ptr)

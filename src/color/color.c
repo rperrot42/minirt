@@ -67,7 +67,7 @@ int	color_to_int(t_color color)
 
 t_color	get_color_obj(t_scene *scene, void *obj, t_line_color *l, t_line *line)
 {
-	if (intersection_obj_line(scene, obj, l, line) || point_in_obj(scene, &scene->lights->position))
+	if (scene->light_in_obj || intersection_obj_line(scene, obj, l, line))
 		return (get_ambiant_color(l->color, scene));
 	return (get_multiple_color(l->color, scene, fabs(l->scalar_light_obj)));
 }
