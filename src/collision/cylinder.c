@@ -18,6 +18,21 @@
 static void	set_second_plane(t_plane *d, float z2, \
 int *cylinder_end, t_cylinder *cylinder);
 
+static t_bool	up_is_closest_disk(t_line *line, t_cylinder *cylinder)
+{
+	t_point	up;
+	t_point	down;
+
+	up.x = cylinder->position.x + cylinder->vector.x * (cylinder->height / 2);
+	up.y = cylinder->position.y + cylinder->vector.y * (cylinder->height / 2);
+	up.z = cylinder->position.z + cylinder->vector.z * (cylinder->height / 2);
+	down.x = cylinder->position.x - cylinder->vector.x * (cylinder->height / 2);
+	down.y = cylinder->position.y - cylinder->vector.y * (cylinder->height / 2);
+	down.z = cylinder->position.z - cylinder->vector.z * (cylinder->height / 2);
+	return (calc_norm(get_line_2point(&line->position, &up).vector) > \
+	calc_norm(get_line_2point(&line->position, &down).vector));
+}
+
 static t_point	get_closest_disk(t_line *line, t_cylinder *cylinder, \
 int *cylinder_end)
 {
@@ -28,16 +43,14 @@ int *cylinder_end)
 
 	z1 = cylinder->position.z + cylinder->vector.z * (cylinder->height / 2);
 	z2 = cylinder->position.z - cylinder->vector.z * (cylinder->height / 2);
-	if (z1 < z2 && z1 > 0)
+	if (!up_is_closest_disk(line, cylinder))
 	{
 		d.vector = cylinder->vector;
 		d.p.z = z1;
 		*cylinder_end = 1;
 	}
-	else if (z2 < z1 && z2 > 0)
-		set_second_plane(&d, z2, cylinder_end, cylinder);
 	else
-		return (disk.z = INFINITY, disk);
+		set_second_plane(&d, z2, cylinder_end, cylinder);
 	d.p.x = cylinder->position.x + d.vector.x * (cylinder->height / 2);
 	d.p.y = cylinder->position.y + d.vector.y * (cylinder->height / 2);
 	d.d = -(d.p.x * d.vector.x + d.p.y * d.vector.y + d.p.z * d.vector.z);

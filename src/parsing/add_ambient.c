@@ -31,8 +31,8 @@ int	add_ambient(t_scene *scene, char *str)
 	else
 		return (print_error(E_FILE_PARS));
 	if (errno)
-	{
 		return (print_error(strerror(errno)));
-	}
+	if (!ft_had_whitespace(str))
+		return (print_error(E_END_LINE));
 	return (0);
 }

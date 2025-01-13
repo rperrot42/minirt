@@ -34,9 +34,8 @@ int	add_camera(t_scene *scene, char *str)
 		scene->cameras.fov = ft_atof(&str);
 	else
 		return (print_error(E_FILE_PARS));
-	if (errno)
-		return (print_error(strerror(errno)));
-	if (scene->cameras.fov < 0 || scene->cameras.fov > 180)
+	if (scene->cameras.fov < 0 || scene->cameras.fov > 180 || \
+errno || !ft_had_whitespace(str))
 		return (print_error(E_FILE_FOV));
 	return (0);
 }

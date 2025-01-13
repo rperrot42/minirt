@@ -50,5 +50,7 @@ static int	add_sphere_color(t_scene *scene, char *str, t_sphere *sphere)
 	if (ft_realloc((void **)&scene->spheres, &scene->nb_spheres, \
 	sizeof(t_sphere), (void *)sphere))
 		return (print_error(E_MALLOC));
+	if (!ft_had_whitespace(str))
+		return (print_error(E_END_LINE));
 	return (0);
 }

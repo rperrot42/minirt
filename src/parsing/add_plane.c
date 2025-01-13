@@ -52,5 +52,7 @@ static int	add_plane_color(t_scene *scene, char *str, t_plane *plane)
 	if (ft_realloc((void **)&scene->planes, &scene->nb_planes, \
 	sizeof(t_plane), (void *)plane))
 		return (print_error(E_MALLOC));
+	if (!ft_had_whitespace(str))
+		return (print_error(E_END_LINE));
 	return (0);
 }

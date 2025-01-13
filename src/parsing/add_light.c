@@ -54,5 +54,7 @@ static int	add_light_color(t_scene *scene, char *str, t_light *light)
 	if (ft_realloc((void **)&scene->lights, &scene->nb_lights, \
 	sizeof(t_light), (void *)light))
 		return (print_error(E_MALLOC));
+	if (!ft_had_whitespace(str))
+		return (print_error(E_END_LINE));
 	return (0);
 }

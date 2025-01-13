@@ -35,9 +35,13 @@ int	ft_readline(int fd, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
-	rotate_camera(scene);
 	if (camera == false || ambient == false || scene->lights == false)
 		return (error_camera_ambient(camera, ambient, scene));
+	rotate_camera(scene);
+	move_plane(scene, scene->cameras.position.x, scene->cameras.position.y, \
+	scene->cameras.position.z);
+	scene->cameras.position = (t_point){0};
+	scene->cameras.fov = scene->cameras.fov - (scene->cameras.fov > 177);
 	return (0);
 }
 

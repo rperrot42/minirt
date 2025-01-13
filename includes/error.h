@@ -34,6 +34,7 @@
 # define E_NOT_CAMERAS		 "No cameras\n"
 # define E_NOT_AMBIENT		 "No ambient light\n"
 # define E_NOT_LIGHTS		 "No lights\n"
+# define E_END_LINE			"Bad Character in end of line\n"
 
 int		print_error(char *error);
 int		free_scene(t_scene *scene);

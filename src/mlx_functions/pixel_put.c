@@ -54,9 +54,13 @@ int	draw_window(t_scene *scene)
 
 	actual_fps = ft_clock();
 	all_deplacement(scene, actual_fps - scene->last_frame);
-	create_img(scene);
+	if (!point_in_obj(scene, &scene->cameras.position))
+		create_img(scene);
+	else
+		draw_scene_black(scene);
 	calculus_fps(scene, actual_fps);
 	mlx_put_image_to_window(scene->mlx, scene->window, scene->img.img, 0, 0);
+	printf_fps(scene);
 	return (0);
 }
 
@@ -67,7 +71,7 @@ static void	create_img(t_scene *scene)
 	float	avancement;
 	t_line	line;
 
-	line.position = scene->cameras.position;
+	line.position = (t_point){0};
 	line.vector.z = Z_NEAR;
 	avancement = tanf(scene->cameras.fov * M_PI / 360) * Z_NEAR * 2 / LENGTH;
 	y = -1;

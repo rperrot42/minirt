@@ -68,5 +68,7 @@ static int	add_cylinder_2(t_scene *scene, char *str, t_cylinder *cylinder)
 	if (ft_realloc((void **)&scene->cylinders, &scene->nb_cylinders, \
 	sizeof(t_cylinder), (void *)cylinder))
 		return (print_error(E_MALLOC));
+	if (!ft_had_whitespace(str))
+		return (print_error(E_END_LINE));
 	return (0);
 }
